@@ -1,0 +1,24 @@
+.outer-box {
+    border: 10px solid #f24c46;
+    width: 50px;
+}
+
+.inner-box {
+    border: 10px solid #1785eb;
+    padding: 15px;
+}
+
+/*
+Solution:
+
+.outer-box {
+    border: 10px solid #f24c46;
+    width: 50px;
+}
+
+.inner-box {
+    width: 30px;
+    height: 30px;
+    border: 10px solid #1785eb;
+}
+*/
