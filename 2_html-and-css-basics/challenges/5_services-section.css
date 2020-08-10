@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.title {
+    font-size: 36px;
+    text-align: center;
+    padding-top: 36px;
+    padding-bottom: 108px;
+}
+
+.section {
+    text-align: center;
+    width: 250px;
+}
