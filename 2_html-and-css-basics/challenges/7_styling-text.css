@@ -1,0 +1,12 @@
+strong {
+    color: #eb8315;
+    font-size: 35px;
+}
+
+em {
+    color: #1785eb;
+}
+
+p, em {
+    font-size: 30px;
+}
