@@ -1,0 +1,20 @@
+body {
+    font-size: 20px;
+    margin: 40px;
+}
+
+.main-section {
+    text-align: center;
+    margin: 100px;
+}
+
+.headline {
+    color: #d17d24;
+    font-size: 60px;
+    text-align: center;
+}
+
+.sub-heading {
+    color: #4985de;
+    font-size: 40px;
+}
