@@ -1,0 +1,22 @@
+body {
+    font-size: 20px;
+    font-family: arial;
+}
+
+strong {
+    color: #801919;
+}
+
+em {
+    color: #064791;
+}
+
+.title {
+    color: #0b5710;
+    font-size: 60px;
+}
+
+.headers {
+    color: #198020;
+    font-size: 40px;
+}
