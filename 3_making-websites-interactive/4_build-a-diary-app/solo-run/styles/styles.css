@@ -3,7 +3,7 @@ body {
 }
 
 h1 {
-
+    color: #16697a;
 }
 
 /* form */
@@ -13,10 +13,10 @@ h1 {
 
 /* textarea */
 #box {
-
+    background-color: #ffa62b;
 }
 
 /* submit button */
 #submit {
-
+    background-color: #f6f6f6;
 }
