@@ -17,12 +17,20 @@ function addEntryToDom(event) {
     displayEntryButton.className = 'display-entry-button';
     displayEntryButton.innerText = count;
     entriesNav.appendChild(displayEntryButton);
+    count++
 
     displayEntryButton.addEventListener('click', function() {
+        const allEntries = document.querySelectorAll('.single-entry');
+        for (let i = 0; i < allEntries.length; i++){
+            allEntries[i].style.display = 'none';
+        }
         entryDiv.style.display = 'block';
+
     })
 
-    count++
+
+
+
 }
 
 entryForm.addEventListener('submit', addEntryToDom)
