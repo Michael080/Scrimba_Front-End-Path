@@ -14,9 +14,11 @@ h1 {
 /* textarea */
 #box {
     background-color: #ffa62b;
+    border-radius: 20px;
 }
 
 /* submit button */
 #submit {
     background-color: #f6f6f6;
+    border-radius: 5px;
 }
