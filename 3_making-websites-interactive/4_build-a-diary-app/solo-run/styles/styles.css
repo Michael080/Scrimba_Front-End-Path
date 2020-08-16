@@ -14,6 +14,7 @@ h1 {
 /* textarea */
 #box {
     background-color: #ffa62b;
+    padding: 10px;
     border-radius: 20px;
 }
 
