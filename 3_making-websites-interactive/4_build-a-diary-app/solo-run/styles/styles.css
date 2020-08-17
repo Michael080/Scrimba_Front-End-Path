@@ -42,6 +42,7 @@ h1 {
 .entry {
     background-color: #16697a;
     border-radius: 20px;
+    padding: 10px;
     width: 20em;
     height: 5em;
 }
