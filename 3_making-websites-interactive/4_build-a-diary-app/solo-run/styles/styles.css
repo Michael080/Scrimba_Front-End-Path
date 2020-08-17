@@ -46,3 +46,7 @@ h1 {
     width: 20em;
     height: 5em;
 }
+
+.toggle {
+    padding: 2px;
+}
