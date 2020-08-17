@@ -31,8 +31,17 @@ h1 {
     background-color: #c6bcbc;
     display: block;
     margin-left: 20em;
+    margin-bottom: 10px;
     border: unset;
     padding: 5px;
     width: 5em;
     border-radius: 5px;
+}
+
+/* entries section */
+.entry {
+    background-color: #16697a;
+    border-radius: 20px;
+    width: 20em;
+    height: 5em;
 }
