@@ -17,6 +17,7 @@ function userSubmit(event){
     let toggleText = document.createElement('button');
     counter++;
     toggleText.innerText = counter;
+    toggleText.className = 'toggle';
     nav.appendChild(toggleText);
 }
 
