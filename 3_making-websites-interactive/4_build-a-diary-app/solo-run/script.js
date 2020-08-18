@@ -1,6 +1,6 @@
 const form = document.querySelector('#text-input');
 const textField = document.querySelector('#box');
-const button = document.querySelector('#submit');
+const submitButton = document.querySelector('#submit');
 const entrySection = document.querySelector('.entry');
 const nav = document.querySelector('.entries-nav');
 
@@ -11,14 +11,25 @@ function userSubmit(event){
     let userInput = textField.value;  //Save user input
     //Create output text and append to DOM
     let outputText = document.createElement('div');
+    outputText.className = 'output-text';
     outputText.textContent = userInput;
     outputText.style.display = 'none';
+    entrySection.appendChild(outputText);
     //Create buttons for each entry
     let toggleText = document.createElement('button');
     counter++;
     toggleText.innerText = counter;
     toggleText.className = 'toggle';
     nav.appendChild(toggleText);
+    //Toggle entries via button
+    // toggleText.addEventListener('click', function() {
+    //
+    // });
+    toggleText.addEventListener('click', function() {
+        const allEntries = document.querySelectorAll('.output-text');
+        allEntries.forEach(element => element.style.display ='none');
+        outputText.style.display = 'block';
+    })
 }
 
 form.addEventListener('submit', userSubmit);
