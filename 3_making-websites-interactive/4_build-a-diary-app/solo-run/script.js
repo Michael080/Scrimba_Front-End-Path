@@ -17,13 +17,14 @@ function userSubmit(event){
     outputText.style.display = 'none';
     entrySection.appendChild(outputText);
     //Create buttons for each entry
-    let toggleText = document.createElement('button');
-    counter++;
-    toggleText.innerText = counter;
-    toggleText.className = 'toggle';
-    nav.appendChild(toggleText);
-
-    toggleText.addEventListener('click', displayEntry);
+    if (textField.value.length > 0) {
+        let toggleText = document.createElement('button');
+        counter++;
+        toggleText.innerText = counter;
+        toggleText.className = 'toggle';
+        nav.appendChild(toggleText);
+        toggleText.addEventListener('click', displayEntry);
+    }
 
     function displayEntry() {
         const allEntries = document.querySelectorAll('.output-text');
