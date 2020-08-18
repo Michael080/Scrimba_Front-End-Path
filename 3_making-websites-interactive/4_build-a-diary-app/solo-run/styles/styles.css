@@ -47,6 +47,10 @@ h1 {
     height: 5em;
 }
 
+.entries-nav {
+    padding-bottom: 10px;
+}
+
 .toggle {
     padding: 2px;
 }
