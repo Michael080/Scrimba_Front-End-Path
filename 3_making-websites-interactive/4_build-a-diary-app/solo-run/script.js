@@ -22,10 +22,7 @@ function userSubmit(event){
     toggleText.innerText = counter;
     toggleText.className = 'toggle';
     nav.appendChild(toggleText);
-    //Toggle entries via button
-    // toggleText.addEventListener('click', function() {
-    //
-    // });
+
     toggleText.addEventListener('click', displayEntry);
 
     function displayEntry() {
