@@ -40,11 +40,12 @@ h1 {
 
 /* entries section */
 .entry {
+    display: flex;
     background-color: #16697a;
     border-radius: 20px;
     padding: 10px;
     width: 20em;
-    height: 5em;
+    min-height: 5em;
 }
 
 .entries-nav {
@@ -53,4 +54,5 @@ h1 {
 
 .toggle {
     padding: 2px;
+    margin: 2px;
 }
