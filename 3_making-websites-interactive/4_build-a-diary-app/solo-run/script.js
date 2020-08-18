@@ -9,6 +9,7 @@ let counter = 0;
 function userSubmit(event){
     event.preventDefault();  //Prevent refresh
     let userInput = textField.value;  //Save user input
+    // textField.value = '';  //Remove user input from textarea
     //Create output text and append to DOM
     let outputText = document.createElement('div');
     outputText.className = 'output-text';
@@ -25,11 +26,13 @@ function userSubmit(event){
     // toggleText.addEventListener('click', function() {
     //
     // });
-    toggleText.addEventListener('click', function() {
+    toggleText.addEventListener('click', displayEntry);
+
+    function displayEntry() {
         const allEntries = document.querySelectorAll('.output-text');
         allEntries.forEach(element => element.style.display ='none');
         outputText.style.display = 'block';
-    })
+    }
 }
 
 form.addEventListener('submit', userSubmit);
