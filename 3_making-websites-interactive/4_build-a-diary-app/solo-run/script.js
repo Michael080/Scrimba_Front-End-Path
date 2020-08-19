@@ -9,7 +9,6 @@ let counter = 0;
 function userSubmit(event){
     event.preventDefault();  //Prevent refresh
     let userInput = textField.value;  //Save user input
-    textField.value = '';  //Remove user input from textarea
     //Create output text and append to DOM
     let outputText = document.createElement('div');
     outputText.className = 'output-text';
@@ -24,6 +23,7 @@ function userSubmit(event){
         toggleText.className = 'toggle';
         nav.appendChild(toggleText);
         toggleText.addEventListener('click', displayEntry);
+        textField.value = '';  //Remove user input from textarea
     }
 
     function displayEntry() {
