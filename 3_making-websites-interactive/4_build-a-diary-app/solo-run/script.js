@@ -1,6 +1,5 @@
 const form = document.querySelector('#text-input');
 const textField = document.querySelector('#box');
-const submitButton = document.querySelector('#submit');
 const entrySection = document.querySelector('.entry');
 const nav = document.querySelector('.entries-nav');
 
