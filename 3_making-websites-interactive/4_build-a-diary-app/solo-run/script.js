@@ -12,10 +12,11 @@ function userSubmit(event){
     let outputText = document.createElement('div');
     outputText.className = 'output-text';
     outputText.textContent = userInput;
-    outputText.style.display = 'none';
+    outputText.style.display = 'none';  //Hide entry
     entrySection.appendChild(outputText);
-    //Create buttons for each entry
+    //Only create entries when field is populated
     if (textField.value.length > 0) {
+        //Create buttons for each entry
         let toggleText = document.createElement('button');
         counter++;
         toggleText.innerText = counter;
