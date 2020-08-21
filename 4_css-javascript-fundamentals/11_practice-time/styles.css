@@ -8,10 +8,12 @@ body {
 
 h1 {
     font-size: 48px;
+    color: #2E7AD3;
 }
 
 h2 {
     font-size: 32px;
+    color: #104C90;
 }
 
 p {
@@ -19,9 +21,9 @@ p {
 }
 
 a {
-
+    color: #FF8000;
 }
 
 .container {
-
+    background-color: #F1;
 }
