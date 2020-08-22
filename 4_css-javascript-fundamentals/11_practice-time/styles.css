@@ -15,6 +15,7 @@ h1 {
 h2 {
     font-size: 32px;
     color: #104C90;
+    margin: 0 0 45px 0;
 }
 
 img {
@@ -28,6 +29,12 @@ p {
 
 a {
     color: #FF8000;
+    font-weight: bold;
+}
+
+a:hover,
+a:focus {
+    color: #104C90;
 }
 
 .container {
@@ -35,4 +42,8 @@ a {
     margin: 0 auto;
     padding: 25px;
     width: 450px;
+}
+
+.read-more {
+    margin: 0;
 }
