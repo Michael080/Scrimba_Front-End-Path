@@ -22,11 +22,47 @@ a {
     color: #FFE600;
 }
 
-
 header, section {
     padding: 50px;
 }
+
 header {
     background: #FFE600;
     color: #000;
 }
+
+.section-one {
+    background: black;
+    color: white;
+}
+
+.section-one .btn {
+    display: inline-block;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: #FFE600;
+    color: black;
+    padding: 12px 25px;
+}
+
+.section-one .btn:hover {
+    color: white;
+}
+
+.section-two a {
+    color: black;
+}
+
+.section-two .btn {
+    display: inline-block;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: black;
+    color: yellow;
+    padding: 12px 25px;
+}
+
+.section-two .btn:hover {
+    color: black;
+}
+
