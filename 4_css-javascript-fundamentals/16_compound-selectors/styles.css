@@ -2,16 +2,12 @@ body {
     margin: 0;
 }
 
-h1, h1, p {
+h1, h2, p {
     margin-top: 0;
 }
 
 h1 {
     font-size: 24px;
-}
-
-h2 {
-    font-size: 18px;
 }
 
 p {
@@ -22,7 +18,8 @@ a {
     color: #FFE600;
 }
 
-header, section {
+header,
+section {
     padding: 50px;
 }
 
@@ -36,33 +33,35 @@ header {
     color: white;
 }
 
-.section-one .btn {
+/*.section-two a {*/
+/*    color: black;*/
+/*}*/
+
+
+/* button styles */
+
+.btn {
     display: inline-block;
+    padding: 12px 25px;
     font-weight: bold;
     text-decoration: none;
-    background-color: #FFE600;
-    color: black;
-    padding: 12px 25px;
 }
 
-.section-one .btn:hover {
-    color: white;
+.btn-accent {
+    background: #FFE600;
+    color: #000;
 }
 
-.section-two a {
-    color: black;
+.btn-accent:hover {
+    background: white;
 }
 
-.section-two .btn {
-    display: inline-block;
-    font-weight: bold;
-    text-decoration: none;
-    background-color: black;
-    color: yellow;
-    padding: 12px 25px;
+.btn-dark {
+    background: #000;
+    color: #fff;
 }
 
-.section-two .btn:hover {
+.btn-dark:hover {
+    background: #FFE600;
     color: black;
 }
-
