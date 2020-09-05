@@ -27,25 +27,27 @@ a {
 .btn {
     display: inline-block;
     text-align: center;
-    width: 100px;
-    padding: 25px;
+    padding: 18px 27px;
     background-color: yellow;
-    margin-bottom: 21px;
+    margin-right: 18px;
+    /*margin-bottom: 21px;*/
 }
 
-.btn-light > a,
-.btn-dark > a {
+.btn-light,
+.btn-dark{
     font-weight: bold;
     text-decoration: none;
 }
 
 /* Buttons */
-.btn-light > a {
+.btn-light{
     color: #2E354F;
+    background-color: #fff;
 }
 
-.btn-dark > a {
+.btn-dark{
     color: #fff;
+    background-color: #ef5839;
 }
 
 .dark {
