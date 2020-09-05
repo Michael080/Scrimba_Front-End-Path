@@ -13,11 +13,17 @@ a {
     color: #ef5839;
 }
 
-
+section {
+    padding: 21px;
+}
 
 .container {
     display: grid;
     justify-content: space-around;
+}
+
+.section-header {
+    color: #ef5839;
 }
 
 .content {
