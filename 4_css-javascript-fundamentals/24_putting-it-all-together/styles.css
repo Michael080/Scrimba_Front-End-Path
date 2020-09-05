@@ -34,11 +34,7 @@ section {
     width: 600px;
 }
 
-/*  BUTTONS  */
-
-p > a:hover {
-    color: #9F0DAE;
-}
+/*  BUTTONS & LINKS */
 
 .btn {
     display: inline-block;
@@ -74,11 +70,27 @@ p > a:hover {
     color: #9F0DAE;
 }
 
+.dark a:hover {
+    color: #fff;
+}
+
+.dark a:focus {
+    color: #9F0DAE;
+}
+
 .btn-light:hover {
     color: #ef5839;
 }
 
 .btn-light:focus {
+    color: #9F0DAE;
+}
+
+.light a:hover {
+    color: #2E354F;
+}
+
+.light a:focus {
     color: #9F0DAE;
 }
 
