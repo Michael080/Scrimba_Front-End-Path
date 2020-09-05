@@ -36,6 +36,10 @@ section {
 
 /*  BUTTONS  */
 
+p > a:hover {
+    color: #9F0DAE;
+}
+
 .btn {
     display: inline-block;
     text-align: center;
@@ -66,7 +70,15 @@ section {
     color: #ef5839;
 }
 
+.btn-dark:focus {
+    color: #2e354f;
+}
+
 .btn-light:hover {
+    color: #ef5839;
+}
+
+.btn-light:focus {
     color: #ef5839;
 }
 
