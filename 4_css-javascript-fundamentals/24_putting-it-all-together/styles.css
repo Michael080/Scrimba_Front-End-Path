@@ -1,0 +1,39 @@
+body {
+    font-family: "Lato";
+    font-size: 18px;
+    margin: 0;
+}
+
+h2, p, img, a {
+    margin-top: 0;
+    margin-bottom: 21px;
+}
+
+.container {
+    display: grid;
+    justify-content: space-around;
+}
+
+.content {
+    width: 600px;
+}
+
+.btn {
+    display: inline-block;
+    text-align: center;
+    width: 100px;
+    padding: 25px;
+    background-color: yellow;
+    margin-bottom: 21px;
+}
+
+.dark {
+    background-color: #2E354F;
+    color: #fff;
+}
+
+.light {
+    background-color: #FFF;
+    color: rgba(0, 0, 0, 0.72);
+}
+
