@@ -71,7 +71,7 @@ p > a:hover {
 }
 
 .btn-dark:focus {
-    color: #2e354f;
+    color: #9F0DAE;
 }
 
 .btn-light:hover {
@@ -79,7 +79,7 @@ p > a:hover {
 }
 
 .btn-light:focus {
-    color: #ef5839;
+    color: #9F0DAE;
 }
 
 /*  MAIN COLOR THEMES  */
