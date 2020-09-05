@@ -61,6 +61,16 @@ section {
     background-color: #ef5839;
 }
 
+.btn-dark:hover {
+    background-color: #fff;
+    color: #ef5839;
+}
+
+.btn-light:hover {
+    background-color: #ef5839;
+    color: #fff;
+}
+
 /*  MAIN COLOR THEMES  */
 
 .dark {
@@ -73,6 +83,6 @@ section {
     color: rgba(0, 0, 0, 0.72);
 }
 
-/*  LINKS  */
+
 
 
