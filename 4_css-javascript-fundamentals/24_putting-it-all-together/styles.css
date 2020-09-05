@@ -9,6 +9,12 @@ h2, p, img, a {
     margin-bottom: 21px;
 }
 
+a {
+    color: #ef5839;
+}
+
+
+
 .container {
     display: grid;
     justify-content: space-around;
@@ -25,6 +31,21 @@ h2, p, img, a {
     padding: 25px;
     background-color: yellow;
     margin-bottom: 21px;
+}
+
+.btn-light > a,
+.btn-dark > a {
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Buttons */
+.btn-light > a {
+    color: #2E354F;
+}
+
+.btn-dark > a {
+    color: #fff;
 }
 
 .dark {
