@@ -58,7 +58,6 @@ section {
     padding: 18px 27px;
     background-color: yellow;
     margin-right: 18px;
-    /*margin-bottom: 21px;*/
 }
 
 .btn-light,
@@ -77,8 +76,6 @@ section {
     background-color: #ef5839;
 }
 
-
-
 .btn-dark:hover {
     background-color: #fff;
     color: #ef5839;
@@ -95,8 +92,6 @@ section {
 .btn-light:focus {
     color: #9F0DAE;
 }
-
-
 
 /*  MAIN COLOR THEMES  */
 
