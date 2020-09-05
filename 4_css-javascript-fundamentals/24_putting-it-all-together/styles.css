@@ -4,6 +4,7 @@ body {
     margin: 0;
 }
 
+/* TEXT */
 h2, p, img, a {
     margin-top: 0;
     margin-bottom: 21px;
@@ -13,6 +14,7 @@ a {
     color: #ef5839;
 }
 
+/* LAYOUT */
 section {
     padding: 21px;
 }
@@ -30,6 +32,7 @@ section {
     width: 600px;
 }
 
+/* BUTTONS */
 .btn {
     display: inline-block;
     text-align: center;
@@ -45,7 +48,6 @@ section {
     text-decoration: none;
 }
 
-/* Buttons */
 .btn-light{
     color: #2E354F;
     background-color: #fff;
@@ -56,6 +58,7 @@ section {
     background-color: #ef5839;
 }
 
+/* MAIN COLOR THEMES */
 .dark {
     background-color: #2E354F;
     color: #fff;
@@ -65,4 +68,5 @@ section {
     background-color: #FFF;
     color: rgba(0, 0, 0, 0.72);
 }
+
 
