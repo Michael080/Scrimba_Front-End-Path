@@ -32,7 +32,7 @@ h1 {
 
 h2, p, a {
     margin-top: 0;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 .container {
@@ -54,5 +54,16 @@ h2, p, a {
 }
 
 .about-section {
-    padding-top: 40px;
+    padding-top: 50px;
+}
+
+.btn {
+    display: inline-block;
+    text-align: center;
+    color: #FFF;
+    font-weight: 900;
+    text-decoration: none;
+    background-color: #ef5839;
+    margin: 0 auto;
+    padding: 16px 22px;
 }
