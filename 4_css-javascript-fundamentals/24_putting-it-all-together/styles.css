@@ -34,6 +34,10 @@ section {
     padding: 21px;
 }
 
+header {
+    padding: 21px 0;
+}
+
 .container {
     display: grid;
     justify-content: space-around;
