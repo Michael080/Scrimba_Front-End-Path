@@ -22,3 +22,7 @@ h1, h2 {
 h1, h2, p, a {
     margin-top: 0;
 }
+
+.container {
+    width: 650px;
+}
