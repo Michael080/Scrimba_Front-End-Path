@@ -34,8 +34,20 @@ section {
     width: 600px;
 }
 
-/*  LINKS & BUTTONS */
+/*  MAIN COLOR THEMES  */
 
+.dark {
+    background-color: #2E354F;
+    color: #fff;
+}
+
+.light {
+    background-color: #FFF;
+    color: rgba(0, 0, 0, 0.72);
+}
+
+/*  LINKS & BUTTONS */
+/* section links focus and hover */
 .light .section-link:hover {
     color: #2E354F;
 }
@@ -51,7 +63,7 @@ section {
 .dark .section-link:focus {
     color: #9F0DAE;
 }
-
+/* button styling */
 .btn {
     display: inline-block;
     text-align: center;
@@ -59,7 +71,7 @@ section {
     background-color: yellow;
     margin-right: 18px;
 }
-
+/* button styling light & dark */
 .btn-light,
 .btn-dark{
     font-weight: bold;
@@ -75,7 +87,7 @@ section {
     color: #fff;
     background-color: #ef5839;
 }
-
+/* button hover & focus*/
 .btn-dark:hover {
     background-color: #fff;
     color: #ef5839;
@@ -93,17 +105,7 @@ section {
     color: #9F0DAE;
 }
 
-/*  MAIN COLOR THEMES  */
 
-.dark {
-    background-color: #2E354F;
-    color: #fff;
-}
-
-.light {
-    background-color: #FFF;
-    color: rgba(0, 0, 0, 0.72);
-}
 
 
 
