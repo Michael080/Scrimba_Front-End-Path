@@ -3,6 +3,7 @@
 body {
     font-family: 'Lato', sans-serif;
     font-size: 18px;
+    color: #000000;
     margin: 0;
     text-align: center;
     display: grid;
@@ -14,6 +15,10 @@ body {
 
 h1, h2, strong {
     font-weight: 900;
+}
+
+.title-text {
+    color: #FFF;
 }
 
 h1, h2 {
@@ -29,4 +34,8 @@ h1, h2, p, a {
 
 .container {
     width: 650px;
+}
+
+.title-section {
+    background-color: #2E354F;
 }
