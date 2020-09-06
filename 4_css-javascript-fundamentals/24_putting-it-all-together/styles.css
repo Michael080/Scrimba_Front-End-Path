@@ -14,13 +14,17 @@ h2, p, img, a {
 a {
     color: #ef5839;
 }
-
-strong {
+/* Bold Text*/
+strong,
+h1,
+h2,
+.section-header,
+.btn-dark,
+.btn-light {
     font-weight: 900;
 }
 
 .section-header {
-    font-weight: 900;
     color: #ef5839;
 }
 
@@ -50,7 +54,6 @@ section {
     background-color: #FFF;
     color: rgba(0, 0, 0, 0.72);
 }
-
 /*  LINKS & BUTTONS */
 /* section links focus and hover */
 .light .section-link:hover {
@@ -79,7 +82,6 @@ section {
 /* button styling light & dark */
 .btn-light,
 .btn-dark{
-    font-weight: bold;
     text-decoration: none;
 }
 
