@@ -35,6 +35,10 @@ h2, p, a {
     margin-bottom: 30px;
 }
 
+a {
+    color: #EF5839;
+}
+
 .container {
     display: grid;
     justify-content: space-around;
@@ -73,4 +77,8 @@ h2, p, a {
 .btn:hover {
     background-color: #D4B44C;
     color: #2E354F;
+}
+
+a:focus {
+    color: #72738d;
 }
