@@ -6,6 +6,11 @@ body {
 
 /*  TEXT  */
 
+h1 {
+    font-size: 36px;
+    margin: 0;
+}
+
 h2, p, img, a {
     margin-top: 0;
     margin-bottom: 21px;
@@ -35,7 +40,7 @@ section {
 }
 
 header {
-    padding: 21px 0;
+    padding: 45px 0;
 }
 
 .container {
