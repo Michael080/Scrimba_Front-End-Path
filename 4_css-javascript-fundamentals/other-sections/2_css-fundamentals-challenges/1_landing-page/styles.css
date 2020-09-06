@@ -74,11 +74,19 @@ a {
     padding: 16px 22px;
 }
 
+a:hover {
+    color: #2E354F
+}
+
+a:focus {
+    color: #72738d;
+}
+
 .btn:hover {
     background-color: #D4B44C;
     color: #2E354F;
 }
 
-a:focus {
+.btn:focus {
     color: #72738d;
 }
