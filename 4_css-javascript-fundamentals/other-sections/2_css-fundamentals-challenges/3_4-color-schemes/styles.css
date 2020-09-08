@@ -47,16 +47,20 @@ body {
 
 .square-1 {
     background-color: #c74e48;
+    color: #beffb0;
 }
 
 .square-2 {
     background-color: #6cb344;
+    color: #ffd9d1;
 }
 
 .square-3 {
     background-color: #beffb0;
+    color: #472a00;
 }
 
 .square-4 {
     background-color: #af63db;
+    color: #fffbc2;
 }
