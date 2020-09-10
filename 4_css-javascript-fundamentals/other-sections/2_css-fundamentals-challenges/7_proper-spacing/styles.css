@@ -65,6 +65,10 @@ body {
 .section-title {
     border-bottom: 2px solid gray;
     padding-bottom: 9px;
-    margin-bottom: 18px;
+    margin-bottom: 32px;
+}
+
+.btn {
+    padding: 15px;
 }
 
