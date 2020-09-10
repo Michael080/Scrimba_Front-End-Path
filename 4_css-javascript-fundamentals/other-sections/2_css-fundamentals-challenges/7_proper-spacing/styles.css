@@ -49,11 +49,22 @@ body {
     text-align: center;
 }
 
-.title-section, .about-section {
+.title-section, .about-section, .contact-section {
+    margin: 0 auto;
     margin-bottom: 100px;
+}
+
+.about-section, .contact-section {
+    width: 635px;
 }
 
 .title-text {
     padding: 8px;
+}
+
+.section-title {
+    border-bottom: 2px solid gray;
+    padding-bottom: 9px;
+    margin-bottom: 18px;
 }
 
