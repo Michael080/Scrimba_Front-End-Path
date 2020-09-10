@@ -44,3 +44,16 @@ h1 {
 /* ==========================
 	Write your solution here!
    ========================== */
+
+body {
+    text-align: center;
+}
+
+.title-section, .about-section {
+    margin-bottom: 100px;
+}
+
+.title-text {
+    padding: 8px;
+}
+
