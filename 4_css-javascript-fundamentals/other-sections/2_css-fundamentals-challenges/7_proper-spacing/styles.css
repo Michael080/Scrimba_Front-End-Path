@@ -49,7 +49,7 @@ body {
     text-align: center;
 }
 
-.title-section, .about-section, .contact-section {
+.title-section, .container {
     margin: 0 auto;
     margin-bottom: 100px;
 }
