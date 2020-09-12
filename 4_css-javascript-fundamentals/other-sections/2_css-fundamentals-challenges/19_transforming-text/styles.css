@@ -17,3 +17,19 @@ body {
 /* ==========================
 	Write your solution here!
    ========================== */
+
+body {
+    background-color: white;
+}
+
+.text {
+    border: 5px solid #646464;
+}
+
+.text:hover {
+    font-size: 56px;
+    font-weight: 900;
+    color: #2e354f;
+    background-color: white;
+    width: 465px;
+}
