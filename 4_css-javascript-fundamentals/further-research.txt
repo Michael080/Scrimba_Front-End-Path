@@ -1,0 +1,18 @@
+** Topics that I can brush up on **
+
+* Good Overall Web Resources*
+
+Smashing Magazine Membership:
+https://www.smashingmagazine.com/membership/
+
+
+* CSS Grid *
+
+Rachel Andrew Smashing CSS Grid Series:
+https://www.smashingmagazine.com/2020/01/understanding-css-grid-container/
+
+Rachel Andrew 'The CSS Workshop' CSS Grid course ($69):
+https://courses.thecssworkshop.com/p/css-grid
+
+Rachel Andrew Skillshare CSS Grid Course (paid):
+https://www.skillshare.com/site/join?teacherRef=1034322&via=teacher-referral-partner&utm_source=rachel-andrew&utm_medium=teacher-referral-partner&utm_content=2018-07-17-rachel-andrew&t=CSS-Layout-Essentials-Getting-Started-with-CSS-Grid&sku=78310865
