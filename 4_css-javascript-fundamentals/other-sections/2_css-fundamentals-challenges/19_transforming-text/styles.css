@@ -26,7 +26,8 @@ body {
     border: 5px solid #646464;
 }
 
-.text:hover {
+.text:hover, .text:focus {
+    font-family: 'Lato', sans-serif;
     font-size: 56px;
     font-weight: 900;
     color: #2e354f;
