@@ -41,3 +41,14 @@ img {
 /* ==========================
 	Write your solution here!
    ========================== */
+.post {
+    margin-bottom: 15px;
+}
+
+.orange-accent {
+    background-color: #ffe8c4;
+}
+
+.orange-accent > h1 {
+    color: #ef5839;
+}
