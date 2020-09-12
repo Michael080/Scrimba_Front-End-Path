@@ -1,0 +1,32 @@
+body {
+    display: grid;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    text-align: center;
+}
+
+.card {
+    background-color: #a6e87d;
+    width: 950px;
+    padding: 35px;
+}
+
+h1, em, .info-label {
+    font-weight: 800;
+
+}
+
+h1, p, img {
+    margin-top: 0;
+    margin-bottom: 35px;
+}
+
+h1 {
+
+}
+
+img {
+    width: 100px;
+    margin-bottom: 0;
+}
