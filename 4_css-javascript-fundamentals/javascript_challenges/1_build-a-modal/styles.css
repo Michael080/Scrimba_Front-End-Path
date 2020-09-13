@@ -12,6 +12,7 @@ h2, p, button {
 h2 {
     font-size: 28px;
     font-weight: 900;
+    padding-top: 30px;
 }
 
 .btn {
@@ -27,4 +28,15 @@ h2 {
 .btn:hover, .btn:focus {
     cursor: pointer;
     background-color: #0a84ff;
+}
+
+.container {
+    display: grid;
+    justify-content: center;
+}
+
+.card {
+    display: none;
+    width: 600px;
+    background-color: #fff;
 }
