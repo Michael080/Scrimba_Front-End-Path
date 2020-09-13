@@ -25,6 +25,15 @@ h2 {
     height: 50px;
 }
 
+.btn.contact {
+    border: none;
+    border-radius: 4px;
+}
+
+.btn.btn-close {
+    border: none;
+}
+
 .btn:hover, .btn:focus {
     cursor: pointer;
     background-color: #0a84ff;
