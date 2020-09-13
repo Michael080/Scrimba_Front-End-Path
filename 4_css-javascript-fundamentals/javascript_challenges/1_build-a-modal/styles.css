@@ -23,3 +23,8 @@ h2 {
     width: 125px;
     height: 50px;
 }
+
+.btn:hover, .btn:focus {
+    cursor: pointer;
+    background-color: #0a84ff;
+}
