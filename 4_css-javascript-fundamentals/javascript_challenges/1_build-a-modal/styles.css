@@ -1,0 +1,17 @@
+body {
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    font-weight: 400;
+}
+
+h2 {
+    font-size: 28px;
+    font-weight: 900;
+}
+
+.btn {
+    background-color: #3f66dc;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+}
