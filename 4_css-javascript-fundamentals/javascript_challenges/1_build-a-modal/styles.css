@@ -47,6 +47,7 @@ h2 {
 .card {
     width: 600px;
     background-color: #fff;
+    border-radius: 2px;
 }
 
 .hidden {
