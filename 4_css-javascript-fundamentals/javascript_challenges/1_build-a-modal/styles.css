@@ -56,3 +56,7 @@ h2 {
 .opaque {
     opacity: 0.5;
 }
+
+.gray-background {
+    background-color: #a9a9a9;
+}
