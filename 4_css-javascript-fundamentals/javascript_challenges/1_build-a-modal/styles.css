@@ -45,7 +45,10 @@ h2 {
 }
 
 .card {
-    display: none;
     width: 600px;
     background-color: #fff;
+}
+
+.hidden {
+    display: none;
 }
