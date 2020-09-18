@@ -6,9 +6,16 @@
 */
 
 const input = document.querySelector('#searchInput');
+const nameNodes = document.querySelectorAll('.name');
+let allNamesDOMCollection = [];
+
+nameNodes.forEach((name) => {
+    allNamesDOMCollection.push(name.textContent);
+});
+console.log('allNamesDOMCollection', allNamesDOMCollection);
 
 input.addEventListener('keyup', function(event){
     let searchQuery = event.target.value.toLowerCase();
-
     console.log('event.target.value:', searchQuery);
-})
+});
+
