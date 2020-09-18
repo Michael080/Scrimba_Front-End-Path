@@ -8,7 +8,7 @@
 const input = document.querySelector('#searchInput');
 
 input.addEventListener('keyup', function(event){
-    let searchQuery = event.key.toLowerCase();
+    let searchQuery = event.target.value.toLowerCase();
 
-    console.log(searchQuery);
+    console.log('event.target.value:', searchQuery);
 })
