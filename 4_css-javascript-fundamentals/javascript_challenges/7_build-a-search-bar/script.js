@@ -12,7 +12,10 @@ let allNamesDOMCollection = [];
 nameNodes.forEach((name) => {
     allNamesDOMCollection.push(name.textContent);
 });
-console.log('allNamesDOMCollection', allNamesDOMCollection);
+console.log(
+    'allNamesDOMCollection', allNamesDOMCollection, '\n',
+    'first index: ', allNamesDOMCollection[0]
+);
 
 input.addEventListener('keyup', function(event){
     let searchQuery = event.target.value.toLowerCase();
