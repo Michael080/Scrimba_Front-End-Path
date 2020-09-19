@@ -19,10 +19,6 @@ input.addEventListener('keyup', function(event){
         } else {
             nameNodes[i].style.display = 'none';
         }
-        // console.log(
-        //     `currentName: ${currentName} === ${searchQuery} \n`,
-        //     searchQuery.includes(currentName)
-        // );
     };
 });
 
