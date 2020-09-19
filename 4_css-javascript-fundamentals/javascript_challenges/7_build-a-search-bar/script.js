@@ -8,7 +8,11 @@ nameNodes.forEach((name) => {
     allNamesDOMCollection.push(name.textContent);
 });
 
-input.addEventListener('keyup', function(event){
+input.addEventListener('keyup', event => {
+    search(event);
+});
+
+function search (event) {
     let searchQuery = event.target.value.toLowerCase();
 
     for(let i = 0; i < allNamesDOMCollection.length; i++){
@@ -20,5 +24,5 @@ input.addEventListener('keyup', function(event){
             nameNodes[i].style.display = 'none';
         }
     };
-});
+}
 
