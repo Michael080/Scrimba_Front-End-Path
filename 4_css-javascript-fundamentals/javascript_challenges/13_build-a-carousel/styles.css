@@ -1,5 +1,21 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
 .carousel {
     position: relative;
+}
+
+/*  Buttons */
+
+.circle:hover,
+.circle:focus,
+.button:hover,
+.button:focus {
+    cursor: pointer;
+    color: #fdac67;
+    border-color: #fdac67;
+    opacity: 100%;
 }
 
 .buttons {
@@ -11,9 +27,9 @@
 }
 
 .button {
-    font-weight: bold;
     color: white;
     display: inline-block;
+    opacity: 70%;
 }
 
 .button-previous {
@@ -22,15 +38,6 @@
 
 .button-next {
     margin-right: -200px;
-}
-
-.circle:hover,
-.circle:focus,
-.button:hover,
-.button:focus {
-    cursor: pointer;
-    color: #fdac67;
-    border-color: #fdac67;
 }
 
 .circle {
@@ -43,10 +50,19 @@
 }
 
 .arrow {
+    font-size: 30px;
+    font-weight: 500;
     padding: 0;
     margin: 0;
     justify-self: center;
     align-self: center;
-    font-size: 24px;
     text-align: center;
+}
+
+#previous {
+    padding-left: 2px;
+}
+
+#next {
+    padding-left: 3px;
 }
