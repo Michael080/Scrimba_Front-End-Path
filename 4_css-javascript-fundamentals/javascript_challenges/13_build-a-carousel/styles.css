@@ -3,9 +3,13 @@
     display: inline-block;
     z-index: 1;
 }
-
-.button:hover {
+.circle:hover,
+.circle:focus,
+.button:hover,
+.button:focus {
     cursor: pointer;
+    color: #fdac67;
+    border-color: #fdac67;
 }
 
 .circle {
