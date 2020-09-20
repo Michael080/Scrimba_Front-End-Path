@@ -33,12 +33,24 @@ next.addEventListener('click', nextImage);
 
 function previousImage() {
     carousel.removeChild(images[currentImage]);
-    currentImage--;
+
+    if(currentImage > 0){
+        currentImage--;
+    } else {
+        currentImage = 2;
+    }
+
     displayImage(images[currentImage]);
 }
 
 function nextImage() {
     carousel.removeChild(images[currentImage]);
-    currentImage++;
+
+    if(currentImage < images.length - 1){
+        currentImage++;
+    } else {
+        currentImage = 0;
+    }
+
     displayImage(images[currentImage]);
 }
