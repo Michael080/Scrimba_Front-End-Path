@@ -1,5 +1,7 @@
 const carousel = document.querySelector('.carousel');
-const rightButton = document.querySelector('#right');
+const next = document.querySelector('#next');
+const previous = document.querySelector('#previous');
+
 let images = [];
 let currentImage = 0;
 
@@ -25,8 +27,18 @@ function displayImage(image) {
     carousel.appendChild(image);
 }
 
-rightButton.addEventListener('click', function() {
+previous.addEventListener('click', previousImage);
+
+next.addEventListener('click', nextImage);
+
+function previousImage() {
+    carousel.removeChild(images[currentImage]);
+    currentImage--;
+    displayImage(images[currentImage]);
+}
+
+function nextImage() {
     carousel.removeChild(images[currentImage]);
     currentImage++;
     displayImage(images[currentImage]);
-});
+}
