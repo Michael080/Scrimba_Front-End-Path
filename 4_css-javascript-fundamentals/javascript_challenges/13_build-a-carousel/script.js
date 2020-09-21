@@ -1,6 +1,6 @@
 const carousel = document.querySelector('.carousel');
-const next = document.querySelector('#next');
-const previous = document.querySelector('#previous');
+const previous = document.querySelector('.button-previous');
+const next = document.querySelector('.button-next');
 
 let images = [];
 let currentImage = 0;
