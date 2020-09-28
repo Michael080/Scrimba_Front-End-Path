@@ -1,3 +1,14 @@
+/*  Global Styles  */
+img {
+    width: 800px;
+}
+
+/*=========================================*/
+/*  Carousel  */
+.carousel {
+    position: relative;
+}
+
 .carousel-item img {
     display: none;
 }
@@ -5,3 +16,6 @@
 .carousel-item-visible img {
     display: initial;
 }
+
+
+
