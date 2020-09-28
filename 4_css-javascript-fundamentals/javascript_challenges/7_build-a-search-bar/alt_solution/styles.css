@@ -17,5 +17,20 @@ img {
     display: initial;
 }
 
+.carousel-actions {
+    /*position: absolute;*/
+}
+
+.buttons {
+    border: none;
+    border-radius: 50%;
+    padding: 12px 20px;
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    top: 200px;
+}
+
 
 
