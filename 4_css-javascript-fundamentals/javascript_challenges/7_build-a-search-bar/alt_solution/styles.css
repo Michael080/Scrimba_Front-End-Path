@@ -7,30 +7,35 @@ img {
 /*  Carousel  */
 .carousel {
     position: relative;
+    max-width: 800px;
 }
-
 .carousel-item img {
     display: none;
 }
 
 .carousel-item-visible img {
-    display: initial;
+    display: block;
+}
+
+.carousel-item img {
+    width: 100%;
+    max-width: 800px;
 }
 
 .carousel-actions {
-    /*position: absolute;*/
+    position: absolute;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    top: 50%;
 }
 
 .buttons {
+    display: inline-block;
     border: none;
     border-radius: 50%;
     padding: 12px 20px;
     font-size: 25px;
     text-align: center;
     font-weight: bold;
-    position: absolute;
-    top: 200px;
 }
-
-
-
