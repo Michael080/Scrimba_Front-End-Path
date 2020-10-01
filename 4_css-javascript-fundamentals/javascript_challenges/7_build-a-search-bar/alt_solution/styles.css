@@ -34,8 +34,26 @@ img {
     display: inline-block;
     border: none;
     border-radius: 50%;
+    opacity: 30%;
     padding: 12px 20px;
     font-size: 25px;
     text-align: center;
     font-weight: bold;
+}
+
+#carousel-button-previous {
+    margin-left: 15px;
+}
+
+#carousel-button-next {
+    margin-right: 15px;
+}
+
+/* button-states */
+
+.buttons:hover, .buttons:focus {
+    cursor: pointer;
+    opacity: 90%;
+    background-color: #007E93;
+    color: #ff763a;
 }
