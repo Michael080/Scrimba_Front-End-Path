@@ -23,7 +23,7 @@ img {
 
 @keyframes fadeIn {
     from {
-        opacity: 0%;
+        opacity: 35%;
     }
 
     to {
