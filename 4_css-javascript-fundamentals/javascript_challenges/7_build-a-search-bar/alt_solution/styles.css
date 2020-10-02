@@ -61,3 +61,8 @@ img {
     background-color: #007E93;
     color: #ff763a;
 }
+
+.buttons:active {
+    background-color: #009cb1;
+    color: #ff763a;
+}
