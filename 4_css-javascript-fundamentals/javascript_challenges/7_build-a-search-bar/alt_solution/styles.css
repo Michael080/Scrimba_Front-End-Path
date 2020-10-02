@@ -17,6 +17,18 @@ img {
 
 .carousel-item-visible img {
     display: block;
+    animation-duration: 500ms;
+    animation-name: fadeIn;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0%;
+    }
+
+    to {
+        opacity: 100%;
+    }
 }
 
 .carousel-item img {
