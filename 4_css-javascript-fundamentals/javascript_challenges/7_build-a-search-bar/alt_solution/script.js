@@ -8,6 +8,7 @@ let counter = 0;  //for iteration
 let start = 0;
 let end = imageCollection.length - 1;
 
+//Click listeners on carousel buttons
 previous.addEventListener('click', changeSlide);
 next.addEventListener('click', changeSlide);
 
