@@ -33,6 +33,7 @@ img {
     width: 100%;
     justify-content: space-between;
     top: 50%;
+    transform: translateY(-50%);
 }
 
 .buttons {
