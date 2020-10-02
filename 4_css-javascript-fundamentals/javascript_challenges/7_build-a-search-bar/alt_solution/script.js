@@ -26,8 +26,8 @@ function changeSlide(event){
 }
 
 function previousImage(){
-    if (counter == start){  //check if at start of collection
-        counter = 2;
+    if (counter == start){  //check if at start of carousel
+        counter = end;  //display last image in carousel
     } else {
         counter--;
     }
@@ -36,8 +36,8 @@ function previousImage(){
 }
 
 function nextImage(){
-    if (counter == end){
-        counter = 0;
+    if (counter == end){  //check if at end of carousel
+        counter = start;  //display first image in carousel
     } else {
         counter++;
     }
