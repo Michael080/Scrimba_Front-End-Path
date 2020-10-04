@@ -10,6 +10,8 @@ const subDir = document.querySelector('.sub-director');
 const starring = document.querySelector('.starring');
 const subStar = document.querySelector('.sub-starring');
 const imageInfo = document.querySelector('#image-info');
+let infoAnimation = document.querySelector('.info-animation');
+const progressBars = document.querySelectorAll('.bar');
 
 //Reference values
 let counter = 0;  //for iteration
@@ -63,6 +65,7 @@ function slideshow() {
     let currentImage = imageCollection[counter];
     toggleImage(currentImage);
     nextImage();
+    updateProgressBar();
 }
 
 function changeSlide(event){
@@ -73,8 +76,10 @@ function changeSlide(event){
     //Update carousel w/ corresponding image
     if (buttonClicked == 'previous'){
         previousImage();
+        updateProgressBar();
     } else {
         nextImage();
+        updateProgressBar();
     }
 }
 
@@ -87,6 +92,7 @@ function previousImage(){
     let previousImage = imageCollection[counter];
     toggleImage(previousImage);
     populateFilmData(imageData[counter]);
+    updateProgressBar();
 }
 
 function nextImage(){
@@ -109,9 +115,6 @@ function populateFilmData(data){
     title.textContent = data.title; //title info
     published.textContent = data.year; //filmed date
 
-    // imageInfo.classList.toggle('description');
-    // animateImageData();
-
     //Director info
     let directorHeading = document.createElement('span');
     directorHeading.classList.add('sub-title');
@@ -127,13 +130,27 @@ function populateFilmData(data){
     starring.textContent = data.starring;
     starringHeading.appendChild(subHeadStar);
     starring.prepend(starringHeading);
-
-    // imageInfo.classList.toggle('description');
-    // animateImageData();
 }
-let infoAnimation = document.querySelector('.info-animation');
-function animateImageData(){
 
+function animateImageData(){
     infoAnimation.classList.toggle('info-animation');
+}
+
+// Update progress bar on slide change
+function updateProgressBar(action, bar){
+    clearProgressBar();
+    for (let bar of progressBars){
+        if (bar === progressBars[counter]){
+            bar.classList.toggle('active');
+        }
+    }
+}
+
+function clearProgressBar(){
+    for (let bar of progressBars){
+        if (bar.classList.contains('active')){
+            bar.classList.toggle('active');
+        }
+    }
 }
 

@@ -82,7 +82,7 @@ img {
 
 
 /*=========================================*/
-/*  Buttons  */
+/*  Buttons  / Interface */
 
 .carousel-actions {
     position: absolute;
@@ -123,4 +123,23 @@ img {
 .buttons:active {
     background-color: #009cb1;
     color: #ff763a;
+}
+
+/* Progress bar */
+.progress-bar {
+    display: flex;
+    justify-content: center;
+}
+
+.bar {
+    background-color: #ff763a;
+    border-radius: 2px;
+    width: 58px;
+    height: 5px;
+    margin: 12px;
+}
+
+.active {
+    background-color: #fe2000;
+    filter: drop-shadow(0 4px 7px #fe2000);
 }
