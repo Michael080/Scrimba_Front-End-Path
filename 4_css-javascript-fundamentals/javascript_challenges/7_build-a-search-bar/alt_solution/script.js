@@ -1,16 +1,17 @@
 //DOM Selectors
+//buttons
 const previous = document.querySelector('#carousel-button-previous');
 const next = document.querySelector('#carousel-button-next');
+//images
 const imageCollection = document.querySelectorAll('img');
 const description = document.querySelector('.description');
+//description
 const title = document.querySelector('.title');
 const published = document.querySelector('.published');
 const director = document.querySelector('.director');
-const subDir = document.querySelector('.sub-director');
 const starring = document.querySelector('.starring');
-const subStar = document.querySelector('.sub-starring');
-const imageInfo = document.querySelector('#image-info');
 let infoAnimation = document.querySelector('.info-animation');
+//progress bar
 const progressBars = document.querySelectorAll('.bar');
 
 //Reference values

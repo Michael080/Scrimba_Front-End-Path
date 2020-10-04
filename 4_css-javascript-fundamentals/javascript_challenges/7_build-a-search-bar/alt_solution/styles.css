@@ -58,6 +58,7 @@ img {
     list-style-type: none;
 }
 
+/* images */
 .carousel-item img {
     display: none;
     width: 100%;
