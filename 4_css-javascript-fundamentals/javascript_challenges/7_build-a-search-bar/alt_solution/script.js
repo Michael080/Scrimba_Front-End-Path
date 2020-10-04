@@ -9,6 +9,7 @@ const director = document.querySelector('.director');
 const subDir = document.querySelector('.sub-director');
 const starring = document.querySelector('.starring');
 const subStar = document.querySelector('.sub-starring');
+const imageInfo = document.querySelector('#image-info');
 
 //Reference values
 let counter = 0;  //for iteration
@@ -105,8 +106,11 @@ function toggleImage(image){
 
 //  Populate Film Data
 function populateFilmData(data){
-    title.textContent = data.title;
-    published.textContent = data.year;
+    title.textContent = data.title; //title info
+    published.textContent = data.year; //filmed date
+
+    // imageInfo.classList.toggle('description');
+    // animateImageData();
 
     //Director info
     let directorHeading = document.createElement('span');
@@ -123,7 +127,13 @@ function populateFilmData(data){
     starring.textContent = data.starring;
     starringHeading.appendChild(subHeadStar);
     starring.prepend(starringHeading);
+
+    // imageInfo.classList.toggle('description');
+    // animateImageData();
 }
+let infoAnimation = document.querySelector('.info-animation');
+function animateImageData(){
 
-
+    infoAnimation.classList.toggle('info-animation');
+}
 

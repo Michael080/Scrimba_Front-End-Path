@@ -18,6 +18,8 @@ img {
     position: relative;
     max-width: 800px;
     margin: 50px auto 0 auto;
+    filter: drop-shadow(0 2px 5px gray);
+    background-color: gray;
 }
 
 /* slide description */
@@ -29,7 +31,22 @@ img {
     text-align: right;
     position: absolute;
     top: 286px;
-    left: 600px;
+    left: 585px;
+}
+
+.info-animation {
+    animation-name: textFadeIn;
+    animation-duration: 2000ms;
+}
+
+@keyframes textFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .title {
@@ -43,9 +60,11 @@ img {
 
 .carousel-item img {
     display: none;
+    width: 100%;
+    max-width: 800px;
 }
 
-.carousel-item-visible img {
+.carousel-item-visible img{
     display: block;
     animation-duration: 500ms;
     animation-name: fadeIn;
@@ -61,10 +80,6 @@ img {
     }
 }
 
-.carousel-item img {
-    width: 100%;
-    max-width: 800px;
-}
 
 /*=========================================*/
 /*  Buttons  */
