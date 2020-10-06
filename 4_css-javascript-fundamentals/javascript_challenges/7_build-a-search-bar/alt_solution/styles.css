@@ -91,6 +91,7 @@ img {
 
     .description {
         font-size: 12px;
+        position: absolute;
         top: 60%;
         left: 69%;
         min-width: 150px;
