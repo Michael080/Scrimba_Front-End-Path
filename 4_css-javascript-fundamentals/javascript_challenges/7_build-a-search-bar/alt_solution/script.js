@@ -115,9 +115,11 @@ function toggleImage(image){
 function populateFilmData(data){
     //Title info
     title.textContent = data.title; //title info
+    //Title year
     let filmedDate = document.createElement('span');
     filmedDate.classList.add('.published');
     let year = document.createTextNode(` (${data.year})`);
+    //Update DOM
     filmedDate.appendChild(year);
     title.appendChild(filmedDate);
 
@@ -159,4 +161,3 @@ function clearProgressBar(){
         }
     }
 }
-
