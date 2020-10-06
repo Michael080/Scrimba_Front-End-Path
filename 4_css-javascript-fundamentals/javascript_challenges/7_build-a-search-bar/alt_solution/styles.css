@@ -19,43 +19,6 @@ img {
     max-width: 800px;
     margin: 50px auto 0 auto;
     filter: drop-shadow(0 2px 5px gray);
-    background-color: gray;
-}
-
-/* slide description */
-.title, .sub-title {
-    font-weight: 600;
-}
-
-.description {
-    text-align: right;
-    position: absolute;
-    top: 286px;
-    left: 585px;
-}
-
-.info-animation {
-    animation-name: textFadeIn;
-    animation-duration: 2000ms;
-}
-
-@keyframes textFadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-.title {
-    font-size: 26px;
-    margin: 0;
-}
-
-.details {
-    list-style-type: none;
 }
 
 /* images */
@@ -81,6 +44,81 @@ img {
     }
 }
 
+/* image description */
+.title, .sub-title {
+    font-weight: 600;
+}
+
+.description {
+    font-size: 12px;
+    text-align: right;
+}
+
+.title {
+    font-size: 18px;
+    margin: 0;
+}
+
+.info-animation {
+    animation-name: textFadeIn;
+    animation-duration: 2000ms;
+}
+
+@keyframes textFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.details {
+    list-style-type: none;
+    display: grid;
+    justify-content: right;
+}
+
+.details {
+    list-style-type: none;
+}
+/* Image Description Media Queries */
+@media screen and (min-width: 600px){
+    .title {
+        font-size: 18px;
+    }
+
+    .description {
+        font-size: 12px;
+        top: 60%;
+        left: 69%;
+        min-width: 150px;
+        max-width: 250px;
+    }
+}
+
+@media screen and (min-width: 700px){
+    .title {
+        font-size: 22px;
+    }
+
+    .description {
+        font-size: 15px;
+        top: 65%;
+        left: 72%;
+    }
+}
+
+@media screen and (min-width: 900px){
+    .title {
+        font-size: 26px;
+    }
+
+    .description {
+        font-size: 17px;
+    }
+}
 
 /*=========================================*/
 /*  Buttons  / Interface */
