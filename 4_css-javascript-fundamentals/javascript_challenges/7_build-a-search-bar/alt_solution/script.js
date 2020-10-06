@@ -113,8 +113,13 @@ function toggleImage(image){
 
 //  Populate Film Data
 function populateFilmData(data){
+    //Title info
     title.textContent = data.title; //title info
-    published.textContent = data.year; //filmed date
+    let filmedDate = document.createElement('span');
+    filmedDate.classList.add('.published');
+    let year = document.createTextNode(` (${data.year})`);
+    filmedDate.appendChild(year);
+    title.appendChild(filmedDate);
 
     //Director info
     let directorHeading = document.createElement('span');
