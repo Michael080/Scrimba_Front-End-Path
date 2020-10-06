@@ -45,7 +45,8 @@ img {
 }
 
 /* image description */
-.title, .sub-title {
+.title,
+.sub-title {
     font-weight: 600;
 }
 
@@ -143,7 +144,8 @@ img {
 }
 
 /* button-states */
-.buttons:hover, .buttons:focus {
+.buttons:hover,
+.buttons:focus {
     cursor: pointer;
     opacity: 90%;
     background-color: #007E93;
@@ -171,5 +173,5 @@ img {
 
 .active {
     background-color: #fe2000;
-    filter: drop-shadow(0 4px 7px #fe2000);
+    filter: drop-shadow(0 4px 7px #ff0000);
 }
