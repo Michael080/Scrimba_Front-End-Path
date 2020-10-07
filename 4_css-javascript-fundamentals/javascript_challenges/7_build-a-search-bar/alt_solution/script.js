@@ -3,8 +3,7 @@
 const previous = document.querySelector('#carousel-button-previous');
 const next = document.querySelector('#carousel-button-next');
 //images
-//TODO fix image error @ DOM: select only film images/exclude IMDB image
-const imageCollection = document.querySelectorAll('img');
+const imageCollection = document.querySelectorAll('.carousel-image');
 const description = document.querySelector('.description');
 //description
 const title = document.querySelector('.title');
@@ -64,8 +63,7 @@ previous.addEventListener('click', changeSlide);
 next.addEventListener('click', changeSlide);
 
 //Transition 'slides' automatically via timer
-//TODO turn back on @ IMDB logo completion
-// let autoSlideTransition = setInterval(slideshow, 5000);
+let autoSlideTransition = setInterval(slideshow, 5000);
 function slideshow() {
     let currentImage = imageCollection[counter];
     toggleImage(currentImage);
