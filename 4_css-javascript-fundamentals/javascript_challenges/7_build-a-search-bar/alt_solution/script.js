@@ -3,6 +3,7 @@
 const previous = document.querySelector('#carousel-button-previous');
 const next = document.querySelector('#carousel-button-next');
 //images
+//TODO fix image error @ DOM: select only film images/exclude IMDB image
 const imageCollection = document.querySelectorAll('img');
 const description = document.querySelector('.description');
 //description
@@ -10,6 +11,8 @@ const title = document.querySelector('.title');
 const published = document.querySelector('.published');
 const director = document.querySelector('.director');
 const starring = document.querySelector('.starring');
+const imdbLinkDOM = document.querySelector('.imdb-link');
+const imdbLinkImage = document.querySelector('.imdb-logo');
 let infoAnimation = document.querySelector('.info-animation');
 //progress bar
 const progressBars = document.querySelectorAll('.bar');
@@ -61,7 +64,8 @@ previous.addEventListener('click', changeSlide);
 next.addEventListener('click', changeSlide);
 
 //Transition 'slides' automatically via timer
-let autoSlideTransition = setInterval(slideshow, 5000);
+//TODO turn back on @ IMDB logo completion
+// let autoSlideTransition = setInterval(slideshow, 5000);
 function slideshow() {
     let currentImage = imageCollection[counter];
     toggleImage(currentImage);
@@ -119,7 +123,6 @@ function populateFilmData(data){
     let filmedDate = document.createElement('span');
     filmedDate.classList.add('.published');
     let year = document.createTextNode(` (${data.year})`);
-    //Update DOM
     filmedDate.appendChild(year);
     title.appendChild(filmedDate);
 
@@ -138,6 +141,9 @@ function populateFilmData(data){
     starring.textContent = data.starring;
     starringHeading.appendChild(subHeadStar);
     starring.prepend(starringHeading);
+
+    //IMDB link
+    imdbLinkDOM.setAttribute('href', data.imdb);
 }
 
 function animateImageData(){

@@ -45,6 +45,11 @@ img {
 }
 
 /* image description */
+li {
+    margin-top: 0;
+    margin-bottom: 4px;
+}
+
 .title,
 .sub-title {
     font-weight: 600;
@@ -58,6 +63,7 @@ img {
 .title {
     font-size: 18px;
     margin: 0;
+    margin-bottom: 7px;
 }
 
 .info-animation {
@@ -76,14 +82,18 @@ img {
 }
 
 .details {
+    line-height: 1.5rem;
+    margin-bottom: 10px;
     list-style-type: none;
     display: grid;
     justify-content: right;
 }
 
-.details {
-    list-style-type: none;
+.imdb-logo {
+    width: 45px;
+    margin-top: 9px;
 }
+
 /* Image Description Media Queries */
 @media screen and (min-width: 600px){
     .title {
