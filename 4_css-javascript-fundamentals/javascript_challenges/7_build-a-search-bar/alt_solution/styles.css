@@ -176,8 +176,9 @@ li {
 }
 
 .buttons:active {
-    background-color: #009cb1;
-    color: #ff763a;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: #ffce22;
+    filter: drop-shadow(0 1px 10px #ffe199);
 }
 
 /* Progress bar */
