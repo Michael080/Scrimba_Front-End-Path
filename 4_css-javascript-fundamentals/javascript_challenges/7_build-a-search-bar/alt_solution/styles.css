@@ -17,7 +17,7 @@ img {
 .carousel {
     max-width: 800px;
     margin: 50px auto 0 auto;
-    filter: drop-shadow(0 2px 5px gray);
+    filter: drop-shadow(0 2px 5px rgba(255, 187, 170, 0.45));
 }
 
 /* images */
