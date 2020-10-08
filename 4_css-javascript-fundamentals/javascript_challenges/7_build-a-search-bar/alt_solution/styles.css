@@ -160,9 +160,19 @@ li {
 .buttons:hover,
 .buttons:focus {
     cursor: pointer;
-    opacity: 90%;
-    background-color: #007E93;
+    /*opacity: 58%;*/
+    opacity: 100%;
+    /*background-color: #00cbec;*/
+    /*color: #fb8fa5;*/
+
+    background-color: rgba(0, 0, 0, 0.85);
     color: #ff763a;
+    filter: drop-shadow(0 1px 10px rgba(255, 201, 52, 0.58));
+
+
+    /*background-color: gray;*/
+    /*color: #fe2000;*/
+    /*filter: drop-shadow(0 4px 7px #fe2000);*/
 }
 
 .buttons:active {
