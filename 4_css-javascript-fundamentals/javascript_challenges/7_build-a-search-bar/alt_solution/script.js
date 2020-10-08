@@ -1,4 +1,6 @@
 //DOM Selectors
+//carousel
+const carousel = document.querySelector('.carousel');
 //buttons
 const previous = document.querySelector('#carousel-button-previous');
 const next = document.querySelector('#carousel-button-next');
@@ -32,7 +34,6 @@ let joker = {
     starring: 'Joaquin Phoenix',
     imdb: 'https://www.imdb.com/title/tt7286456/'
 };
-
 imageData.push(joker);
 
 //Baby Driver
@@ -43,7 +44,6 @@ let babyDriver = {
     starring: 'Ansel Elgort',
     imdb: 'https://www.imdb.com/title/tt3890160/'
 };
-
 imageData.push(babyDriver);
 
 //Unknown
@@ -54,9 +54,11 @@ let unknown = {
     starring: 'Creepy Family',
     imdb: 'n/a'
 };
-
 imageData.push(unknown); //Save image data in array
-populateFilmData(imageData[0]); //Show data for first slide
+
+addDescriptionsToDOM(imageData);  // Update DOM w/ image info
+
+let descriptions = document.querySelectorAll('.description');
 
 //Click listeners on carousel buttons
 previous.addEventListener('click', changeSlide);
@@ -64,9 +66,14 @@ next.addEventListener('click', changeSlide);
 
 //Transition 'slides' automatically via timer
 let autoSlideTransition = setInterval(slideshow, 5000);
+
 function slideshow() {
     let currentImage = imageCollection[counter];
+    let currentDescription = descriptions[counter];
+    //Hide image & description
     toggleImage(currentImage);
+    toggleDescription(currentDescription);
+
     nextImage();
     updateProgressBar();
 }
@@ -74,8 +81,12 @@ function slideshow() {
 function changeSlide(event){
     let buttonClicked = event.target.classList[0]; //ID which button was clicked
     let currentImage = imageCollection[counter];
-    //Hide image
+    let currentDescription = descriptions[counter];
+
+    //Hide image & description
     toggleImage(currentImage);
+    toggleDescription(currentDescription);
+
     //Update carousel w/ corresponding image
     if (buttonClicked == 'previous'){
         previousImage();
@@ -92,9 +103,12 @@ function previousImage(){
     } else {
         counter--;
     }
+
+    //Display image & info
     let previousImage = imageCollection[counter];
+    let previousDescription = descriptions[counter];
     toggleImage(previousImage);
-    populateFilmData(imageData[counter]);
+    toggleDescription(previousDescription);
     updateProgressBar();
 }
 
@@ -104,44 +118,61 @@ function nextImage(){
     } else {
         counter++;
     }
+
+    //Display image & info
     let nextImage = imageCollection[counter];
+    let nextDescription = descriptions[counter];
     toggleImage(nextImage);
-    populateFilmData(imageData[counter]);
+    toggleDescription(nextDescription);
 }
 
 function toggleImage(image){
     image.parentNode.classList.toggle('carousel-item-visible');
 }
 
-//  Populate Film Data
-function populateFilmData(data){
-    //Title info
-    title.textContent = data.title; //title info
-    //Title year
-    let filmedDate = document.createElement('span');
-    filmedDate.classList.add('.published');
-    let year = document.createTextNode(` (${data.year})`);
-    filmedDate.appendChild(year);
-    title.appendChild(filmedDate);
+function createFilmDescription(film, joker){
+    let testDiv = document.createElement('div');
+    testDiv.classList.add('description');
+    testDiv.classList.add('info-animation');
+    testDiv.id = 'image-info';
 
-    //Director info
-    let directorHeading = document.createElement('span');
-    directorHeading.classList.add('sub-title');
-    let subHeadDir = document.createTextNode('Director: ');
-    director.textContent = data.director;
-    directorHeading.appendChild(subHeadDir);
-    director.prepend(directorHeading);
+    testDiv.innerHTML = `<h3 class="title">${film.title}<span class="published"></span></h3>
+        <ul class="details">
+            <li class="director"><span class="sub-title">Director: </span>${film.director}</li>
+            <li class="starring"><span class="sub-title">Starring: </span>${film.starring}</li>
+            <li class="imdb"><a class="imdb-link" href="${film.imdb}"><img src="logos/imdb_logo.png" alt="IMDB logo and link to film page" class="imdb-logo"></a></li>
+        </ul>`;
 
-    //Starring info
-    let starringHeading = document.createElement('span');
-    starringHeading.classList.add('sub-title');
-    let subHeadStar = document.createTextNode('Starring: ');
-    starring.textContent = data.starring;
-    starringHeading.appendChild(subHeadStar);
-    starring.prepend(starringHeading);
+    //make info for first slide visible
+    let firstSlide = imageData[0];
+    if (film === firstSlide){
+        toggleDescription(testDiv);
+        console.log(film);
+    }
 
-    //IMDB link
-    imdbLinkDOM.setAttribute('href', data.imdb);
+    return testDiv;
+}
+
+function updateData(filmsDataArray){
+    for (film of filmsDataArray){
+        film.filmInfoDOM = createFilmDescription(film);  //update film object
+    }
+}
+
+function updateDOM(element){
+    carousel.appendChild(element);
+}
+
+function addDescriptionsToDOM(filmsArray){
+    updateData(filmsArray); //add DOM elements to each film object
+
+    for (film of filmsArray){
+        updateDOM(film.filmInfoDOM);
+    }
+}
+
+function toggleDescription(description){
+    description.classList.toggle('description-visible');
 }
 
 function animateImageData(){

@@ -49,6 +49,7 @@ li {
     margin-top: 0;
     margin-bottom: 4px;
 }
+/*TODO -- Show one element at a time*/
 
 .title,
 .sub-title {
@@ -56,11 +57,19 @@ li {
 }
 
 .description {
+    display: none;
     box-sizing: border-box;
     font-size: 12px;
     text-align: right;
     margin: 0;
     padding: 6px;
+}
+
+.description-visible {
+    display: block;
+    background-color: rgba(0, 0, 0, 0.27);
+    /*width: 100px;*/
+    /*height: 100px;*/
 }
 
 .title {
