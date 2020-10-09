@@ -140,7 +140,7 @@ li {
     width: 100%;
     justify-content: space-between;
     top: 50%;
-    transform: translateY(-125%);
+    transform: translateY(-200%);
 }
 
 @media screen and (min-width: 599px){
@@ -150,48 +150,71 @@ li {
 }
 
 .buttons {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
     display: inline-block;
+    box-sizing: border-box;
     border: none;
     border-radius: 50%;
+    width: 34px;
+    height: 34px;
     opacity: 30%;
-    padding: 9px 15px;
-    font-size: 22px;
-    text-align: center;
-    font-weight: bold;
+}
+
+/*smallest width 284*/
+#carousel-button-previous {
+    margin-left: 16.25%;
+    transform: translateX(-50%);
+}
+
+#carousel-button-next {
+    margin-right: 16.25%;
+    transform: translateX(50%);
 }
 
 @media screen and (min-width: 500px){
     .buttons {
-        padding: 12px 20px;
-        font-size: 30px;
+        font-size: 25px;
+        width: 39px;
+        height: 39px;
     }
 }
 
-#carousel-button-previous {
-    margin-left: 15px;
+@media screen and (min-width: 750px){
+    .buttons {
+        font-size: 35px;
+        width: 56px;
+        height: 56px;
+    }
 }
 
-#carousel-button-next {
-    margin-right: 15px;
+@media screen and (min-width: 866px){
+    .buttons {
+        width: 65px;
+        height: 65px;
+        font-size: 41px;
+    }
+
+    #carousel-button-previous {
+        margin-left: 0px;
+        transform: translateX(-50%);
+    }
+
+    #carousel-button-next {
+        margin-right: 0px;
+        transform: translateX(50%);
+    }
 }
 
 /* button-states */
 .buttons:hover,
 .buttons:focus {
     cursor: pointer;
-    /*opacity: 58%;*/
     opacity: 100%;
-    /*background-color: #00cbec;*/
-    /*color: #fb8fa5;*/
-
     background-color: rgba(0, 0, 0, 0.85);
     color: #ff763a;
     filter: drop-shadow(0 1px 10px rgba(255, 201, 52, 0.58));
-
-
-    /*background-color: gray;*/
-    /*color: #fe2000;*/
-    /*filter: drop-shadow(0 4px 7px #fe2000);*/
 }
 
 .buttons:active {
