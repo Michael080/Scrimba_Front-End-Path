@@ -57,7 +57,6 @@ let unknown = {
 imageData.push(unknown); //Save image data in array
 
 addDescriptionsToDOM(imageData);  // Update DOM w/ image info
-
 let descriptions = document.querySelectorAll('.description');
 
 //Click listeners on carousel buttons
