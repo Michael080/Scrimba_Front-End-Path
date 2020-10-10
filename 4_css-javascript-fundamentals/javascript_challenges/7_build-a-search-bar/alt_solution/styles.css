@@ -2,7 +2,9 @@
 /*  Global Styles  */
 
 body {
-    font-family: 'Oswald', sans-serif;
+    /*TODO -- undo temporary comment*/
+    /*font-family: 'Oswald', sans-serif;*/
+    font-family: sans-serif;
     background-color: black;
     color: white;
 }

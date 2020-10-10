@@ -16,6 +16,7 @@ const imdbLinkDOM = document.querySelector('.imdb-link');
 const imdbLinkImage = document.querySelector('.imdb-logo');
 let infoAnimation = document.querySelector('.info-animation');
 //progress bar
+//TODO -- turn progress bar into a navigation
 const progressBars = document.querySelectorAll('.bar');
 
 //Reference values
@@ -26,34 +27,51 @@ let end = imageCollection.length - 1;
 //Images & image data
 let imageData = Array();
 
-//Joker
-let joker = {
-    title: 'Joker',
-    year: 2019,
-    director: 'Todd Phillips',
-    starring: 'Joaquin Phoenix',
-    imdb: 'https://www.imdb.com/title/tt7286456/'
-};
+//works...maybe?
+/*
+
+-- CHANGE SLIDE METHOD --
+create properties:
+    imageDOM - contains the node for corresponding image
+
+create method:
+    - gets info from getter
+    - toggles 'visible' classes (create 1 visible class to rule them all?)
+
+create getter -- (DOM elements):
+    returns -> filmInfoDOM && imageDOM
+
+create getter -- (next film / previous film)
+    returns -> corresponding adjacent objects
+ */
+class Film {
+    constructor(title, year, director, starring, imdbLink, currentSlide, filmInfoDOM) {
+        this.title = title;
+        this.year = year;
+        this.director = director;
+        this.starring = starring;
+        this.imdbLink = imdbLink;
+        this.currentSlide = currentSlide;
+        this.filmInfoDOM = filmInfoDOM;
+    }
+}
+
+let joker = new Film(
+    'Joker', 2019, 'Todd Phillips', 'Joaquin Phoenix',
+    'https://www.imdb.com/title/tt7286456/'
+);
 imageData.push(joker);
 
-//Baby Driver
-let babyDriver = {
-    title: 'Baby Driver',
-    year: 2017,
-    director: 'Edgar Wright',
-    starring: 'Ansel Elgort',
-    imdb: 'https://www.imdb.com/title/tt3890160/'
-};
+let babyDriver = new Film(
+    'Baby Driver', 2017, 'Edgar Wright', 'Ansel Elgort',
+    'https://www.imbd.com/title/tt3890160/'
+);
 imageData.push(babyDriver);
 
-//Unknown
-let unknown = {
-    title: 'unknown',
-    year: 'n/a',
-    director: 'Who Knows',
-    starring: 'Creepy Family',
-    imdb: 'n/a'
-};
+let unknown = new Film(
+    'unknown', "n/a", 'Who Knows', 'Creepy Family',
+    "n/a"
+);
 imageData.push(unknown); //Save image data in array
 
 addDescriptionsToDOM(imageData);  // Update DOM w/ image info
@@ -77,7 +95,7 @@ function slideshow() {
     updateProgressBar();
 }
 
-function changeSlide(event){
+function changeSlide(event) {
     let buttonClicked = event.target.classList[0]; //ID which button was clicked
     let currentImage = imageCollection[counter];
     let currentDescription = descriptions[counter];
@@ -87,7 +105,7 @@ function changeSlide(event){
     toggleDescription(currentDescription);
 
     //Update carousel w/ corresponding image
-    if (buttonClicked == 'previous'){
+    if (buttonClicked == 'previous') {
         previousImage();
         updateProgressBar();
     } else {
@@ -96,8 +114,8 @@ function changeSlide(event){
     }
 }
 
-function previousImage(){
-    if (counter == start){  //check if at start of carousel
+function previousImage() {
+    if (counter == start) {  //check if at start of carousel
         counter = end;  //display last image in carousel
     } else {
         counter--;
@@ -112,7 +130,7 @@ function previousImage(){
 }
 
 function nextImage(){
-    if (counter == end){  //check if at end of carousel
+    if (counter == end) {  //check if at end of carousel
         counter = start;  //display first image in carousel
     } else {
         counter++;
@@ -125,11 +143,11 @@ function nextImage(){
     toggleDescription(nextDescription);
 }
 
-function toggleImage(image){
+function toggleImage(image) {
     image.parentNode.classList.toggle('carousel-item-visible');
 }
 
-function createFilmDescription(film, joker){
+function createFilmDescription(film, joker) {
     let testDiv = document.createElement('div');
     testDiv.classList.add('description');
     testDiv.classList.add('info-animation');
@@ -139,12 +157,12 @@ function createFilmDescription(film, joker){
         <ul class="details">
             <li class="director"><span class="sub-title">Director: </span>${film.director}</li>
             <li class="starring"><span class="sub-title">Starring: </span>${film.starring}</li>
-            <li class="imdb"><a class="imdb-link" href="${film.imdb}"><img src="logos/imdb_logo.png" alt="IMDB logo and link to film page" class="imdb-logo"></a></li>
+            <li class="imdb"><a class="imdb-link" href="${film.imdbLink}"><img src="logos/imdb_logo.png" alt="IMDB logo and link to film page" class="imdb-logo"></a></li>
         </ul>`;
 
     //make info for first slide visible
     let firstSlide = imageData[0];
-    if (film === firstSlide){
+    if (film === firstSlide) {
         toggleDescription(testDiv);
         console.log(film);
     }
@@ -152,45 +170,45 @@ function createFilmDescription(film, joker){
     return testDiv;
 }
 
-function updateData(filmsDataArray){
+function updateData(filmsDataArray) {
     for (film of filmsDataArray){
         film.filmInfoDOM = createFilmDescription(film);  //update film object
     }
 }
 
-function updateDOM(element){
+function updateDOM(element) {
     carousel.appendChild(element);
 }
 
-function addDescriptionsToDOM(filmsArray){
+function addDescriptionsToDOM(filmsArray) {
     updateData(filmsArray); //add DOM elements to each film object
 
-    for (film of filmsArray){
+    for (film of filmsArray) {
         updateDOM(film.filmInfoDOM);
     }
 }
 
-function toggleDescription(description){
+function toggleDescription(description) {
     description.classList.toggle('description-visible');
 }
 
-function animateImageData(){
+function animateImageData() {
     infoAnimation.classList.toggle('info-animation');
 }
 
 // Update progress bar on slide change
-function updateProgressBar(action, bar){
+function updateProgressBar(action, bar) {
     clearProgressBar();
-    for (let bar of progressBars){
-        if (bar === progressBars[counter]){
+    for (let bar of progressBars) {
+        if (bar === progressBars[counter]) {
             bar.classList.toggle('active');
         }
     }
 }
 
-function clearProgressBar(){
-    for (let bar of progressBars){
-        if (bar.classList.contains('active')){
+function clearProgressBar() {
+    for (let bar of progressBars) {
+        if (bar.classList.contains('active')) {
             bar.classList.toggle('active');
         }
     }
