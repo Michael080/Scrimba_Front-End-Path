@@ -54,26 +54,34 @@ class Film {
         this.currentSlide = currentSlide;
         this.filmInfoDOM = filmInfoDOM;
     }
+
+    saveFilmArray() {
+        imageData.push(this);
+    }
+
 }
 
 let joker = new Film(
     'Joker', 2019, 'Todd Phillips', 'Joaquin Phoenix',
     'https://www.imdb.com/title/tt7286456/'
 );
-imageData.push(joker);
 
 let babyDriver = new Film(
     'Baby Driver', 2017, 'Edgar Wright', 'Ansel Elgort',
     'https://www.imbd.com/title/tt3890160/'
 );
-imageData.push(babyDriver);
+
 
 let unknown = new Film(
     'unknown', "n/a", 'Who Knows', 'Creepy Family',
     "n/a"
 );
-imageData.push(unknown); //Save image data in array
 
+// Store films in imageData[]
+joker.saveFilmArray();
+babyDriver.saveFilmArray();
+unknown.saveFilmArray();
+//TODO --- Methodize
 addDescriptionsToDOM(imageData);  // Update DOM w/ image info
 let descriptions = document.querySelectorAll('.description');
 
