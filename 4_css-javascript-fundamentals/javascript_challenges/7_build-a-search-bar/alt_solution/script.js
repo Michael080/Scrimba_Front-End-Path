@@ -26,40 +26,185 @@ let end = imageCollection.length - 1;
 
 //Images & image data
 let imageData = Array();
+let tempImageData = new Array;
 
-//works...maybe?
-/*
 
--- CHANGE SLIDE METHOD --
-create properties:
-    imageDOM - contains the node for corresponding image
+//Store state information
+let carouselState = function(currentSlide, change) {
+    currentSlide = currentSlide;
+    change = change;
+}
 
-create method:
-    - gets info from getter
-    - toggles 'visible' classes (create 1 visible class to rule them all?)
-
-create getter -- (DOM elements):
-    returns -> filmInfoDOM && imageDOM
-
-create getter -- (next film / previous film)
-    returns -> corresponding adjacent objects
- */
 class Film {
-    constructor(title, year, director, starring, imdbLink, currentSlide, filmInfoDOM) {
+    constructor(
+        title, year, director, starring, imdbLink, image, previousSlide, nextSlide,
+                currentSlide, filmInfoDOM, value, state, filmID, slideDOM,
+        slidesBiyatch, switchDisplay
+    ) {
         this.title = title;
         this.year = year;
         this.director = director;
         this.starring = starring;
         this.imdbLink = imdbLink;
+        this.image = image;
+        this.previousSlide = previousSlide;
+        this.nextSlide = nextSlide;
         this.currentSlide = currentSlide;
-        this.filmInfoDOM = filmInfoDOM;
+        this.filmInfoDOM = createFilmDescription(this);
+        this.value = false;
+        this.state = '!currentSlide'; //state can be either '!currentSlide' || 'currentSlide'
+        this.filmID = filmID; //create w/ saveFilmArray()
+        this.slideDOM = new Object; //create w/ saveFilmArray()
+
+
+
+
+        /*
+        Description:
+        --Take input from getSlides() and display slides or call getSlides() on
+        --the slides that are 'in queue' to be
+
+        Parameters:
+        --switch - ALWAYS passed to toggle film display
+        --slide - Specs 'next', 'previous', OR 'current'
+        */
+        this.slidesBiyatch = function(transitionType, object) {
+            const getSlides = {
+                //TODO: Update currentSlide - on 'this' object and in the 'state' object
+                switch: switchDisplay,
+                next: (function () {
+                    //TODO -- why does this not work?
+                    // imageData[this.filmID - 1].isCurrent;
+                    console.log('hello from next');
+                })(),
+                previous: 'previous',
+                //TODO -- call makeCurrent instead of current
+                makeCurrent: (function () {
+                    console.log('do whatever the fuk you fuk');
+                    // carouselState.currentSlide =
+                })(),
+                default: 'default'
+            }
+
+            return (getSlides[switcheroo] || getSlides.default);
+        }
+
+        //toggle display of image and text
+        this.switchDisplay = function(){
+            toggleImage(imageCollection[this.filmID]);
+            // toggleDescription();
+        }
+    }
+    //TODO --- Redundant?
+    saveToArray(item, array){
+        array.push(item);
     }
 
-    saveFilmArray() {
-        imageData.push(this);
+    // findAdjacent(slide, slidesArray = slideStore){
+    //     const firstIndex = 0;
+    //     const lastIndex = slidesArray.length - 1;
+    //     const firstSlide = slidesArray[firstIndex];
+    //     const lastSlide = slidesArray[lastIndex];
+    //
+    //     if (slide.filmID === firstIndex) {
+    //         slide.previousSlide = lastSlide;
+    //         slide.nextSlide = slidesArray[ slide.filmID + 1 ];
+    //
+    //     } else if (slide.filmID === lastIndex) {
+    //         slide.previousSlide = slidesArray[ slide.filmID -1 ];
+    //         slide.nextSlide = firstSlide;
+    //     }else {
+    //         slide.previousSlide = slidesArray[ slide.filmID - 1] ;
+    //         slide.nextSlide = slidesArray[ slide.filmID + 1 ];
+    //     }
+    // }
+
+    findAdjacent(slidesArray = slideStore){
+        const firstIndex = 0;
+        const lastIndex = slidesArray.length - 1;
+        const firstSlide = slidesArray[firstIndex];
+        const lastSlide = slidesArray[lastIndex];
+
+        if (this.filmID === firstIndex) {
+            this.previousSlide = lastSlide;
+            this.nextSlide = slidesArray[ this.filmID + 1 ];
+
+        } else if (this.filmID === lastIndex) {
+            this.previousSlide = slidesArray[ this.filmID -1 ];
+            this.nextSlide = firstSlide;
+        }else {
+            this.previousSlide = slidesArray[ this.filmID - 1];
+            this.nextSlide = slidesArray[ this.filmID + 1 ];
+        }
+    }
+
+    // //TODO -- Store image & data only in object - remove any redundant storage
+    // //Store objects in array, create id for each
+    storeSlideDOM(slideObject, imageDOMArray, infoDOM) {
+        // slideObject.filmID = slideObject.length - 1;
+        slideObject.slideDOM = {
+            slideImage: imageDOMArray,
+            slideData: infoDOM
+        };
+    }
+
+    set setImage(setImage) {
+        this.image = setImage;
+    }
+
+    //TODO -- Rename- isCurrent() =>   ||  implement as method instead of getter
+    //Check and change state of film
+    get isCurrent() {
+        if(this.state === 'currentSlide') {
+            //TODO -- Store current object in var outside of object? - call var currentSlideID
+            this.state = '!currentSlide'; //toggle state
+            // setCurrentState(switch); //display corresponding film
+            this.switchDisplay();
+            console.log(this.slidesBiyatch('switchDisplay'));
+        // state === '!currentSlide'
+        } else {
+            this.state = 'currentSlide'; //toggle state
+            // this.slidesBiyatch('switchDisplay', 'makeCurrent', this.filmID, slideDOM);
+        }
+        // setCurrentState(this.value);
+    }
+
+    set setCurrentState(string) {
+
+        if(string === next) {
+            //display next
+        //
+
+        } else {
+            //display previous
+            this.state = false;
+        }
+        //Run if this.currentSlide(which has no value yet) is true
+        switch (string) {
+            case 'next':
+                // nextSlide has not been initialized yet...do that
+                // currentSlide = nextSlide;
+                // isCurrent(nextFilm);
+                break;
+        }
+
+    //  Display Film
+
     }
 
 }
+
+//TODO rename: filmsArray
+//TODO -- Store image & data only in object - remove any redundant storage
+
+
+
+// let stateTest = new Film();
+// stateTest.state = true;
+// console.log(stateTest.isCurrent);
+// stateTest.isCurrent;
+
+
 
 let joker = new Film(
     'Joker', 2019, 'Todd Phillips', 'Joaquin Phoenix',
@@ -77,20 +222,57 @@ let unknown = new Film(
     "n/a"
 );
 
-// Store films in imageData[]
-joker.saveFilmArray();
-babyDriver.saveFilmArray();
-unknown.saveFilmArray();
+//add node to DOM
+function updateDOMOOO(element) {
+    carousel.appendChild(element);
+}
+//Take array of carousel objects and update DOM
+function addDescriptionsToDOMOOO(filmsArray) {
+
+    for (film of filmsArray) {
+        updateDOM(film.filmInfoDOM);
+    }
+}
+
+function slideNodes000(film, image) {
+    film.filmID = film.length - 1; //set filmID
+    film.setImage = imageCollection[film.filmID]; //setImage
+};
+
+carouselState.currentSlide = joker; // set currentSlide property
+
+unknown.setImage = imageCollection[unknown.filmID];
+
+let slideStore = new Array;  // for containing each slide object
+addToArray(slideStore, joker, babyDriver, unknown);
+
+//update IDs, and set image,previousSlide/nextSlide on each object
+for (let slide of slideStore) {
+    slide.filmID = slideStore.indexOf(slide); // set filmID property
+    slide.setImage = imageCollection[slide.filmID]; // set image property
+    slide.findAdjacent(); // set previousSlide & nextSlide properties
+}
+
 //TODO --- Methodize
-addDescriptionsToDOM(imageData);  // Update DOM w/ image info
+addDescriptionsToDOM(slideStore);  // Update DOM w/ image info
 let descriptions = document.querySelectorAll('.description');
 
 //Click listeners on carousel buttons
 previous.addEventListener('click', changeSlide);
 next.addEventListener('click', changeSlide);
 
+//Add object/s to array
+function addToArray(array, ...objects){
+        for (let obj of objects) {
+            array.push(obj);
+        }
+    return array;
+}
+
+
+//TODO -- Turn autoSlideTransition() back on
 //Transition 'slides' automatically via timer
-let autoSlideTransition = setInterval(slideshow, 5000);
+// let autoSlideTransition = setInterval(slideshow, 5000);
 
 function slideshow() {
     let currentImage = imageCollection[counter];
@@ -155,7 +337,8 @@ function toggleImage(image) {
     image.parentNode.classList.toggle('carousel-item-visible');
 }
 
-function createFilmDescription(film, joker) {
+function createFilmDescription(film) {
+    //TODO --- Rename- testDiv => descriptionDiv
     let testDiv = document.createElement('div');
     testDiv.classList.add('description');
     testDiv.classList.add('info-animation');
@@ -174,7 +357,6 @@ function createFilmDescription(film, joker) {
         toggleDescription(testDiv);
         console.log(film);
     }
-
     return testDiv;
 }
 
