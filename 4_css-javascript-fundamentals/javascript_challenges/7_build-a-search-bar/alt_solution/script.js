@@ -50,7 +50,7 @@ class Film {
         this.previousSlide = previousSlide;
         this.nextSlide = nextSlide;
         this.currentSlide = currentSlide;
-        this.filmInfoDOM = createFilmDescription(this);
+        this.filmInfoDOM = filmInfoDOM;
         this.value = false;
         this.state = '!currentSlide'; //state can be either '!currentSlide' || 'currentSlide'
         this.filmID = filmID; //create w/ saveFilmArray()
@@ -197,18 +197,11 @@ let unknown = new Film(
 function updateDOMOOO(element) {
     carousel.appendChild(element);
 }
-//Take array of carousel objects and update DOM
-function addDescriptionsToDOMOOO(filmsArray) {
-
-    for (film of filmsArray) {
-        updateDOM(film.filmInfoDOM);
-    }
-}
 
 function slideNodes000(film, image) {
     film.filmID = film.length - 1; //set filmID
     film.setImage = imageCollection[film.filmID]; //setImage
-};
+}
 
 carouselState.currentSlide = joker; // set currentSlide property
 
@@ -219,13 +212,14 @@ addToArray(slideStore, joker, babyDriver, unknown);
 
 //update IDs, and set image,previousSlide/nextSlide on each object
 for (let slide of slideStore) {
+    slide.filmInfoDOM = createFilmDescription(slide, slideStore); // create innerHTML (title, director, etc,.)
     slide.filmID = slideStore.indexOf(slide); // set filmID property
     slide.setImage = imageCollection[slide.filmID]; // set image property
     slide.findAdjacent(); // set previousSlide & nextSlide properties
 }
 
 //TODO --- Methodize
-addDescriptionsToDOM(slideStore);  // Update DOM w/ image info
+addDescriptionsToDOM(slideStore);  // Update DOM w/ descriptions
 let descriptions = document.querySelectorAll('.description');
 
 //Click listeners on carousel buttons
@@ -307,11 +301,15 @@ function nextImage(){
 function toggleImage(image) {
     image.parentNode.classList.toggle('carousel-item-visible');
 }
+
+// TODO --- CANT Use @ creation of DOM info on object because the array slideStore is not yet iniitalized
+// UNLESS there is a way to automatically push each object onto an array @ initialization
+// TODO --- Refactor- Break up into separate functions AND use as many existing methods and functions
+// as possible to clean up
 //in use
-function createFilmDescription(film) {
-    let descriptionDiv = document.createElement('div');
-    descriptionDiv.classList.add('description');
-    descriptionDiv.classList.add('info-animation');
+// Create description and add to DOM
+function createFilmDescription(film, slidesArray = slideStore) {
+    let descriptionDiv = makeElement('div', 'description', 'info-animation');
     descriptionDiv.id = 'image-info';
 
     descriptionDiv.innerHTML = `<h3 class="title">${film.title}<span class="published"></span></h3>
@@ -322,23 +320,36 @@ function createFilmDescription(film) {
         </ul>`;
 
     //make info for first slide visible
-    let firstSlide = imageData[0];
+    let firstSlide = slidesArray[0];
     if (film === firstSlide) {
         toggleDescription(descriptionDiv);
-        console.log(film);
     }
     return descriptionDiv;
 }
+
+function makeElement(type, ...htmlClasses) {
+    let elem = document.createElement(type);
+    for (let htmlClass of htmlClasses) {
+        elem.classList.add(htmlClass);
+    }
+    return elem;
+}
+
+
+
 //TODO --- Methodize
 function updateDOM(element) {
     carousel.appendChild(element);
 }
+
+//TODO --- Delete- Use as method & implement @ creation of description
 //in use
-function addDescriptionsToDOM(filmsArray) {
-    for (film of filmsArray) {
-        updateDOM(film.filmInfoDOM);
+function addDescriptionsToDOM(slidesArray = slideStore) {
+    for (slide of slidesArray) {
+        updateDOM(slide.filmInfoDOM);
     }
 }
+
 //in use
 function toggleDescription(description) {
     description.classList.toggle('description-visible');
@@ -347,6 +358,7 @@ function toggleDescription(description) {
 function animateImageData() {
     infoAnimation.classList.toggle('info-animation');
 }
+
 //in use
 // Update progress bar on slide change
 function updateProgressBar(action, bar) {
