@@ -100,25 +100,6 @@ class Film {
         array.push(item);
     }
 
-    // findAdjacent(slide, slidesArray = slideStore){
-    //     const firstIndex = 0;
-    //     const lastIndex = slidesArray.length - 1;
-    //     const firstSlide = slidesArray[firstIndex];
-    //     const lastSlide = slidesArray[lastIndex];
-    //
-    //     if (slide.filmID === firstIndex) {
-    //         slide.previousSlide = lastSlide;
-    //         slide.nextSlide = slidesArray[ slide.filmID + 1 ];
-    //
-    //     } else if (slide.filmID === lastIndex) {
-    //         slide.previousSlide = slidesArray[ slide.filmID -1 ];
-    //         slide.nextSlide = firstSlide;
-    //     }else {
-    //         slide.previousSlide = slidesArray[ slide.filmID - 1] ;
-    //         slide.nextSlide = slidesArray[ slide.filmID + 1 ];
-    //     }
-    // }
-
     findAdjacent(slidesArray = slideStore){
         const firstIndex = 0;
         const lastIndex = slidesArray.length - 1;
@@ -136,16 +117,6 @@ class Film {
             this.previousSlide = slidesArray[ this.filmID - 1];
             this.nextSlide = slidesArray[ this.filmID + 1 ];
         }
-    }
-
-    // //TODO -- Store image & data only in object - remove any redundant storage
-    // //Store objects in array, create id for each
-    storeSlideDOM(slideObject, imageDOMArray, infoDOM) {
-        // slideObject.filmID = slideObject.length - 1;
-        slideObject.slideDOM = {
-            slideImage: imageDOMArray,
-            slideData: infoDOM
-        };
     }
 
     set setImage(setImage) {
@@ -261,6 +232,7 @@ let descriptions = document.querySelectorAll('.description');
 previous.addEventListener('click', changeSlide);
 next.addEventListener('click', changeSlide);
 
+//TODO --- Methodize
 //Add object/s to array
 function addToArray(array, ...objects){
         for (let obj of objects) {
@@ -268,7 +240,6 @@ function addToArray(array, ...objects){
         }
     return array;
 }
-
 
 //TODO -- Turn autoSlideTransition() back on
 //Transition 'slides' automatically via timer
@@ -336,15 +307,14 @@ function nextImage(){
 function toggleImage(image) {
     image.parentNode.classList.toggle('carousel-item-visible');
 }
-
+//in use
 function createFilmDescription(film) {
-    //TODO --- Rename- testDiv => descriptionDiv
-    let testDiv = document.createElement('div');
-    testDiv.classList.add('description');
-    testDiv.classList.add('info-animation');
-    testDiv.id = 'image-info';
+    let descriptionDiv = document.createElement('div');
+    descriptionDiv.classList.add('description');
+    descriptionDiv.classList.add('info-animation');
+    descriptionDiv.id = 'image-info';
 
-    testDiv.innerHTML = `<h3 class="title">${film.title}<span class="published"></span></h3>
+    descriptionDiv.innerHTML = `<h3 class="title">${film.title}<span class="published"></span></h3>
         <ul class="details">
             <li class="director"><span class="sub-title">Director: </span>${film.director}</li>
             <li class="starring"><span class="sub-title">Starring: </span>${film.starring}</li>
@@ -354,38 +324,30 @@ function createFilmDescription(film) {
     //make info for first slide visible
     let firstSlide = imageData[0];
     if (film === firstSlide) {
-        toggleDescription(testDiv);
+        toggleDescription(descriptionDiv);
         console.log(film);
     }
-    return testDiv;
+    return descriptionDiv;
 }
-
-function updateData(filmsDataArray) {
-    for (film of filmsDataArray){
-        film.filmInfoDOM = createFilmDescription(film);  //update film object
-    }
-}
-
+//TODO --- Methodize
 function updateDOM(element) {
     carousel.appendChild(element);
 }
-
+//in use
 function addDescriptionsToDOM(filmsArray) {
-    updateData(filmsArray); //add DOM elements to each film object
-
     for (film of filmsArray) {
         updateDOM(film.filmInfoDOM);
     }
 }
-
+//in use
 function toggleDescription(description) {
     description.classList.toggle('description-visible');
 }
-
+//in use
 function animateImageData() {
     infoAnimation.classList.toggle('info-animation');
 }
-
+//in use
 // Update progress bar on slide change
 function updateProgressBar(action, bar) {
     clearProgressBar();
@@ -395,7 +357,7 @@ function updateProgressBar(action, bar) {
         }
     }
 }
-
+//in use
 function clearProgressBar() {
     for (let bar of progressBars) {
         if (bar.classList.contains('active')) {
