@@ -12,8 +12,6 @@ const title = document.querySelector('.title');
 const published = document.querySelector('.published');
 const director = document.querySelector('.director');
 const starring = document.querySelector('.starring');
-const imdbLinkDOM = document.querySelector('.imdb-link');
-const imdbLinkImage = document.querySelector('.imdb-logo');
 let infoAnimation = document.querySelector('.info-animation');
 //progress bar
 //TODO -- turn progress bar into a navigation
@@ -26,14 +24,20 @@ let end = imageCollection.length - 1;
 
 //Images & image data
 let imageData = Array();
-let tempImageData = new Array;
-
 
 //Store state information
-let carouselState = function(currentSlide, change) {
-    currentSlide = currentSlide;
-    change = change;
+class Carousel {
+    constructor(currentSlide, transition) {
+        this.currentSlide = currentSlide;
+        this.actions = {
+            previous, next
+        };
+        this.transition = transition;
+    }
 }
+
+let carouselState = new Carousel();
+
 
 class Film {
     constructor(
@@ -55,9 +59,6 @@ class Film {
         this.state = '!currentSlide'; //state can be either '!currentSlide' || 'currentSlide'
         this.filmID = filmID; //create w/ saveFilmArray()
         this.slideDOM = new Object; //create w/ saveFilmArray()
-
-
-
 
         /*
         Description:
@@ -165,18 +166,6 @@ class Film {
 
 }
 
-//TODO rename: filmsArray
-//TODO -- Store image & data only in object - remove any redundant storage
-
-
-
-// let stateTest = new Film();
-// stateTest.state = true;
-// console.log(stateTest.isCurrent);
-// stateTest.isCurrent;
-
-
-
 let joker = new Film(
     'Joker', 2019, 'Todd Phillips', 'Joaquin Phoenix',
     'https://www.imdb.com/title/tt7286456/'
@@ -193,14 +182,143 @@ let unknown = new Film(
     "n/a"
 );
 
-//add node to DOM
-function updateDOMOOO(element) {
-    carousel.appendChild(element);
+function slideshow() {
+    //TODO --- Use carouselState object to access these values
+    let currentImage = imageCollection[counter];
+    let currentDescription = descriptions[counter];
+    //Hide image & description
+    toggleImage(currentImage);
+    toggle(currentDescription, 'description-visible');
+
+    nextImage();
+    updateProgressBar();
 }
 
-function slideNodes000(film, image) {
-    film.filmID = film.length - 1; //set filmID
-    film.setImage = imageCollection[film.filmID]; //setImage
+function changeSlide(event) {
+    let buttonClicked = event.target.classList[0]; //ID which button was clicked
+    let currentImage = imageCollection[counter];
+    let currentDescription = descriptions[counter];
+
+    //Hide image & description
+    toggleImage(currentImage);
+    toggle(currentDescription, 'description-visible');
+
+    //Update carousel w/ corresponding image
+    if (buttonClicked == 'previous') {
+        previousImage();
+        updateProgressBar();
+    } else {
+        nextImage();
+        updateProgressBar();
+    }
+}
+
+function previousImage() {
+    // if (counter == start) {  //check if at start of carousel
+    //     counter = end;  //display last image in carousel
+    // } else {
+    //     counter--;
+    // }
+
+    //Display image & info
+    let previousImage = imageCollection[counter];
+    // let previousDescription = descriptions[counter];
+    toggleImage(previousImage);
+    toggle(previousDescription, 'description-visible');
+    updateProgressBar();
+
+    //
+    // toggleImage(carouselState.currentSlide.image); // hide image
+    // // hide description
+    // toggle(carouselState.currentSlide.filmInfoDOM, 'description-visible');
+}
+
+function nextImage(){
+    if (counter == end) {  //check if at end of carousel
+        counter = start;  //display first image in carousel
+    } else {
+        counter++;
+    }
+
+    //Display image & info
+    let nextImage = imageCollection[counter];
+    let nextDescription = descriptions[counter];
+    toggleImage(nextImage);
+    toggle(nextDescription, 'description-visible');
+}
+
+function toggleImage(image) {
+    image.parentNode.classList.toggle('carousel-item-visible');
+}
+
+let makeDescription = (film) => {
+    let descriptionDiv = makeElement('div', 'description', 'info-animation');
+    descriptionDiv.id = 'image-info';
+
+    descriptionDiv.innerHTML =
+        `<h3 class="title">${film.title}<span class="published"></span></h3>
+        <ul class="details">
+            <li class="director"><span class="sub-title">Director: </span>${film.director}</li>
+            <li class="starring"><span class="sub-title">Starring: </span>${film.starring}</li>
+            <li class="imdb"><a class="imdb-link" href="${film.imdbLink}"><img src="logos/imdb_logo.png" alt="IMDB logo and link to film page" class="imdb-logo"></a></li>
+        </ul>`;
+    return descriptionDiv;
+}
+// TODO --- Refactor- Break up into separate functions AND use as many existing methods and functions
+// as possible to clean up
+//in use
+// Create description and add to DOM
+function createFilmDescription(film, slidesArray = slideStore) {
+   let descriptionDiv = makeDescription(film);
+    //make info for first slide visible
+    let firstSlide = slidesArray[0];
+    if (film === firstSlide) {
+        toggle(descriptionDiv, 'description-visible');
+    }
+    return descriptionDiv;
+}
+
+function makeElement(type, ...htmlClasses) {
+    let elem = document.createElement(type);
+    htmlClasses.forEach(clss => elem.classList.add( clss ));
+    return elem;
+}
+
+//TODO --- Methodize
+let updateDOM = element => carousel.appendChild(element);
+
+//TODO --- Delete- Use as method & implement @ creation of description
+//in use
+let addDescriptionsToDOM = (array = slideStore) => {
+    array.forEach(slide => updateDOM(slide.filmInfoDOM));
+}
+
+//in use
+let toggle = (element, name) => element.classList.toggle(name);
+//in use
+let animateImageData = () => infoAnimation.classList.toggle('info-animation');
+
+let convertCollection = collection => Array.from(collection);
+
+//in use
+// Update progress bar on slide change
+function updateProgressBar(action, bar) {
+    clearProgressBar();
+    let bars = convertCollection(progressBars); // convert from HTML collection to array
+    // Set class => 'active'
+    toggle(bars.filter(bar => bar === bars[counter])[0], 'active');
+}
+//in use
+let clearProgressBar = () => {
+    let bars = convertCollection(progressBars); // convert from HTML collection to array
+    // Remove 'active' class
+    toggle(bars.filter(bar => bar.classList.contains('active'))[0], 'active');
+}
+
+//TODO --- Methodize
+//Add object/s to array
+function addToArray(array, ...objects){
+    objects.forEach(obj => array.push(obj));
 }
 
 carouselState.currentSlide = joker; // set currentSlide property
@@ -226,154 +344,6 @@ let descriptions = document.querySelectorAll('.description');
 previous.addEventListener('click', changeSlide);
 next.addEventListener('click', changeSlide);
 
-//TODO --- Methodize
-//Add object/s to array
-function addToArray(array, ...objects){
-        for (let obj of objects) {
-            array.push(obj);
-        }
-    return array;
-}
-
 //TODO -- Turn autoSlideTransition() back on
 //Transition 'slides' automatically via timer
 // let autoSlideTransition = setInterval(slideshow, 5000);
-
-function slideshow() {
-    let currentImage = imageCollection[counter];
-    let currentDescription = descriptions[counter];
-    //Hide image & description
-    toggleImage(currentImage);
-    toggleDescription(currentDescription);
-
-    nextImage();
-    updateProgressBar();
-}
-
-function changeSlide(event) {
-    let buttonClicked = event.target.classList[0]; //ID which button was clicked
-    let currentImage = imageCollection[counter];
-    let currentDescription = descriptions[counter];
-
-    //Hide image & description
-    toggleImage(currentImage);
-    toggleDescription(currentDescription);
-
-    //Update carousel w/ corresponding image
-    if (buttonClicked == 'previous') {
-        previousImage();
-        updateProgressBar();
-    } else {
-        nextImage();
-        updateProgressBar();
-    }
-}
-
-function previousImage() {
-    if (counter == start) {  //check if at start of carousel
-        counter = end;  //display last image in carousel
-    } else {
-        counter--;
-    }
-
-    //Display image & info
-    let previousImage = imageCollection[counter];
-    let previousDescription = descriptions[counter];
-    toggleImage(previousImage);
-    toggleDescription(previousDescription);
-    updateProgressBar();
-}
-
-function nextImage(){
-    if (counter == end) {  //check if at end of carousel
-        counter = start;  //display first image in carousel
-    } else {
-        counter++;
-    }
-
-    //Display image & info
-    let nextImage = imageCollection[counter];
-    let nextDescription = descriptions[counter];
-    toggleImage(nextImage);
-    toggleDescription(nextDescription);
-}
-
-function toggleImage(image) {
-    image.parentNode.classList.toggle('carousel-item-visible');
-}
-
-// TODO --- CANT Use @ creation of DOM info on object because the array slideStore is not yet iniitalized
-// UNLESS there is a way to automatically push each object onto an array @ initialization
-// TODO --- Refactor- Break up into separate functions AND use as many existing methods and functions
-// as possible to clean up
-//in use
-// Create description and add to DOM
-function createFilmDescription(film, slidesArray = slideStore) {
-    let descriptionDiv = makeElement('div', 'description', 'info-animation');
-    descriptionDiv.id = 'image-info';
-
-    descriptionDiv.innerHTML = `<h3 class="title">${film.title}<span class="published"></span></h3>
-        <ul class="details">
-            <li class="director"><span class="sub-title">Director: </span>${film.director}</li>
-            <li class="starring"><span class="sub-title">Starring: </span>${film.starring}</li>
-            <li class="imdb"><a class="imdb-link" href="${film.imdbLink}"><img src="logos/imdb_logo.png" alt="IMDB logo and link to film page" class="imdb-logo"></a></li>
-        </ul>`;
-
-    //make info for first slide visible
-    let firstSlide = slidesArray[0];
-    if (film === firstSlide) {
-        toggleDescription(descriptionDiv);
-    }
-    return descriptionDiv;
-}
-
-function makeElement(type, ...htmlClasses) {
-    let elem = document.createElement(type);
-    for (let htmlClass of htmlClasses) {
-        elem.classList.add(htmlClass);
-    }
-    return elem;
-}
-
-
-
-//TODO --- Methodize
-function updateDOM(element) {
-    carousel.appendChild(element);
-}
-
-//TODO --- Delete- Use as method & implement @ creation of description
-//in use
-function addDescriptionsToDOM(slidesArray = slideStore) {
-    for (slide of slidesArray) {
-        updateDOM(slide.filmInfoDOM);
-    }
-}
-
-//in use
-function toggleDescription(description) {
-    description.classList.toggle('description-visible');
-}
-//in use
-function animateImageData() {
-    infoAnimation.classList.toggle('info-animation');
-}
-
-//in use
-// Update progress bar on slide change
-function updateProgressBar(action, bar) {
-    clearProgressBar();
-    for (let bar of progressBars) {
-        if (bar === progressBars[counter]) {
-            bar.classList.toggle('active');
-        }
-    }
-}
-//in use
-function clearProgressBar() {
-    for (let bar of progressBars) {
-        if (bar.classList.contains('active')) {
-            bar.classList.toggle('active');
-        }
-    }
-}
