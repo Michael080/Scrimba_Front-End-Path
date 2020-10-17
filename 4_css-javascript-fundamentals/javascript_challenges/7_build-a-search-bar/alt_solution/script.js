@@ -27,17 +27,41 @@ let imageData = Array();
 
 //Store state information
 class Carousel {
-    constructor(currentSlide, transition) {
-        this.currentSlide = currentSlide;
-        this.actions = {
-            previous, next
-        };
+    constructor(current, previous, next, image, description, transition) {
+        this.current = current;
+        this.previous = previous;
+        this.next = next;
+        this.image = image;
+        this.description = description;
+        //TODO --- Add actions parameter when appropriate
+        // this.actions = {
+        //     transitionPrevious, transitionNext
+        // };
         this.transition = transition;
     }
+
+    getCurrent(){
+        return this.current;
+    }
+
+    setCurrent(slide){
+        this.current = slide;
+    }
+
+    setPrev() {
+        this.previous = this.current.previousSlide;
+    }
+
+    setNext() {
+        this.next = this.current.nextSlide;
+    }
+
+    // Update previous/next properties
+    updateActions(){
+        this.setPrev();
+        this.setNext();
+    }
 }
-
-let carouselState = new Carousel();
-
 
 class Film {
     constructor(
@@ -182,6 +206,7 @@ let unknown = new Film(
     "n/a"
 );
 
+
 function slideshow() {
     //TODO --- Use carouselState object to access these values
     let currentImage = imageCollection[counter];
@@ -321,8 +346,6 @@ function addToArray(array, ...objects){
     objects.forEach(obj => array.push(obj));
 }
 
-carouselState.currentSlide = joker; // set currentSlide property
-
 unknown.setImage = imageCollection[unknown.filmID];
 
 let slideStore = new Array;  // for containing each slide object
@@ -335,6 +358,9 @@ for (let slide of slideStore) {
     slide.setImage = imageCollection[slide.filmID]; // set image property
     slide.findAdjacent(); // set previousSlide & nextSlide properties
 }
+
+let carouselState = new Carousel(joker);
+carouselState.updateActions(); // update next/previous properties
 
 //TODO --- Methodize
 addDescriptionsToDOM(slideStore);  // Update DOM w/ descriptions
