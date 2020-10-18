@@ -138,29 +138,17 @@ function changeSlide(event) {
 
 function toggleSlides(action){
     // Hide current
-    let currSlide = carouselState.getCurrent();
-    let currImage = currSlide.image;
-    let currDesc = currSlide.filmInfoDOM;
-    toggleClass(currImage);
-    toggleClass(currDesc, 'description-visible');
+    let current = carouselState.getCurrent();
+    toggleClass(current.image);
+    toggleClass(current.filmInfoDOM, 'description-visible');
     // Display target
     let target = carouselState[action];
-    let targImage = target.image;
-    let targDesc = target.filmInfoDOM;
     // toggleImage(targImage);
-    toggleClass(targImage);
-    toggleClass(targDesc, 'description-visible');
+    toggleClass(target.image);
+    toggleClass(target.filmInfoDOM, 'description-visible');
     // Update carouselState.current
     carouselState.setCurrent(target);
     carouselState.updateActions();
-}
-
-let toggleClass = (elem, name = 'carousel-item-visible') => {
-    if (elem.tagName === 'IMG'){
-        elem.parentNode.classList.toggle(name);
-    } else {
-        elem.classList.toggle(name);
-    }
 }
 
 let makeDescription = (film) => {
@@ -206,21 +194,32 @@ let addDescriptionsToDOM = (array = slideStore) => {
     array.forEach(slide => updateDOM(slide.filmInfoDOM));
 }
 
+let toggleClass = (elem, name = 'carousel-item-visible') => {
+    if (elem.tagName === 'IMG'){
+        elem.parentNode.classList.toggle(name);
+    } else {
+        elem.classList.toggle(name);
+    }
+}
 // TODO --- Refactor-Update Bar- Create property on carouselState to track/assing bars
 // ??? Loop over slides and assign corresponding bars to each
 //in use
 
 //in use
 let animateImageData = () => infoAnimation.classList.toggle('info-animation');
+
 let convertCollection = collection => Array.from(collection);
 //in use
 // Update progress bar on slide change
-function updateProgressBar(action, bar) {
+function updateProgressBar(action, bar, stateID) {
+
     clearProgressBar();
     let bars = convertCollection(progressBars); // convert from HTML collection to array
     // Set class => 'active'
-    toggleClass(bars.filter(bar => bar === bars[counter])[0], 'active');
+    toggleClass(bars.filter(bar => bar === bars[carouselState.current.filmID])[0], 'active');
 }
+
+// let clearance = () toggleClass(bar)
 //in use
 let clearProgressBar = () => {
     let bars = convertCollection(progressBars); // convert from HTML collection to array
