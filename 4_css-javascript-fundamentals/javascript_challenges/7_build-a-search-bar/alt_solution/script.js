@@ -66,7 +66,7 @@ class Carousel {
 class Film {
     constructor(
         title, year, director, starring, imdbLink, image, previousSlide, nextSlide,
-                currentSlide, filmInfoDOM, value, state, filmID
+                previousBar, nextBar, currentSlide, filmInfoDOM, value, state, filmID
     ) {
         this.title = title;
         this.year = year;
@@ -76,6 +76,8 @@ class Film {
         this.image = image;
         this.previousSlide = previousSlide;
         this.nextSlide = nextSlide;
+        this.previousBar = previousBar;
+        this.nextBar = nextBar;
         this.currentSlide = currentSlide;
         this.filmInfoDOM = filmInfoDOM;
         this.value = false;
@@ -91,15 +93,21 @@ class Film {
 
         if (this.filmID === firstIndex) {
             this.previousSlide = lastSlide;
-            this.nextSlide = slidesArray[ this.filmID + 1 ];
-
+            this.nextSlide = slidesArray[this.filmID+1];
         } else if (this.filmID === lastIndex) {
-            this.previousSlide = slidesArray[ this.filmID -1 ];
+            this.previousSlide = slidesArray[this.filmID-1];
             this.nextSlide = firstSlide;
         }else {
-            this.previousSlide = slidesArray[ this.filmID - 1];
-            this.nextSlide = slidesArray[ this.filmID + 1 ];
+            this.previousSlide = slidesArray[this.filmID-1];
+            this.nextSlide = slidesArray[this.filmID+1];
         }
+
+    }
+
+    adjacentProgBars(slidesArray = slideStore){
+            this.nextBar = this.nextSlide.progBar;
+            this.previousBar = this.previousSlide.progBar;
+
     }
 
     set setImage(setImage) {
@@ -127,14 +135,13 @@ let unknown = new Film(
 
 function slideshow() {
     toggleSlides('next');
-    updateProgressBar();
+    // updateProgressBar();
 }
 
 function changeSlide(event) {
     let clicked = event.target.classList[0]; //ID which button was clicked
     //Update slide display
     toggleSlides(clicked);
-    updateProgressBar();
 }
 
 function toggleSlides(action){
@@ -142,15 +149,18 @@ function toggleSlides(action){
     let current = carouselState.getCurrent();
     toggleClass(current.image);
     toggleClass(current.filmInfoDOM, 'description-visible');
+    toggleClass(current.progBar, 'active');
     // Display target
     let target = carouselState[action];
-    // toggleImage(targImage);
     toggleClass(target.image);
     toggleClass(target.filmInfoDOM, 'description-visible');
+    toggleClass(target.progBar, 'active');
     // Update carouselState.current
     carouselState.setCurrent(target);
     carouselState.updateActions();
 }
+
+
 
 let makeDescription = (film) => {
     let descriptionDiv = makeElement('div', 'description', 'info-animation');
@@ -195,38 +205,17 @@ let addDescriptionsToDOM = (array = slideStore) => {
     array.forEach(slide => updateDOM(slide.filmInfoDOM));
 }
 
-let toggleClass = (elem, name = 'carousel-item-visible') => {
+let toggleClass = (elem, propValue = 'carousel-item-visible') => {
     if (elem.tagName === 'IMG'){
-        elem.parentNode.classList.toggle(name);
+        elem.parentNode.classList.toggle(propValue);
     } else {
-        elem.classList.toggle(name);
+        elem.classList.toggle(propValue);
     }
 }
-// TODO --- Refactor-Update Bar- Create property on carouselState to track/assing bars
-// ??? Loop over slides and assign corresponding bars to each
-//in use
 
-//in use
 let animateImageData = () => infoAnimation.classList.toggle('info-animation');
 
 let convertCollection = collection => Array.from(collection);
-//in use
-// Update progress bar on slide change
-function updateProgressBar(action, bar, stateID) {
-
-    clearProgressBar();
-    let bars = convertCollection(progressBars); // convert from HTML collection to array
-    // Set class => 'active'
-    toggleClass(bars.filter(bar => bar === bars[carouselState.current.filmID])[0], 'active');
-}
-
-// let clearance = () toggleClass(bar)
-//in use
-let clearProgressBar = () => {
-    let bars = convertCollection(progressBars); // convert from HTML collection to array
-    // Remove 'active' class
-    toggleClass(bars.filter(bar => bar.classList.contains('active'))[0], 'active');
-}
 
 //TODO --- Methodize
 //Add object/s to array
@@ -234,20 +223,23 @@ function addToArray(array, ...objects){
     objects.forEach(obj => array.push(obj));
 }
 
-unknown.setImage = imageCollection[unknown.filmID];
-
 let slideStore = new Array;  // for containing each slide object
 addToArray(slideStore, joker, babyDriver, unknown);
 
 //update IDs, and set image,previousSlide/nextSlide on each object
 for (let slide of slideStore) {
     let currentIndex = slideStore.indexOf(slide);
-    slide.filmInfoDOM = createFilmDescription(slide, slideStore); // create innerHTML (title, director, etc,.)
-    slide.filmID = currentIndex; // set filmID property
-    slide.setImage = imageCollection[slide.filmID]; // set image property
-    slide.findAdjacent(); // set previousSlide & nextSlide properties
     slide.progBar = progressBars[currentIndex];
+    slide.filmID = currentIndex; // set filmID property
+    slide.filmInfoDOM = createFilmDescription(slide, slideStore); // create innerHTML (title, director, etc,.)
+    slide.setImage = imageCollection[slide.filmID]; // set image property
+    slide.findAdjacent();
 }
+
+for (let slide of slideStore) {
+    slide.adjacentProgBars();  // set previousSlide & nextSlide properties
+}
+
 
 let carouselState = new Carousel(joker);
 carouselState.updateActions(); // update next/previous properties
