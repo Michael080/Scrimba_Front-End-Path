@@ -26,7 +26,7 @@ let imageData = Array();
 
 //Store state information
 class Carousel {
-    constructor(current, previous, next, image, description, transition) {
+    constructor(current, previous, next, image, description, transition, progBar) {
         this.current = current;
         this.previous = previous;
         this.next = next;
@@ -37,6 +37,7 @@ class Carousel {
         //     transitionPrevious, transitionNext
         // };
         this.transition = transition;
+        this.progBar = progBar;
     }
 
     getCurrent(){
@@ -240,10 +241,12 @@ addToArray(slideStore, joker, babyDriver, unknown);
 
 //update IDs, and set image,previousSlide/nextSlide on each object
 for (let slide of slideStore) {
+    let currentIndex = slideStore.indexOf(slide);
     slide.filmInfoDOM = createFilmDescription(slide, slideStore); // create innerHTML (title, director, etc,.)
-    slide.filmID = slideStore.indexOf(slide); // set filmID property
+    slide.filmID = currentIndex; // set filmID property
     slide.setImage = imageCollection[slide.filmID]; // set image property
     slide.findAdjacent(); // set previousSlide & nextSlide properties
+    slide.progBar = progressBars[currentIndex];
 }
 
 let carouselState = new Carousel(joker);
@@ -257,6 +260,5 @@ let descriptions = document.querySelectorAll('.description');
 previous.addEventListener('click', changeSlide);
 next.addEventListener('click', changeSlide);
 
-//TODO -- Turn autoSlideTransition() back on
 //Transition 'slides' automatically via timer
 let autoSlideTransition = setInterval(slideshow, 5000);
