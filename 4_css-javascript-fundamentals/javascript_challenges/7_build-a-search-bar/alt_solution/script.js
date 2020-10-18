@@ -141,21 +141,26 @@ function toggleSlides(action){
     let currSlide = carouselState.getCurrent();
     let currImage = currSlide.image;
     let currDesc = currSlide.filmInfoDOM;
-    toggleImage(currImage);
-    toggle(currDesc, 'description-visible');
+    toggleClass(currImage);
+    toggleClass(currDesc, 'description-visible');
     // Display target
     let target = carouselState[action];
     let targImage = target.image;
     let targDesc = target.filmInfoDOM;
-    toggleImage(targImage);
-    toggle(targDesc, 'description-visible');
+    // toggleImage(targImage);
+    toggleClass(targImage);
+    toggleClass(targDesc, 'description-visible');
     // Update carouselState.current
     carouselState.setCurrent(target);
     carouselState.updateActions();
 }
 
-function toggleImage(image) {
-    image.parentNode.classList.toggle('carousel-item-visible');
+let toggleClass = (elem, name = 'carousel-item-visible') => {
+    if (elem.tagName === 'IMG'){
+        elem.parentNode.classList.toggle(name);
+    } else {
+        elem.classList.toggle(name);
+    }
 }
 
 let makeDescription = (film) => {
@@ -181,7 +186,7 @@ function createFilmDescription(film, slidesArray = slideStore) {
     //make info for first slide visible
     let firstSlide = slidesArray[0];
     if (film === firstSlide) {
-        toggle(descriptionDiv, 'description-visible');
+        toggleClass(descriptionDiv, 'description-visible');
     }
     return descriptionDiv;
 }
@@ -204,26 +209,23 @@ let addDescriptionsToDOM = (array = slideStore) => {
 // TODO --- Refactor-Update Bar- Create property on carouselState to track/assing bars
 // ??? Loop over slides and assign corresponding bars to each
 //in use
-//TODO --- Refactor toggle/s there's one for images and this 'for' descriptions
-let toggle = (element, name) => element.classList.toggle(name);
+
 //in use
 let animateImageData = () => infoAnimation.classList.toggle('info-animation');
-
 let convertCollection = collection => Array.from(collection);
-
 //in use
 // Update progress bar on slide change
 function updateProgressBar(action, bar) {
     clearProgressBar();
     let bars = convertCollection(progressBars); // convert from HTML collection to array
     // Set class => 'active'
-    toggle(bars.filter(bar => bar === bars[counter])[0], 'active');
+    toggleClass(bars.filter(bar => bar === bars[counter])[0], 'active');
 }
 //in use
 let clearProgressBar = () => {
     let bars = convertCollection(progressBars); // convert from HTML collection to array
     // Remove 'active' class
-    toggle(bars.filter(bar => bar.classList.contains('active'))[0], 'active');
+    toggleClass(bars.filter(bar => bar.classList.contains('active'))[0], 'active');
 }
 
 //TODO --- Methodize
