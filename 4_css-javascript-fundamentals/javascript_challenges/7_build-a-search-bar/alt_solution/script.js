@@ -32,10 +32,6 @@ class Carousel {
         this.next = next;
         this.image = image;
         this.description = description;
-        //TODO --- Add actions parameter when appropriate
-        // this.actions = {
-        //     transitionPrevious, transitionNext
-        // };
         this.transition = transition;
         this.progBar = progBar;
     }
@@ -101,19 +97,16 @@ class Film {
             this.previousSlide = slidesArray[this.filmID-1];
             this.nextSlide = slidesArray[this.filmID+1];
         }
-
     }
 
     adjacentProgBars(slidesArray = slideStore){
             this.nextBar = this.nextSlide.progBar;
             this.previousBar = this.previousSlide.progBar;
-
     }
 
     set setImage(setImage) {
         this.image = setImage;
     }
-
 }
 
 let joker = new Film(
@@ -126,25 +119,20 @@ let babyDriver = new Film(
     'https://www.imbd.com/title/tt3890160/'
 );
 
-
 let unknown = new Film(
     'unknown', "n/a", 'Who Knows', 'Creepy Family',
     "n/a"
 );
 
+let slideshow = () => toggleSlides('next');
 
-function slideshow() {
-    toggleSlides('next');
-    // updateProgressBar();
-}
-
-function changeSlide(event) {
+let changeSlide = (event) => {
     let clicked = event.target.classList[0]; //ID which button was clicked
     //Update slide display
     toggleSlides(clicked);
 }
 
-function toggleSlides(action){
+let toggleSlides = (action) => {
     // Hide current
     let current = carouselState.getCurrent();
     toggleClass(current.image);
@@ -160,12 +148,9 @@ function toggleSlides(action){
     carouselState.updateActions();
 }
 
-
-
 let makeDescription = (film) => {
     let descriptionDiv = makeElement('div', 'description', 'info-animation');
     descriptionDiv.id = 'image-info';
-
     descriptionDiv.innerHTML =
         `<h3 class="title">${film.title}<span class="published"></span></h3>
         <ul class="details">
@@ -176,11 +161,8 @@ let makeDescription = (film) => {
     return descriptionDiv;
 }
 
-// TODO --- Refactor- Break up into separate functions AND use as many existing methods and functions
-// as possible to clean up
-//in use
 // Create description and add to DOM
-function createFilmDescription(film, slidesArray = slideStore) {
+let createFilmDescription = (film, slidesArray = slideStore) => {
    let descriptionDiv = makeDescription(film);
     //make info for first slide visible
     let firstSlide = slidesArray[0];
@@ -190,17 +172,14 @@ function createFilmDescription(film, slidesArray = slideStore) {
     return descriptionDiv;
 }
 
-function makeElement(type, ...htmlClasses) {
+let makeElement = (type, ...htmlClasses) => {
     let elem = document.createElement(type);
     htmlClasses.forEach(clss => elem.classList.add( clss ));
     return elem;
 }
 
-//TODO --- Methodize
 let updateDOM = element => carousel.appendChild(element);
 
-//TODO --- Delete- Use as method & implement @ creation of description
-//in use
 let addDescriptionsToDOM = (array = slideStore) => {
     array.forEach(slide => updateDOM(slide.filmInfoDOM));
 }
@@ -213,15 +192,8 @@ let toggleClass = (elem, propValue = 'carousel-item-visible') => {
     }
 }
 
-let animateImageData = () => infoAnimation.classList.toggle('info-animation');
-
-let convertCollection = collection => Array.from(collection);
-
-//TODO --- Methodize
 //Add object/s to array
-function addToArray(array, ...objects){
-    objects.forEach(obj => array.push(obj));
-}
+let addToArray = (array, ...objects) => objects.forEach(obj => array.push(obj));
 
 let slideStore = new Array;  // for containing each slide object
 addToArray(slideStore, joker, babyDriver, unknown);
@@ -240,17 +212,14 @@ for (let slide of slideStore) {
     slide.adjacentProgBars();  // set previousSlide & nextSlide properties
 }
 
-
 let carouselState = new Carousel(joker);
 carouselState.updateActions(); // update next/previous properties
 
-//TODO --- Methodize
 addDescriptionsToDOM(slideStore);  // Update DOM w/ descriptions
 let descriptions = document.querySelectorAll('.description');
 
-//Click listeners on carousel buttons
 previous.addEventListener('click', changeSlide);
 next.addEventListener('click', changeSlide);
 
 //Transition 'slides' automatically via timer
-let autoSlideTransition = setInterval(slideshow, 5000);
+let autoSlideTransition = setInterval(slideshow, 10000);
