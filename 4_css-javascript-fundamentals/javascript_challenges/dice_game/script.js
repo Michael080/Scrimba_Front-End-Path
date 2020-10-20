@@ -1,14 +1,13 @@
-// player roll
+let playerTurn = document.querySelector('.player-turn');
+let roll = document.querySelector('.roll'); //roll button
+//player one stats
+let oneScore = document.querySelector('.player-one-score');
+let diceOne = document.querySelector('.dice-one');
+//player two stats
+let twoScore = document.querySelector('.player-two-score');
+let diceTwo = document.querySelector('.dice-two');
 
-
-// player score
-let dice = {
-    scoreboard: {
-        player1: 0,
-        player1Turn: true,
-        player2: 0
-    }
-}
-
-console.log(`player1: score - ${dice.scoreboard.player1}`);
-console.log(`player2: score - ${dice.scoreboard.player2}`);
+// game stats
+player1 = 0;
+player1Turn = true;
+player2 = 0;
