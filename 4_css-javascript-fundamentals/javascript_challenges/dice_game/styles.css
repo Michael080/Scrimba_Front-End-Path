@@ -58,6 +58,10 @@ h3 {
     place-items: center;
 }
 
+#reset {
+    display: none;
+}
+
 .roll {
     position: relative;
     display: inline-block;
