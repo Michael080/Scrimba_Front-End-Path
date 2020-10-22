@@ -13,15 +13,16 @@ const rollTwo = document.querySelector('.roll-value-two');
 let player1 = 0;
 let player1Turn = false;
 let player2 = 0;
+let maxScore = 10;
 
-let randNumb = () => {
-    return Math.floor((Math.random() * 6) + 1);
-}
+let randNumb = () => Math.floor((Math.random() * 6) + 1);
 
 let toggleElems = (onNode, offNode, cssClass) => {
     onNode.classList.add(cssClass);
     offNode.classList.remove(cssClass);
 };
+
+let toggleClasses = (elem, ...classes) => classes.forEach(c => elem.classList.toggle(c));
 
 let updateScore = (player, currentRoll, playerBoard) => {
     player += currentRoll;
@@ -30,21 +31,21 @@ let updateScore = (player, currentRoll, playerBoard) => {
 }
 
 let winner = () => {
-    toggleElems(roll, reset, 'hidden');
     if (player1Turn) {
         message.textContent = 'Player 1 Wins!!!';
     } else {
         message.textContent = 'Player 2 Wins!!!';
     }
+    // hide roll button and show reset
+    toggleClasses(reset, 'hidden');
+    toggleClasses(roll, 'roll');
 }
 
 let checkWin = score => {
-    (score >= 10) ? winner() : (console.log('no winner'));
+    (score >= 10) ? winner() : (console.log(`player1: ${player1} player2: ${player2}`));
 }
 
 let dieDisplay = (die, val) => die.textContent = val;
-
-let playerRoll;
 
 let scoring = (roll = randNumb(), player, currDice, otherDice, diceValue) => {
     let playerRoll = roll;
@@ -89,7 +90,10 @@ let resetGame = () => {
             diceDOM: diceTwo
     }];
 
-    players.forEach(player => updateScore(player.player, negatize(player.player), player.board));
+players.forEach(function(player) {
+    updateScore(player.player, negatize(player.player), player.board);
+    toggleElems(roll, reset, 'hidden');
+});
 
     let diceAndTurn = (function (...dice) {
         dice.forEach(die => {
@@ -97,4 +101,5 @@ let resetGame = () => {
         });
     })(rollOne, rollTwo);
 }
+
 reset.addEventListener('click', resetGame);
