@@ -74,7 +74,6 @@ function playDice() {
 roll.addEventListener('click', playDice);
 
 let resetGame = () => {
-    let negatize = value => value = - value; //create negative of a value
     let players = [
         playaUno = {
             player: player1,
@@ -90,7 +89,9 @@ let resetGame = () => {
             diceDOM: diceTwo
     }];
 
-players.forEach(function(player) {
+    let negatize = value => value = - value; //create negative of a value
+
+    players.forEach(function(player) {
     updateScore(player.player, negatize(player.player), player.board);
     toggleElems(roll, reset, 'hidden');
 });
