@@ -36,9 +36,7 @@ let winner = () => {
     } else {
         message.textContent = 'Player 2 Wins!!!';
     }
-    // hide roll button and show reset
     toggleElems(roll, reset,'hidden');
-    // toggleClasses(roll, 'roll');
 }
 
 let checkWin = score => {
