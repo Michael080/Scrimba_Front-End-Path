@@ -24,6 +24,14 @@ let toggleElems = (onNode, offNode, cssClass) => {
 
 let toggleClasses = (elem, ...classes) => classes.forEach(c => elem.classList.toggle(c));
 
+let displayBtn = button => {
+    if (button === roll) {
+    toggleElems(reset, roll, 'hidden');
+    } else if (button === reset) {
+        toggleElems(roll, reset, 'hidden');
+    }
+}
+
 let updateScore = (player, currentRoll, playerBoard) => {
     player += currentRoll;
     playerBoard.textContent = player;
@@ -36,7 +44,8 @@ let winner = () => {
     } else {
         message.textContent = 'Player 2 Wins!!!';
     }
-    toggleElems(roll, reset,'hidden');
+
+    displayBtn(reset);
 }
 
 let checkWin = score => {
@@ -93,12 +102,14 @@ let resetGame = () => {
     updateScore(player.player, negatize(player.player), player.board);
     toggleElems(roll, reset, 'hidden');
 });
-
+    //TODO --- Reset scoreboard, message, and turnorder for next round
     let diceAndTurn = (function (...dice) {
+        player1Turn = true;
         dice.forEach(die => {
             dieDisplay(die, '-');
         });
     })(rollOne, rollTwo);
+    displayBtn(roll);
 }
 
 reset.addEventListener('click', resetGame);
