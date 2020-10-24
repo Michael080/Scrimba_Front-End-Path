@@ -35,14 +35,17 @@ let displayBtn = button => {
 let updateScore = (player, currentRoll, playerBoard) => {
     player += currentRoll;
     playerBoard.textContent = player;
+    console.log(player, 'from upodateScore');
     return player;
 }
 
+let updateMessage = mess => message.textContent = mess;
+
 let winner = () => {
     if (player1Turn) {
-        message.textContent = 'Player 1 Wins!!!';
+        updateMessage('Player 1 Wins!!!');
     } else {
-        message.textContent = 'Player 2 Wins!!!';
+        updateMessage('Player 2 Wins!!!');
     }
 
     displayBtn(reset);
@@ -64,13 +67,13 @@ let scoring = (roll = randNumb(), player, currDice, otherDice, diceValue) => {
 function playDice() {
     player1Turn = !player1Turn;
     if (player1Turn) {
-        message.textContent = 'Player 1 Turn';
+        updateMessage('Player 1 Turn');
         let playerRoll = scoring(randNumb(), player1, diceOne, diceTwo, rollOne);
         player1 = updateScore(player1, playerRoll, oneScore);
         checkWin(player1);
         return player1;
     } else {
-        message.textContent = 'Player 2 Turn';
+        updateMessage('Player 2 Turn');
         let playerRoll = scoring(randNumb(), player2, diceTwo, diceOne, rollTwo);
         player2 = updateScore(player2, playerRoll, twoScore);
         checkWin(player2);
@@ -81,34 +84,21 @@ function playDice() {
 roll.addEventListener('click', playDice);
 
 let resetGame = () => {
-    let players = [
-        playaUno = {
-            player: player1,
-            dice: '-',
-            board: oneScore,
-            diceDOM: diceOne
-
-        },
-        playaDos = {
-            player: player2,
-            dice: '-',
-            board: twoScore,
-            diceDOM: diceTwo
-    }];
-
     let negatize = value => value = - value; //create negative of a value
-
-    players.forEach(function(player) {
-    updateScore(player.player, negatize(player.player), player.board);
+    //reset scores & scoreboard
+    let neg1 = negatize(player1);
+    let neg2 = negatize(player2);
+    player1 = updateScore(player1, neg1 , oneScore);
+    player2 = updateScore(player2, neg2, twoScore);
     toggleElems(roll, reset, 'hidden');
-});
-    //TODO --- Reset scoreboard, message, and turnorder for next round
+    //reset dice display
     let diceAndTurn = (function (...dice) {
         player1Turn = true;
         dice.forEach(die => {
             dieDisplay(die, '-');
         });
     })(rollOne, rollTwo);
+    updateMessage('Player 1 Turn');
     displayBtn(roll);
 }
 
