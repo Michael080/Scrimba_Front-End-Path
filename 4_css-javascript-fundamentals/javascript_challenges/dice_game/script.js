@@ -34,6 +34,8 @@ let displayBtn = button => {
     }
 }
 
+let turn = () => (player1 === 0) ? player1Turn = true : player1Turn = !player1Turn;
+
 let updateScore = (player, currentRoll, playerBoard) => {
     player += currentRoll;
     playerBoard.textContent = player;
@@ -68,7 +70,7 @@ let scoring = (roll = randNumb(), player, currDice, otherDice, diceValue, currSc
 }
 
 function playDice() {
-    player1Turn = !player1Turn;
+    turn();
     if (player1Turn) {
         updateMessage('Player 1 Turn');
         let playerRoll = scoring(randNumb(), player1, diceOne, diceTwo, rollOne, scoreOne, scoreTwo);
@@ -95,8 +97,7 @@ let resetGame = () => {
     player2 = updateScore(player2, neg2, twoScore);
     toggleElems(roll, reset, 'hidden');
     //reset dice display
-    let diceAndTurn = (function (...dice) {
-        player1Turn = true;
+    let resetDice = (function (...dice) {
         dice.forEach(die => {
             dieDisplay(die, '-');
         });
