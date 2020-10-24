@@ -2,11 +2,13 @@ const message = document.querySelector('.message');
 const roll = document.querySelector('.roll');
 const reset = document.querySelector('#reset');
 //player one stats
-const oneScore = document.querySelector('.player-one-score');
+const scoreOne = document.querySelector('.score-1'); //select entire score node
+const oneScore = document.querySelector('.player-one-score'); //select just the points
 const diceOne = document.querySelector('.dice-one');
 const rollOne = document.querySelector('.roll-value-one');
 //player two stats
-const twoScore = document.querySelector('.player-two-score');
+const scoreTwo = document.querySelector('.score-2'); //select entire score node
+const twoScore = document.querySelector('.player-two-score'); //select just the points
 const diceTwo = document.querySelector('.dice-two');
 const rollTwo = document.querySelector('.roll-value-two');
 // game stats
@@ -57,10 +59,11 @@ let checkWin = score => {
 
 let dieDisplay = (die, val) => die.textContent = val;
 
-let scoring = (roll = randNumb(), player, currDice, otherDice, diceValue) => {
+let scoring = (roll = randNumb(), player, currDice, otherDice, diceValue, currScore, otherScore) => {
     let playerRoll = roll;
     dieDisplay(diceValue, playerRoll);
     toggleElems(currDice, otherDice, 'active');
+    toggleElems(currScore, otherScore, 'score-in-play');
     return playerRoll;
 }
 
@@ -68,13 +71,13 @@ function playDice() {
     player1Turn = !player1Turn;
     if (player1Turn) {
         updateMessage('Player 1 Turn');
-        let playerRoll = scoring(randNumb(), player1, diceOne, diceTwo, rollOne);
+        let playerRoll = scoring(randNumb(), player1, diceOne, diceTwo, rollOne, scoreOne, scoreTwo);
         player1 = updateScore(player1, playerRoll, oneScore);
         checkWin(player1);
         return player1;
     } else {
         updateMessage('Player 2 Turn');
-        let playerRoll = scoring(randNumb(), player2, diceTwo, diceOne, rollTwo);
+        let playerRoll = scoring(randNumb(), player2, diceTwo, diceOne, rollTwo, scoreTwo, scoreOne);
         player2 = updateScore(player2, playerRoll, twoScore);
         checkWin(player2);
         return player2;
