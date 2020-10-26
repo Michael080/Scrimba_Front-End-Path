@@ -1,0 +1,27 @@
+body {
+    font-family: 'Bubbler One', sans-serif;
+
+}
+
+h1 {
+    font-size: 48px;
+    text-align: center;
+    width: 309px;
+    margin: 20px auto 20px auto;
+}
+
+.container {
+    background-color: #323232;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr [col-start]);
+    gap: 1px 1px;
+    width: 309px;
+    margin: 0 auto;
+}
+
+.grid {
+    background-color: black;
+    width: 30px;
+    height: 30px;
+
+}
