@@ -39,24 +39,23 @@ let turn = () => (player1 === 0) ? player1Turn = true : player1Turn = !player1Tu
 let updateScore = (player, currentRoll, playerBoard) => {
     player += currentRoll;
     playerBoard.textContent = player;
-    console.log(player, 'from upodateScore');
     return player;
 }
 
-let updateMessage = mess => message.textContent = mess;
+let fillMessTxt = mess => message.textContent = mess;
 
 let winner = () => {
     if (player1Turn) {
-        updateMessage('Player 1 Wins!!!');
+        fillMessTxt('Player 1 Wins!!!');
     } else {
-        updateMessage('Player 2 Wins!!!');
+        fillMessTxt('Player 2 Wins!!!');
     }
-
+    message.classList.toggle('win-message');  //scale font-size up
     displayBtn(reset);
 }
 
 let checkWin = score => {
-    (score >= 10) ? winner() : (console.log(`player1: ${player1} player2: ${player2}`));
+    (score >= 10) ? winner() : '';
 }
 
 let dieDisplay = (die, val) => die.textContent = val;
@@ -72,13 +71,13 @@ let scoring = (roll = randNumb(), player, currDice, otherDice, diceValue, currSc
 function playDice() {
     turn();
     if (player1Turn) {
-        updateMessage('Player 1 Turn');
+        fillMessTxt('Player 1 Turn');
         let playerRoll = scoring(randNumb(), player1, diceOne, diceTwo, rollOne, scoreOne, scoreTwo);
         player1 = updateScore(player1, playerRoll, oneScore);
         checkWin(player1);
         return player1;
     } else {
-        updateMessage('Player 2 Turn');
+        fillMessTxt('Player 2 Turn');
         let playerRoll = scoring(randNumb(), player2, diceTwo, diceOne, rollTwo, scoreTwo, scoreOne);
         player2 = updateScore(player2, playerRoll, twoScore);
         checkWin(player2);
@@ -102,7 +101,9 @@ let resetGame = () => {
             dieDisplay(die, '-');
         });
     })(rollOne, rollTwo);
-    updateMessage('Player 1 Turn');
+    //reset message text
+    fillMessTxt('Player 1 Turn');
+    message.classList.toggle('win-message');
     displayBtn(roll);
 }
 
