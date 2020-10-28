@@ -1,0 +1,7 @@
+node_modules/
+*.json
+package-lock.json
+first-jasmine-project
+temp/
+spec/
+add.js
