@@ -20,19 +20,30 @@ function Snek(body, position, speed, direction) {
     this.position = position;
     this.speed = 0;
     this.direction = direction;
-    this.setSnekPlace = function (snekker) {
-        this.position = snekker;
+    this.setSnekPlace = function (snekGrid, snekRow, gameBoard) {
+        this.position = {
+            //store nodes in 'dom' and corresponding indices in x/y
+            row: {
+                dom: snekRow,
+                y: gameBoard.indexOf(snekRow)
+            },
+            grid: {
+                dom: snekGrid,
+                x: gameBoard[gameBoard.indexOf(snekRow)].indexOf(snekGrid)
+            }
+        };
     }
+    this.findSnek = function (board) {
+        board.forEach(gridRow => {
+                gridRow.forEach(grid => {
+                    if(grid.classList.contains('snek')) {
+                        this.setSnekPlace(grid, gridRow, board); //store grid and row location of Snek
+                    }
+                });
+            }
+        )}
+
 }
 
 let snek = new Snek (3,0,1,'down'); //new Snek
-
-Snek.prototype.findSnek = function (board) {
-        board.forEach(gridRow => {
-        gridRow.forEach(grid => {
-            grid.classList.contains('snek') ? (this.setSnekPlace(grid)) : 'no snek'
-        });
-    }
-)}
-
-snek.findSnek(snekLand);
+snek.findSnek(snekLand); //set snek.position
