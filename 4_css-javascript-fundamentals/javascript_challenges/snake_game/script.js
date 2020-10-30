@@ -10,9 +10,9 @@ function makeBoard(array, tempBoard, section = 10) {
     return tempBoard;
 }
 
-let tempGrid = Array.from(areaGrid); //convert node collection
-let arrayGrid = new Array;
-let snekLand = makeBoard(tempGrid, arrayGrid);
+const tempGrid = Array.from(areaGrid); //convert node collection
+const arrayGrid = new Array;
+const snekLand = makeBoard(tempGrid, arrayGrid);
 
 // Create Snek prototype
 function Snek(body, position, speed, direction) {
@@ -62,5 +62,5 @@ function Snek(body, position, speed, direction) {
     }
 }
 
-let snek = new Snek (3,0,1,'down'); //new Snek
+const snek = new Snek (3,0,1,'down'); //new Snek
 snek.findSnek(snekLand); //set snek.position
