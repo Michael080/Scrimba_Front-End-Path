@@ -20,6 +20,7 @@ function Snek(body, position, speed, direction) {
     this.position = position;
     this.speed = 0;
     this.direction = direction;
+
     this.setSnekPlace = function (snekGrid, snekRow, gameBoard) {
         this.position = {
             //store nodes in 'dom' and corresponding indices in x/y
@@ -33,6 +34,7 @@ function Snek(body, position, speed, direction) {
             }
         };
     }
+
     this.findSnek = function (board) {
         board.forEach(gridRow => {
                 gridRow.forEach(grid => {
@@ -42,7 +44,22 @@ function Snek(body, position, speed, direction) {
                 });
             }
         )}
+        // Returns DOM element corresponding to left/right/up/down
+        this.newPos = function (dir) {
+        const left = () => snek.position.grid.dom.previousElementSibling;
+        const right = () => snek.position.grid.dom.nextElementSibling;
+        const up = () => snekLand[snek.position.row.y - 1][snek.position.grid.x];
+        const down = () => snekLand[snek.position.row.y + 1][snek.position.grid.x];
 
+        const posSwitch = {
+            left: left(),
+            right: right(),
+            up: up(),
+            down: down()
+        };
+
+        return posSwitch[dir];
+    }
 }
 
 let snek = new Snek (3,0,1,'down'); //new Snek
