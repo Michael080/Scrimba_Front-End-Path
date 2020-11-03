@@ -26,6 +26,10 @@ h1 {
 
 }
 
-.snek {
+#snek {
+    background-color: #634cbf;
+}
+
+.tail {
     background-color: #634cbf;
 }
