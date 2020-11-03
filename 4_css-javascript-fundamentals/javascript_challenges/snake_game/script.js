@@ -64,7 +64,6 @@ function Snek(size, position, speed, direction, restrict, boundCheck) {
     // Updates restrict property with bool and restricted direction if applicable
     this.outOfBound = function (grid, row, board) {
         const result = this.checker(grid, row, board);
-        // ! TODO --- Remove conditional - defaultResult should stop execution in move()
 
             const restrictWhich = {
                 lessX: () => snek.restrict = {
@@ -124,7 +123,8 @@ function Snek(size, position, speed, direction, restrict, boundCheck) {
 // Create snek, set position and moves
 const snek = new Snek (1,0,1,'down'); //new Snek
 snek.findSnek(snekLand); //set snek.position
-//TODO---Implement in prototype & use in outOfBound()
+// * TODO---Implement in prototype & use in outOfBound() //
+// Calc next grid position based on move direction and current position
 snek.moves = {
     left: function () {
         return snek.position.grid.x - 1;
@@ -139,19 +139,16 @@ snek.moves = {
         return snek.position.row.y + 1;
     }
 }
-// *? Return here
+
+// Validate move
 const isValidMove = function (dir) {
     const newPos = snek.moves[dir]();
-    console.log(newPos);
+    // Check next snek-position: if out-of-bounds & update snek.restrict v/ validation
     snek.outOfBound(newPos, snek.position.row.y, snekLand);
 }
 
-
-
 snek.speed = 4000;
 
-// Check next snek-position: if out-of-bounds
-// Calc next grid based on move direction and current position
 
 
 
@@ -173,44 +170,28 @@ const toggleSnek = ( currPos, nextPos ) => {
     toggleID(nextPos, 'snek'); //New snek is created
 }
 
-// const checkValue = dir => snek.restrict.dir === dir ? true : false;
-// const checkValue2 = dir => {
-//     snek.restrict.movement === true ?
-// }
-
 const move = input => {
     snek.direction = input;
     const x = snek.position.grid.x;
     const y = snek.position.row.y;
-    // const restrict = snek.outOfBound(x, y, snekLand);
-    // console.log('snek.restrict.dir:', snek.restrict.dir);
-    // console.log('n(input):', n(input));
-    isValidMove(input);
-
+    isValidMove(input); //validate move
     if (snek.restrict.movement === false) {
         let pos = snek.position.grid.dom;
-
         let nextPos = snek.newPos(snek.direction);
-        // toggle(pos, 'tail');
-        // toggle(nextPos, 'snek');
         toggleSnek(pos, nextPos);
-        console.log(snek.position.grid.x);
         snek.findSnek(snekLand);
-        console.log(snek.position.grid.x);
-        // n(input);
         // setInterval(move(snek.direction), 500);
     }else {
     //    GAME OVER
         console.log('Snek Ded :(');
     }
-
 }
-// console.log(snek.position.grid.x);
+
 move('left');
 move('left');
 move('left');
 move('left');
-move('left');
+// move('left');
 
 // move('right');
 // move('up');
