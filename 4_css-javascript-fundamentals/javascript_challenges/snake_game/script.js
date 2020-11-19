@@ -26,20 +26,6 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded) {
     this.boundCheck = boundCheck;
     this.ded = false;
 
-    this.setSize = size => {
-        this.size = size;
-        return this;
-    }
-
-    this.setSpeed = speed => {
-        this.speed = speed;
-        return this;
-    }
-
-    this.setDirection = dir => {
-        this.direction = dir;
-        return this;
-    }
 
     this.setSnekPlace = function (snekGrid, snekRow, gameBoard) {
         this.position = {
@@ -185,11 +171,11 @@ const toggleSnek = ( currPos, nextPos ) => {
     toggleID(currPos); //remove id-'snek'
     setTail(currPos, 'tail'); //add class-'tail'
     toggleID(nextPos, 'snek'); //New snek is created
-    setTimeout(() => toggleClass(nextPos, 'tail'), snek.speed * (snek.size ));
+    setTimeout(() => toggleClass(nextPos, 'tail'), snek.speed * (snek.size));
 
     if (snek.firstMove === true) {
         initialDraw();
-        setTimeout(() => {toggleClass(currPos, 'tail'), snek.speed * (snek.size - 1)});
+        setTimeout(() => toggleClass(currPos, 'tail'), snek.speed * (snek.size - 1));
        return snek.firstMove = false;
     }
 }
@@ -244,6 +230,7 @@ function initialDraw() {
     setTailPos(snek);
     const tail1 = snek.initialTailPos[0];
     const tail2 = snek.initialTailPos[1];
+    console.log('initialDraw():', tail1, tail2);
     //draw tail and set timers to 'fade' display:
     toggleClass(tail1, 'tail'); //draw 'tail'
     toggleClass(tail2, 'tail'); //draw 'tail'
