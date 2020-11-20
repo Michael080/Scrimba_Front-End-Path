@@ -18,7 +18,7 @@ const snekLand = makeBoard(tempGrid, arrayGrid);
 function Snek(size, position, speed, direction, restrict, boundCheck, ded) {
     this.size = size;
     this.position = position;
-    this.speed = 0;
+    this.speed = 2000;
     this.direction = 'left';
     this.restrict = {
         movement: false
@@ -129,12 +129,8 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded) {
 }
 
 // Create snek, set position and moves
-const snek = new Snek (1,0,1,'down'); //new Snek
+const snek = new Snek (3,3000,3000,'left'); //new Snek
 snek.findSnek(snekLand); //set snek.position
-// TODO --- Move - move initializations to make more readable?
-snek.speed = 3000;
-snek.size = 3;
-snek.direction = 'left';
 // * TODO---Implement in prototype & use in outOfBound() //
 // Calc next grid position based on move direction and current position
 snek.moves = {
@@ -151,9 +147,6 @@ snek.moves = {
         return snek.position.row.y + 1;
     }
 }
-
-
-
 
 // Functions for toggling CLASSES and IDs
 const toggleClass = (elem, selector = 'tail') => elem.classList.toggle(selector);
