@@ -18,7 +18,7 @@ const snekLand = makeBoard(tempGrid, arrayGrid);
 function Snek(size, position, speed, direction, restrict, boundCheck, ded) {
     this.size = size;
     this.position = position;
-    this.speed = 2000;
+    this.speed = 500;
     this.direction = 'left';
     this.restrict = {
         movement: false
@@ -32,24 +32,27 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded) {
             //store nodes in 'dom' and corresponding indices in x/y
             row: {
                 dom: snekRow,
-                y: gameBoard.indexOf(snekRow)
+                y: gameBoard.indexOf(snekRow) // Y-COORD
             },
             grid: {
                 dom: snekGrid,
-                x: gameBoard[gameBoard.indexOf(snekRow)].indexOf(snekGrid)
+                x: gameBoard[gameBoard.indexOf(snekRow)].indexOf(snekGrid) // X-COORD
             }
         };
     }
     //Takes 'game board' & snek position via grid/row and returns an object whose property
     //specs type of out-of-bounds condition and a bool value
     this.checker = function (grid, row, board) {
-        const rowBound = this.position.row.dom.length - 1;
+        const xBound = this.position.row.dom.length - 1;
+        const yBound = board.length - 2;
         // TODO --- Use Map instead of Object
         // Check for out-of-bound conditions on x/y axis
         const lessX = {lessX: grid < 0};
-        const greatX = {greatX: grid > rowBound};
+        let greatX;
+        // Prevent producing true evaluation of greatX when snek is moving 'down-map'
+        this.direction === 'right' ? (greatX = {greatX: grid > xBound}) : (greatX = {greatX: false});
         const lessY = {lessY: row < 0};
-        const greatY = {greatY: row > board.length -1};
+        const greatY = {greatY: row > yBound};
         let allResults = [lessX, greatX, lessY, greatY]; // Store results
         let finalResult = new Array;
         // Takes array of objects and returns any object with property value: true
@@ -57,14 +60,16 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded) {
             let key = Object.keys(allResults[index]);
             for (var obj in index) {
                 let value = allResults[index][key];
-                value === true ? finalResult.push(allResults[index]) : finalResult.push(false);
+                value === true ? finalResult.push(allResults[index]) : 'finalResult === false';
             }
         }
-
         return finalResult;
-    }
+    } //<----- end of checker()
 
     // Updates restrict property with bool and restricted direction if applicable
+    // snek.outOfBound(newPos, snek.position.row.y, snekLand);
+    //newPos --- array index
+    //snek.position.row.y --- index of array in snekLand
     this.outOfBound = function (grid, row, board) {
         const result = this.checker(grid, row, board);
 
@@ -73,6 +78,7 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded) {
                     movement: true,
                     dir: 'left'
                 },
+                // TODO --- Fix Bug - snek out of bounds NO game abort - Not returning on out of bound conditions
                 greatX: () => snek.restrict = {
                     movement: true,
                     dir: 'right'
@@ -81,6 +87,7 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded) {
                     movement: true,
                     dir: 'up'
                 },
+                // TODO --- Fix Bug - snek out of bounds NO game abort - Not returning on out of bound conditions
                 greatY: () => snek.restrict = {
                     movement: true,
                     dir: 'down'
@@ -91,8 +98,12 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded) {
                 }
             }
 
+        try{
             let key = Object.keys(result[0]);
             result[0][key] === true ? restrictWhich[key]() : restrictWhich['defaultResult']; // Set restrict property
+        } catch(err) {
+            restrictWhich['defaultResult'];
+        }
     }
 
     this.stopSnek = () => {
@@ -109,9 +120,13 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded) {
                 });
             }
         )}
+    // Returns DOM element corresponding to left/right/up/down
+    this.newPos = function (dir) {
+        const currentCoords = {
+            row: this.position.row.y,
+            grid: this.position.grid.x
+        }
 
-        // Returns DOM element corresponding to left/right/up/down
-        this.newPos = function (dir) {
         const left = () => snekLand[snek.position.row.y][snek.position.grid.x - 1];
         const right = () => snekLand[snek.position.row.y][snek.position.grid.x + 1];
         const up = () => snekLand[snek.position.row.y - 1][snek.position.grid.x];
@@ -124,12 +139,54 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded) {
             down: down()
         };
 
+        const checkSwitch = {
+            left: () => {
+                const newCoords = {
+                    row: currentCoords.row,
+                    grid: this.position.grid.x - 1
+                };
+
+                return newCoords;
+            },
+            right: () => {
+                const newCoords = {
+                    row: currentCoords.row,
+                    grid: this.position.grid.x + 1
+                };
+
+                return newCoords;
+            },
+            left: () => {
+                const newCoords = {
+                    row: currentCoords.row,
+                    grid: this.position.grid.x - 1
+                };
+
+                return newCoords;
+            },
+            up: () => {
+                const newCoords = {
+                    row: this.position.row.y - 1,
+                    grid: currentCoords.grid
+                };
+
+                return newCoords;
+            },
+            down: () => {
+                const newCoords = {
+                    row: this.position.row.y + 1,
+                    grid: currentCoords.grid
+                };
+
+                return newCoords;
+            }
+        }
         return posSwitch[dir];
-    }
-}
+    } // <----- end of newPos()
+ }
 
 // Create snek, set position and moves
-const snek = new Snek (3,3000,3000,'left'); //new Snek
+const snek = new Snek (3,3000,500,'left'); //new Snek
 snek.findSnek(snekLand); //set snek.position
 // * TODO---Implement in prototype & use in outOfBound() //
 // Calc next grid position based on move direction and current position
@@ -223,7 +280,6 @@ function initialDraw() {
     setTailPos(snek);
     const tail1 = snek.initialTailPos[0];
     const tail2 = snek.initialTailPos[1];
-    console.log('initialDraw():', tail1, tail2);
     //draw tail and set timers to 'fade' display:
     toggleClass(tail1, 'tail'); //draw 'tail'
     toggleClass(tail2, 'tail'); //draw 'tail'
@@ -232,7 +288,9 @@ function initialDraw() {
     delete snek.initialTailPos; //remove property from Snek object
 }
 
-const move = () => {
+let timer = setInterval(move, snek.speed); //set movement based on snek.speed
+
+function move() {
     const x = snek.position.grid.x;
     const y = snek.position.row.y;
     isValidMove(snek.direction); //validate move
@@ -248,17 +306,11 @@ const move = () => {
         snek.stopSnek();
         snek.ded = true;
         console.log('Snek Ded :(');
-        // TODO --- Not Working - clearInterval() is not succesfully 'aborting game'
         clearInterval(timer);
         return clearInterval(timer);
     }
 }
 
-let timer = setInterval(move, snek.speed); //set movement based on snek.speed
-
-//TODO --- Snek should move based on value of snek.direction -
-// - remove toggleSnek
-// -
 const moveOverride = (input) => {
     snek.direction = input;
     const x = snek.position.grid.x;
@@ -281,10 +333,22 @@ const snekControl = function(event) {
     snek.direction = event.slice(5, input.length - 1);
 }
 
-// TODO --- Refactor - break into separate function()
+function validateInput(input) {
+    const valid = ['right', 'left', 'up', 'down'];
+    return valid.includes(input);
+}
+
 window.addEventListener('keydown', function(event) {
-    let eventStr = event.key
-    snek.direction = eventStr.slice(5, eventStr.length).toLowerCase();
+    // capture input string and format
+    let eventStr = event.key;
+    const formatStr = eventStr.slice(5, eventStr.length).toLowerCase();
+    // log error if input is not an arrow key otherwise update snek.direction
+    if(validateInput(formatStr)) {
+        snek.direction = formatStr;
+    } else {
+        console.log('invalid input: ', event.key);
+    }
+
 });
 
 function clearTimer(timer) {
