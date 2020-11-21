@@ -246,7 +246,7 @@ const setTailPos = (snek) => {
     return tail(snek.size);
 }
 // TODO --- move execution somewhere else in flow
-setTailPos(snek); //draw snek
+// setTailPos(snek); //draw snek
 
 // Validate move
 const isValidMove = function (dir) {
