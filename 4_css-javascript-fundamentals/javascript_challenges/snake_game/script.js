@@ -73,28 +73,28 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded) {
     this.outOfBound = function (grid, row, board) {
         const result = this.checker(grid, row, board);
 
-            const restrictWhich = {
-                lessX: () => snek.restrict = {
-                    movement: true,
-                    dir: 'left'
-                },
-                greatX: () => snek.restrict = {
-                    movement: true,
-                    dir: 'right'
-                },
-                lessY: () => snek.restrict = {
-                    movement: true,
-                    dir: 'up'
-                },
-                greatY: () => snek.restrict = {
-                    movement: true,
-                    dir: 'down'
-                },
-                //if no cases match return value 'false'
-                defaultResult: () => snek.restrict = {
-                    movement: false
-                }
+        const restrictWhich = {
+            lessX: () => snek.restrict = {
+                movement: true,
+                dir: 'left'
+            },
+            greatX: () => snek.restrict = {
+                movement: true,
+                dir: 'right'
+            },
+            lessY: () => snek.restrict = {
+                movement: true,
+                dir: 'up'
+            },
+            greatY: () => snek.restrict = {
+                movement: true,
+                dir: 'down'
+            },
+            //if no cases match return value 'false'
+            defaultResult: () => snek.restrict = {
+                movement: false
             }
+        }
 
         try{
             let key = Object.keys(result[0]);
@@ -181,7 +181,7 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded) {
                 return newCoords;
             }
         }
-        // console.log('newCoords', posSwitch[dir]);
+
         return posSwitch[dir];
     } // <----- end of newPos()
  }
@@ -196,7 +196,10 @@ snek.firstMove = true;
 
 // ----------------------------     Display Snek     ----------------------------
 // Functions for toggling CLASSES and IDs
-const toggleClass = (elem, selector = 'tail') => elem.classList.toggle(selector);
+function toggleClass(elem, selector = 'tail') {
+    elem.classList.toggle(selector)
+}
+
 const toggleID = (elem, selector = '') => elem.id = selector;
 
 // Adds class-'tail' and sets timer to remove after spec'd time
@@ -278,17 +281,18 @@ function move() {
     const x = snek.position.grid.x;
     const y = snek.position.row.y;
     isValidMove(snek.direction); //validate move
+
     if (snek.restrict.movement === false) {
         //set snek.position to grid location containing id #snek
         let pos = snek.position.grid.dom;
         let nextPos = snek.newPos(snek.direction);
         //set nextPos w/ id #snek, remove #snek from pos & swap w/ class .tail
-        // TODO --- Move Utilities -- move toggle utils - move toggleSnek()
         toggleSnek(pos, nextPos);
         snek.findSnek(snekLand); //reset snek.position
     }else {
     //    GAME OVER
-        snek.stopSnek();
+        //TODO --- Remove? - remove stopSnek() unless it is here for some sort of edge case
+    //     snek.stopSnek();
         snek.ded = true;
         console.log('Snek Ded :(');
         return clearInterval(timer);
@@ -339,6 +343,61 @@ window.addEventListener('keydown', function(event) {
     }
 });
 
+
+// ============================     Feed Ssssnek     ===========================
+// Place apples on board to enable Snek's insatiable hunger:
+function Feed(currApples, maxApples, dimensions) {
+    this.currApples = [];
+    this.maxApples = 3;
+    this.dimensions = {
+        maxWidth: 10,
+        maxHeight: 15
+    }
+
+    // ----------------------------     Feed Methods    ------------------------
+    this.randomRange = max => Math.floor(Math.random() * (max + 1));
+
+    // Check coords for 'snek elements' --- id of #snek || class of .tail -
+    // return boolean
+    this.validPlacement = () => {
+        const results = [
+            this.grid.classList.contains('tail'),
+            this.grid.id === 'snek'
+        ];
+        return !results.includes(true); // return true if valid placement
+    }//<----- end of validPlacement()
+
+    // Generate random coords, validate that coords of apples don't conflict
+    // w/ Snek location and store on Feed object
+    this.getCoords = () => {
+        this.newCoords = {
+            x: this.randomRange(9),
+            y: this.randomRange(14)
+        }
+        this.grid = snekLand[this.newCoords.y][this.newCoords.x]; // store coords
+        if (this.validPlacement() === false) { // check validity and rerun if not
+             this.getCoords();
+        }
+    } //<----- end of getCoords()
+
+    // Get valid coordinates, display to screen, & store nodes on currApples arr.
+    this.placeApple = () => {
+        this.getCoords(); //create new random coords
+        toggleClass(this.grid,'apple');
+        this.currApples.push(this.grid);
+    } //<----- end of placeApple()
+
+    // Note: setCoords() is dependent on All previous methods of Feed object
+    this.setCoords = () => {
+        this.placeApple(); // Place some damn feed for hungry Snek!!!
+    } //<----- end of setCoords()
+} //<--------- end of Board
+
+// CREATE NEW FEED & place max-apples
+const newFeed = new Feed();
+for (let i = 0; i < newFeed.maxApples; i++) {
+    newFeed.placeApple();
+}
 
 // ----------------------------     Start Game     ----------------------------
 let timer = setInterval(move, snek.speed); //set movement based on snek.speed
