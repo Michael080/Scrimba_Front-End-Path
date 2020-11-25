@@ -7,7 +7,33 @@ h1 {
     font-size: 48px;
     text-align: center;
     width: 309px;
-    margin: 20px auto 20px auto;
+    margin: 9px auto 20px auto;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+.header {
+    /*display: flex;*/
+}
+
+.heading {
+    display: inline-block;
+    /*margin-bottom: 20px;*/
+    background-color: lightblue;
+    /*justify-content: center;*/
+    /*width: 650px;*/
+    text-align: center;
+}
+
+.stats {
+    /*display: inline-block;*/
+    justify-content: right;
+    background-color: #f5b996;
+    /*width: 30%;;*/
+    margin-left: 66%;
+    padding-left: 18px;
 }
 
 .container {
