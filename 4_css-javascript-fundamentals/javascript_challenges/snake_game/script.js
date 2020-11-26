@@ -194,6 +194,34 @@ snek.findSnek(snekLand); //set snek.position
 snek.firstMove = true;
 
 
+// ============================     Score Snek    ===========================
+// Snek-score increases each apple and score-value goes up each iteration
+function ScoreBoard() {
+    this.score= 0,
+        this.snekAte= 0,
+        this.domNodes = {
+            score: document.querySelector('.score'),
+            length: document.querySelector('.longness')
+        }
+        // Increase store on Snek feedings & increase point value each iteration
+        this.scoreCalc = () => {
+            scoreBoard.snekAte += 1;
+            const rate = Math.ceil(this.snekAte * .25);
+            this.score = this.snekAte * rate; // calc. score & update
+            console.log('rate: ', this.rate);
+        }
+        // Display score and longness
+        this.displayScore = () => {
+            this.domNodes.score.textContent = this.score;
+            this.domNodes.length = snek.size;
+        }
+}
+
+// Create new ScoreBoard & display initial score/longness values:
+const scoreBoard = new ScoreBoard();
+scoreBoard.displayScore();
+
+
 // ----------------------------     Display Snek     ----------------------------
 // Functions for toggling CLASSES and IDs
 function toggleClass(elem, selector = 'tail') {
@@ -270,11 +298,22 @@ snek.moves = {
     }
 }
 
-// Validate move
+// Validate move is within gameboard boundaries
 const isValidMove = function (dir) {
     const newPos = snek.moves[dir]();
     // Check next snek-position: if out-of-bounds & update snek.restrict v/ validation
     snek.outOfBound(newPos, snek.position.row.y, snekLand);
+}
+
+// Takes next Snek position, checks for apples, toggle 'apple' to remove
+// & update corresponding stats
+const snekEat = (pos) => {
+    if (pos.classList.contains('apple')) {
+        toggleClass(pos, 'apple');
+        snek.size += 1;
+        scoreBoard.scoreCalc();
+        scoreBoard.displayScore();
+    }
 }
 
 function move() {
@@ -286,6 +325,8 @@ function move() {
         //set snek.position to grid location containing id #snek
         let pos = snek.position.grid.dom;
         let nextPos = snek.newPos(snek.direction);
+
+        snekEat(nextPos); // if apples coincide update score, snekSize, & display
         //set nextPos w/ id #snek, remove #snek from pos & swap w/ class .tail
         toggleSnek(pos, nextPos);
         snek.findSnek(snekLand); //reset snek.position
@@ -398,26 +439,6 @@ const newFeed = new Feed();
 for (let i = 0; i < newFeed.maxApples; i++) {
     newFeed.placeApple();
 }
-
-// ============================     Score Snek    ===========================
-// Snek-score increases each apple and score-value goes up each iteration
-function ScoreBoard() {
-    this.score= 0,
-    this.snekAte= 0,
-    this.length= snek.size,
-    this.domNodes = {
-        score: document.querySelector('.score'),
-        length: document.querySelector('.longness')
-    },
-    // Increase store on Snek feedings & increase point value each iteration
-    this.scoreCalc = () => {
-        const rate = Math.ceil(this.snekAte * .25);
-        this.score = this.snekAte * rate;
-        console.log('rate: ', this.rate)
-    }
-}
-
-const scoreBoard = new ScoreBoard();
 
 // ----------------------------     Start Game     ----------------------------
 let timer = setInterval(move, snek.speed); //set movement based on snek.speed
