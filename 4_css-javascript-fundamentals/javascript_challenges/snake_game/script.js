@@ -102,8 +102,7 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded) {
         } catch(err) {
             restrictWhich['defaultResult'];
         }
-
-    }//<========= END OF SNEK PROTOTYPE
+    }//<----- end of outOfBound()
 
     this.stopSnek = () => {
         this.restrict.movement = true;
@@ -184,7 +183,7 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded) {
 
         return posSwitch[dir];
     } // <----- end of newPos()
- } // <-------- end of Snek
+ } // <======== end of Snek prototype
 
 
  // ----------------------------     Create Snek     ----------------------------
@@ -368,17 +367,24 @@ const isValidMove = function (dir) {
     snek.outOfBound(newPos, snek.position.row.y, snekLand);
 }
 
+const dedSnek = () => {
+    snek.ded = true;
+    console.log('Snek Ded :(');
+    clearInterval(timer)
+}
+
 // Takes next Snek position, checks for apples, toggle 'apple' to remove
 // & update corresponding stats, & place replacement
 const snekEat = (pos) => {
     if (pos.classList.contains('apple')) {
         toggleClass(pos, 'apple');
-        // feed.placeApple(); // TODO --- WAIT - until all apples are gone and replace w/ 3 more?
         feed.currentRound -= 1;
         feed.placeApples();
         snek.size += 1; // grow Snek!!!
         scoreBoard.scoreCalc();
         scoreBoard.displayScore();
+    } else if (pos.classList.contains('tail')) {
+        dedSnek();
     }
 }
 
@@ -396,11 +402,7 @@ function move() {
         snek.findSnek(snekLand); //reset snek.position
     }else {
     //    GAME OVER
-        //TODO --- Remove? - remove stopSnek() unless it is here for some sort of edge case
-    //     snek.stopSnek();
-        snek.ded = true;
-        console.log('Snek Ded :(');
-        return clearInterval(timer);
+        dedSnek();
     }
 }
 
