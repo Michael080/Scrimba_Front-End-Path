@@ -147,7 +147,7 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded) {
                 };
 
                 return newCoords;
-            },
+            } //<--- end of checkSwitch(),
             right: () => {
                 const newCoords = {
                     row: currentCoords.row,
@@ -155,7 +155,7 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded) {
                 };
 
                 return newCoords;
-            },
+            } //<--- end of right(),
             left: () => {
                 const newCoords = {
                     row: currentCoords.row,
@@ -163,7 +163,7 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded) {
                 };
 
                 return newCoords;
-            },
+            } //<--- end of left(),
             up: () => {
                 const newCoords = {
                     row: this.position.row.y - 1,
@@ -171,7 +171,7 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded) {
                 };
 
                 return newCoords;
-            },
+            } //<--- end of up(),
             down: () => {
                 const newCoords = {
                     row: this.position.row.y + 1,
@@ -179,12 +179,12 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded) {
                 };
 
                 return newCoords;
-            }
+            } //<--- end of down()
         }
 
         return posSwitch[dir];
     } // <----- end of newPos()
- }
+ } // <-------- end of Snek
 
 
  // ----------------------------     Create Snek     ----------------------------
@@ -209,13 +209,13 @@ function ScoreBoard() {
             const rate = Math.ceil(this.snekAte * .25);
             this.score = this.snekAte * rate; // calc. score & update
             console.log('rate: ', this.rate);
-        }
+        } //<--- end of scoreCalc()
         // Display score and longness
         this.displayScore = () => {
             this.domNodes.score.textContent = this.score;
             this.domNodes.length = snek.size;
-        }
-}
+        } //<--- end of displayScore()
+} //<----- end of ScoreBoard
 
 // Create new ScoreBoard & display initial score/longness values:
 const scoreBoard = new ScoreBoard();
@@ -225,7 +225,7 @@ scoreBoard.displayScore();
 // ----------------------------     Display Snek     ----------------------------
 // Functions for toggling CLASSES and IDs
 function toggleClass(elem, selector = 'tail') {
-    elem.classList.toggle(selector)
+    elem.classList.toggle(selector);
 }
 
 const toggleID = (elem, selector = '') => elem.id = selector;
