@@ -213,7 +213,7 @@ function ScoreBoard() {
         // Display score and longness
         this.displayScore = () => {
             this.domNodes.score.textContent = this.score;
-            this.domNodes.length = snek.size;
+            this.domNodes.length.textContent = snek.size;
         } //<--- end of displayScore()
 } //<----- end of ScoreBoard
 
