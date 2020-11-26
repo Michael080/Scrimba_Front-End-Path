@@ -399,6 +399,26 @@ for (let i = 0; i < newFeed.maxApples; i++) {
     newFeed.placeApple();
 }
 
+// ============================     Score Snek    ===========================
+// Snek-score increases each apple and score-value goes up each iteration
+function ScoreBoard() {
+    this.score= 0,
+    this.snekAte= 0,
+    this.length= snek.size,
+    this.domNodes = {
+        score: document.querySelector('.score'),
+        length: document.querySelector('.longness')
+    },
+    // Increase store on Snek feedings & increase point value each iteration
+    this.scoreCalc = () => {
+        const rate = Math.ceil(this.snekAte * .25);
+        this.score = this.snekAte * rate;
+        console.log('rate: ', this.rate)
+    }
+}
+
+const scoreBoard = new ScoreBoard();
+
 // ----------------------------     Start Game     ----------------------------
 let timer = setInterval(move, snek.speed); //set movement based on snek.speed
 
