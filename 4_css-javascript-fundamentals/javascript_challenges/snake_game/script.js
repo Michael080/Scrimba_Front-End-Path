@@ -15,7 +15,7 @@ const arrayGrid = new Array;
 const snekLand = makeBoard(tempGrid, arrayGrid);
 
 // Create Snek prototype
-function Snek(size, position, speed, direction, restrict, boundCheck, ded) {
+function Snek(size, position, speed, direction, restrict, boundCheck, ded, snekBody) {
     this.size = size;
     this.position = position;
     this.speed = 500;
@@ -26,6 +26,7 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded) {
     // TODO --- boundCheck unused - delete or donate name to appropriate function/data-structure/thingamajig
     this.boundCheck = boundCheck;
     this.ded = false;
+    this.snekBody = []; // store DOM nodes for entire Snek
 
 
     this.setSnekPlace = function (snekGrid, snekRow, gameBoard) {
@@ -109,15 +110,45 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded) {
         return this;
     }
 
-    this.findSnek = function (board) {
-        board.forEach(gridRow => {
+    this.find = (board, itemIdentifier, type) => {
+        if (type === 'id') {
+            board.forEach(gridRow => {
                 gridRow.forEach(grid => {
-                    if(grid.id === 'snek') {
+                    if(grid.id === itemIdentifier) {
                         this.setSnekPlace(grid, gridRow, board); //store grid and row location of Snek
+                        this.snekBody.push(grid);
+                        // console.log('grid: ', grid);
+                        // console.log('gridRow', gridRow);
+                        // console.log('board: ', board);
                     }
-                });
-            }
-        )}
+                })
+            })
+        } else if (type === 'class') {
+
+            board.forEach(gridRow => {
+                gridRow.forEach(grid => {
+                    if(grid.classList.contains(itemIdentifier)) {
+                        this.snekBody.push(grid); //store grid location of Snek
+                    }
+                })
+            })
+        }
+    }
+
+    this.findSnekHead = function (board) {
+        // board.forEach(gridRow => {
+        //         gridRow.forEach(grid => {
+        //             if(grid.id === 'snek') {
+        //                 this.setSnekPlace(grid, gridRow, board); //store grid and row location of Snek
+        //             }
+        //         });
+        //     }
+        this.find(board, 'snek', 'id')}
+        // )}
+//TODO --- REMOVE? - May not need findSnekAll
+    // this.findSnekAll = function () {
+    //     board.forEach
+    // }
     //    TODO --- Bug - snek not responsive to input at top and bottom rows newPos not running?
     // Returns DOM element corresponding to left/right/up/down
     this.newPos = function (dir) {
@@ -189,7 +220,7 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded) {
  // ----------------------------     Create Snek     ----------------------------
 // Create snek, set position and moves
 const snek = new Snek (3,3000,500,'left'); //new Snek
-snek.findSnek(snekLand); //set snek.position
+snek.findSnekHead(snekLand); //set snek.position
 snek.firstMove = true;
 
 
@@ -305,11 +336,30 @@ function Feed(currApples, maxApples, dimensions, currentRound,) {
 
     // Generate random coords, validate that coords of apples don't conflict
     // w/ Snek location and store on Feed object
+    // this.getCoords = () => {
+    //     this.newCoords = {
+    //         x: this.randomRange(9),
+    //         y: this.randomRange(14)
+    //     }
+    //     this.grid = snekLand[this.newCoords.y][this.newCoords.x]; // store coords
+    //     if (this.validPlacement() === false) { // check validity and rerun if not
+    //         this.getCoords();
+    //     }
+    // } //<----- end of getCoords()
+    // TODO --- REMOVE - temporary settings for getCoords()
     this.getCoords = () => {
         this.newCoords = {
             x: this.randomRange(9),
             y: this.randomRange(14)
         }
+        if (this.newCoords.y === 0) {
+            this.newCoords.y = 1;
+            console.log('change y from 0');
+        } else if (this.newCoords.y === 14) {
+            this.newCoords.y = 13;
+            console.log('change y from 14');
+        }
+
         this.grid = snekLand[this.newCoords.y][this.newCoords.x]; // store coords
         if (this.validPlacement() === false) { // check validity and rerun if not
             this.getCoords();
@@ -367,11 +417,36 @@ const isValidMove = function (dir) {
     snek.outOfBound(newPos, snek.position.row.y, snekLand);
 }
 
+// Stop movement & animate Snek to indicate dead-Snek-state
 const dedSnek = () => {
+    snek.snekBody = []; //'clear' array
+    snek.find(snekLand, 'snek', 'id');
+    snek.find(snekLand, 'tail', 'class');
     snek.ded = true;
+    clearInterval(timer); // stop move()-interval
+    // Flash Snek's dead body yellow
+    const bloopDoop = snek.snekBody.forEach((part) => {
+        const animateDedSnek = () => {
+            toggleClass(part, 'ded-1')
+        }
+
+        const wamblam = setInterval(animateDedSnek, 500);
+    })
+// Flash Snek's dead body green
+    let bloopy = snek.snekBody.forEach((part) => {
+        const animateDedSnek = () => {
+            toggleClass(part, 'ded-2')
+        }
+
+        const samblam = setInterval(animateDedSnek, 250);
+    })
+
     console.log('Snek Ded :(');
-    clearInterval(timer)
+
+    return bloopDoop, bloopy;
 }
+
+const heading = document.querySelector('.heading');
 
 // Takes next Snek position, checks for apples, toggle 'apple' to remove
 // & update corresponding stats, & place replacement
@@ -399,7 +474,7 @@ function move() {
         snekEat(nextPos); // if apples coincide update score, snekSize, & display
         //set nextPos w/ id #snek, remove #snek from pos & swap w/ class .tail
         toggleSnek(pos, nextPos);
-        snek.findSnek(snekLand); //reset snek.position
+        snek.findSnekHead(snekLand); //reset snek.position
     }else {
     //    GAME OVER
         dedSnek();

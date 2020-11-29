@@ -14,24 +14,15 @@ h2 {
     margin-top: 0;
 }
 
-.header {
-    /*display: flex;*/
-}
-
 .heading {
     display: inline-block;
-    /*margin-bottom: 20px;*/
     background-color: lightblue;
-    /*justify-content: center;*/
-    /*width: 650px;*/
     text-align: center;
 }
 
 .stats {
-    /*display: inline-block;*/
     justify-content: right;
     background-color: #f5b996;
-    /*width: 30%;;*/
     margin-left: 66%;
     padding-left: 18px;
 }
@@ -62,4 +53,12 @@ h2 {
 
 .apple {
     background-color: red;
+}
+
+.ded-1 {
+    background-color: yellow;
+}
+
+.ded-2 {
+    background-color: limegreen;
 }
