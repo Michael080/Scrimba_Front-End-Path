@@ -117,9 +117,6 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded, snekB
                     if(grid.id === itemIdentifier) {
                         this.setSnekPlace(grid, gridRow, board); //store grid and row location of Snek
                         this.snekBody.push(grid);
-                        // console.log('grid: ', grid);
-                        // console.log('gridRow', gridRow);
-                        // console.log('board: ', board);
                     }
                 })
             })
@@ -238,7 +235,6 @@ function ScoreBoard() {
             scoreBoard.snekAte += 1;
             const rate = Math.ceil(this.snekAte * .25);
             this.score = this.snekAte * rate; // calc. score & update
-            console.log('rate: ', this.rate);
         } //<--- end of scoreCalc()
         // Display score and longness
         this.displayScore = () => {
@@ -354,10 +350,8 @@ function Feed(currApples, maxApples, dimensions, currentRound,) {
         }
         if (this.newCoords.y === 0) {
             this.newCoords.y = 1;
-            console.log('change y from 0');
         } else if (this.newCoords.y === 14) {
             this.newCoords.y = 13;
-            console.log('change y from 14');
         }
 
         this.grid = snekLand[this.newCoords.y][this.newCoords.x]; // store coords
@@ -368,21 +362,18 @@ function Feed(currApples, maxApples, dimensions, currentRound,) {
 
     // Get valid coordinates, display to screen, & store nodes on currApples arr.
     this.placeApple = () => {
-        // if
         this.getCoords(); //create new random coords
         toggleClass(this.grid,'apple');
         this.currApples.push(this.grid);
     } //<----- end of placeApple()
 
     this.placeApples = () => { // Place round of apples equal to maxApples value
-        console.log('currentRound --- placeApples(): ', this.currentRound);
         if (this.currentRound === 0) {
             for (let i = 0; i < feed.maxApples; i++) {
                 this.placeApple(); // Place some damn feed for hungry Snek!!!
             }
             this.currentRound = this.maxApples;
         }
-
     } //<----- end of setCoords()
 } //<--------- end of Board
 
@@ -427,9 +418,8 @@ const dedSnek = () => {
     // Flash Snek's dead body yellow
     const bloopDoop = snek.snekBody.forEach((part) => {
         const animateDedSnek = () => {
-            toggleClass(part, 'ded-1')
+            toggleClass(part, 'ded-1');
         }
-
         const wamblam = setInterval(animateDedSnek, 500);
     })
 // Flash Snek's dead body green
@@ -437,13 +427,18 @@ const dedSnek = () => {
         const animateDedSnek = () => {
             toggleClass(part, 'ded-2')
         }
-
         const samblam = setInterval(animateDedSnek, 250);
     })
 
     console.log('Snek Ded :(');
-
     return bloopDoop, bloopy;
+}
+
+const clearFeedArray = () => {
+    if (feed.currentRound === 0) {
+        feed.currApples.splice(0, 5);
+    }
+    return feed.currApples;
 }
 
 const heading = document.querySelector('.heading');
@@ -452,8 +447,10 @@ const heading = document.querySelector('.heading');
 // & update corresponding stats, & place replacement
 const snekEat = (pos) => {
     if (pos.classList.contains('apple')) {
+        let apps = feed.currApples;
         toggleClass(pos, 'apple');
         feed.currentRound -= 1;
+        clearFeedArray();
         feed.placeApples();
         snek.size += 1; // grow Snek!!!
         scoreBoard.scoreCalc();
@@ -467,7 +464,6 @@ function move() {
     const x = snek.position.grid.x;
     const y = snek.position.row.y;
     isValidMove(snek.direction); //validate move
-
     if (snek.restrict.movement === false) { //set snek.position to grid location containing id #snek
         let pos = snek.position.grid.dom;
         let nextPos = snek.newPos(snek.direction);
