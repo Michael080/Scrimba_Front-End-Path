@@ -516,10 +516,23 @@ function goTimer(ref, timerType, comm, speed = snek.speed) {
 const snekControl = function(event) {
     snek.direction = event.slice(5, input.length - 1); //remove 'Arrow' from user input string
 }
+// Check if user input is opposite to current snek-direction & return !bool
+const checkOpposite = (input) => {
+    const opposites = {
+        'left' : 'right',
+        'right' : 'left',
+        'up' : 'down',
+        'down' : 'up'
+    }
+    const invalid = opposites[input] === snek.direction;
+
+    return !invalid;
+}
 
 // Check formatted input for valid values => 'right, left, up, down'
 function validateInput(input) {
     const valid = ['right', 'left', 'up', 'down'];
+
     return valid.includes(input);
 }
 
@@ -528,7 +541,9 @@ window.addEventListener('keydown', function(event) {
     let eventStr = event.key;
     const formatStr = eventStr.slice(5, eventStr.length).toLowerCase();
     // log error if input is not an arrow key otherwise update snek.direction
-    if(validateInput(formatStr)) {
+    checkOpposite(formatStr);
+    //TODO --- Enhance - trigger buzzer on invalid input
+    if(validateInput(formatStr) && checkOpposite(formatStr)) {
         snek.direction = formatStr;
     } else {
         console.log('invalid input: ', event.key);
