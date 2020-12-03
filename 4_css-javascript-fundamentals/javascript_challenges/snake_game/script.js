@@ -367,7 +367,21 @@ function Feed(currApples, maxApples, dimensions, currentRound,) {
         this.currApples.push(this.grid);
     } //<----- end of placeApple()
 
+    this.clearRound = () => this.currentRound = 0; // reset to 0
+
+    // Check if board is clear due to 'glitch' and reset currentRound to = 0
+    this.checkRound = () => {
+        let count = 0;
+        snekLand.forEach(arr => {
+            arr.forEach(item => item.classList.contains('apple') ? count += 1 : 'no apple here...');
+            return count
+        });
+
+        count === 0 ? this.clearRound() : 'NO GLITCH...bitch';
+    }
+
     this.placeApples = () => { // Place round of apples equal to maxApples value
+        this.checkRound();
         if (this.currentRound === 0) {
             for (let i = 0; i < feed.maxApples; i++) {
                 this.placeApple(); // Place some damn feed for hungry Snek!!!
@@ -379,7 +393,7 @@ function Feed(currApples, maxApples, dimensions, currentRound,) {
 
 // CREATE NEW FEED & place max-apples
 const feed = new Feed();
-feed.currentRound = 0; // set to 0 for first-round
+feed.clearRound(); // set to 0 for first-round
 feed.placeApples();
 
 
@@ -450,8 +464,6 @@ const snekEat = (pos) => {
         let apps = feed.currApples;
         toggleClass(pos, 'apple');
         feed.currentRound -= 1;
-        //TODO --- Place apples 'glitch' - fix it dammit
-        // console.log('currentRound: ', feed.currentRound);
         clearFeedArray();
         feed.placeApples();
         snek.size += 1; // grow Snek!!!
