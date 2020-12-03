@@ -54,8 +54,9 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded, snekB
         // Prevent producing true evaluation of greatX when snek is moving 'down-map'
         this.direction === 'right' ? (greatX = {greatX: grid > xBound}) : (greatX = {greatX: false});
         const lessY = {lessY: row < 0};
-        const greatY = {greatY: row > yBound};
-        let allResults = [lessX, greatX, lessY, greatY]; // Store results
+        const greatY = {greatY: row >= yBound};
+        // Store results:
+        let allResults = [lessX, greatX, lessY, greatY];
         let finalResult = new Array;
         // Takes array of objects and returns any object with property value: true
         for (var index in allResults) {
@@ -305,7 +306,6 @@ function initialDraw() {
     delete snek.initialTailPos; //remove property from Snek object
 }
 
-
 // ============================     Feed Ssssnek     ===========================
 // Place apples on board to enable Snek's insatiable hunger:
 function Feed(currApples, maxApples, dimensions, currentRound,) {
@@ -450,6 +450,8 @@ const snekEat = (pos) => {
         let apps = feed.currApples;
         toggleClass(pos, 'apple');
         feed.currentRound -= 1;
+        //TODO --- Place apples 'glitch' - fix it dammit
+        // console.log('currentRound: ', feed.currentRound);
         clearFeedArray();
         feed.placeApples();
         snek.size += 1; // grow Snek!!!
