@@ -396,7 +396,7 @@ function animateSnekWin() {
     changeMessage('initial'); // display 'success message' on modal
     message2.appendChild(levelInfo); // display level-info on modal
     // Display 'click screen to proceed' on modal
-    setTimeout(() => changeMessage('final'), 500);
+    setTimeout(() => changeMessage('final'), 3000);
 
     // Create span for displaying current level-info
     function createLevelInfo() {
