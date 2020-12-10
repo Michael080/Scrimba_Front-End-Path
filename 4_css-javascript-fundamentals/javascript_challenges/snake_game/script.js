@@ -1,5 +1,8 @@
-// const makeBoard = require('./gameboard/makeBoard.js');
+// DOM Nodes:
+const modal = document.querySelector('.modal');
 const areaGrid = document.querySelectorAll('.grid');
+
+let moveTimer; // Will be used for setInterval(move)
 
 // Take areaGrid and slice into sections based on desired 'gameboard' width
 const makeBoard = (array, tempBoard, section = 10) => {
@@ -15,7 +18,7 @@ const arrayGrid = new Array;
 const snekLand = makeBoard(tempGrid, arrayGrid);
 
 // Create Snek prototype
-function Snek(size, position, speed, direction, restrict, boundCheck, ded, snekBody) {
+function Snek(size, position, speed, direction, restrict, boundCheck, ded, snekBody, dedTimers) {
     this.size = size;
     this.position = position;
     this.speed = 500;
@@ -27,6 +30,7 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded, snekB
     this.boundCheck = boundCheck;
     this.ded = false;
     this.snekBody = []; // store DOM nodes for entire Snek
+    this.dedTimers = {};
 
 
     this.setSnekPlace = function (snekGrid, snekRow, gameBoard) {
@@ -122,7 +126,6 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded, snekB
                 })
             })
         } else if (type === 'class') {
-
             board.forEach(gridRow => {
                 gridRow.forEach(grid => {
                     if(grid.classList.contains(itemIdentifier)) {
@@ -141,8 +144,9 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded, snekB
         //             }
         //         });
         //     }
-        this.find(board, 'snek', 'id')}
-        // )}
+        this.find(board, 'snek', 'id')
+        }
+
 //TODO --- REMOVE? - May not need findSnekAll
     // this.findSnekAll = function () {
     //     board.forEach
@@ -212,41 +216,87 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded, snekB
 
         return posSwitch[dir];
     } // <----- end of newPos()
+
  } // <======== end of Snek prototype
 
+const setSnekMoves = () => {
+    Snek.prototype.moves = {
+        left: function () {
+            return snek.position.grid.x - 1;
+        },
+        right: function () {
+            return snek.position.grid.x + 1;
+        },
+        up: function () {
+            return snek.position.row.y - 1;
+        },
+        down: function () {
+            return snek.position.row.y + 1;
+        }
+    }
+}
 
+setSnekMoves();
  // ----------------------------     Create Snek     ----------------------------
-// Create snek, set position and moves
-const snek = new Snek (3,3000,500,'left'); //new Snek
+
+let snek = new Snek (3,3000,500,'left'); //new Snek
 snek.findSnekHead(snekLand); //set snek.position
 snek.firstMove = true;
-
 
 // ============================     Score Snek    ===========================
 // Snek-score increases each apple and score-value goes up each iteration
 function ScoreBoard() {
+    this.level = 1,
+    this.advanceToNextLevel = false,
     this.score= 0,
-        this.snekAte= 0,
-        this.domNodes = {
-            score: document.querySelector('.score'),
-            length: document.querySelector('.longness')
-        }
-        // Increase store on Snek feedings & increase point value each iteration
-        this.scoreCalc = () => {
-            scoreBoard.snekAte += 1;
-            const rate = Math.ceil(this.snekAte * .25);
-            this.score = this.snekAte * rate; // calc. score & update
-        } //<--- end of scoreCalc()
-        // Display score and longness
-        this.displayScore = () => {
-            this.domNodes.score.textContent = this.score;
-            this.domNodes.length.textContent = snek.size;
-        } //<--- end of displayScore()
-} //<----- end of ScoreBoard
+    this.snekAte= 0,
+    this.domNodes = {
+        level: document.querySelector('.level'),
+        score: document.querySelector('.score'),
+        longness: document.querySelector('.longness')
+    }
+
+    //TODO --- SEE BELOW && SEE MATCHING TODO
+    //TODO --- REFACTOR - create generic animate snek method on snek object for dedSnek and levelUp()
+    this.levelUp = () => {
+        this.level += 1;
+        this.advanceToNextLevel = true;
+        clearInterval(moveTimer); // stop snek-movement
+    }
+
+    this.levelCalc = () => {
+        (snek.size % 5 === 0) ?  this.levelUp() : this.level = this.level;
+    };
+
+    // Increase store on Snek feedings & increase point value each iteration
+    this.scoreCalc = () => {
+        scoreBoard.snekAte += 1;
+        const rate = Math.ceil(this.snekAte * .25);
+        this.score = this.snekAte * rate; // calc. score & update
+        this.levelCalc();
+    } //<--- end of scoreCalc()
+
+    this.advanceLevel = () => {
+        this.advanceToNextLevel ? animateSnekWin() : 'advanceToNextLevel === false';
+        this.advanceToNextLevel = false; // reset bool
+    } //<--- end of advanceLevel()
+
+    // Display score and longness
+    this.displayScoreboard = () => {
+        this.domNodes.level.textContent = this.level;
+        this.domNodes.score.textContent = this.score;
+        this.domNodes.longness.textContent = snek.size;
+    } //<--- end of displayScoreboard()
+
+    this.scoreAndLevelUpdate = () => {
+        this.displayScoreboard();
+        this.advanceLevel();
+    } //<--- end of scoreAndLevelUpdate()
+} //<======== end of ScoreBoard
 
 // Create new ScoreBoard & display initial score/longness values:
 const scoreBoard = new ScoreBoard();
-scoreBoard.displayScore();
+scoreBoard.scoreAndLevelUpdate();
 
 
 // ----------------------------     Display Snek     ----------------------------
@@ -306,6 +356,99 @@ function initialDraw() {
     delete snek.initialTailPos; //remove property from Snek object
 }
 
+
+// ----------------------------     Reset/Remove Snek     ----------------------------
+const removeSnekHead = () => toggleID(snek.position.grid.dom);
+
+// 'Move' Snek from last position to new starting position and update corresponding
+// position-properties on Snek object
+const resetSnekPosition = (newSnek) => {
+    snek.findSnekHead(snekLand);
+    const startPos = newSnek.position.grid.dom;
+    const fadeOut = () => startPos.classList.toggle('tail');
+    setTimeout(fadeOut, newSnek.speed * newSnek.size); // removes 'extra' snek part (bug)
+}
+
+// Find all grid-elems containing class 'tail' and remove from gameboard
+const removeTail = (snekToBeRemoved) => {
+    snekToBeRemoved.snekBody.forEach((part) => {
+        part.classList.contains('tail') ? toggleClass(part, 'tail') : 'pass';
+    })
+}
+
+// Remove Snek from board and reset position w/ resetSnekPosition()
+const resetRemoveSnek = (oldSnek, newSnek) => {
+    removeSnekHead();
+    removeTail(oldSnek);
+    return resetSnekPosition(newSnek);
+}
+
+
+// ----------------------------     Level Transition Utils     ----------------------------
+const changeText = (node, text) => node.textContent = text;
+
+// Display modal that instructs user to click to proceed to next level
+function animateSnekWin() {
+    // Contains instructions 'click screen to proceed'
+    const message1 = document.querySelector('.win-message-1');
+    // Contains instructions 'Success!!!' etc,.
+    const message2 = document.querySelector('.win-message-2');
+    const levelInfo = createLevelInfo(); // Create span for displaying current level-info
+    // Display modal w/ 'success message'/level-info for a moment then transition
+    // to 'click screen to proceed':
+    toggleClass(modal, 'hidden'); // display modal
+    changeMessage('initial'); // display 'success message' on modal
+    message2.appendChild(levelInfo); // display level-info on modal
+    // Display 'click screen to proceed' on modal
+    setTimeout(() => changeMessage('final'), 500);
+
+    // Create span for displaying current level-info
+    function createLevelInfo() {
+        let levelInfo = document.createElement('span');
+        levelInfo.classList.add('level-info');
+        return levelInfo;
+    }
+
+    // Create and display 'initial'/'final' messages and run initializeGame() on-click
+    function changeMessage(command) {
+        const commands = {
+            'initial': () => {
+                changeText(levelInfo, scoreBoard.level);
+                changeText(message1, 'Success!!!');
+                changeText(message2, 'Prepare for Level ');
+            },
+            'final': () => {
+                changeText(levelInfo, '');
+                changeText(message1, 'click screen to proceed...');
+                changeText(message2, '');
+                return window.addEventListener('click', initializeGame);
+            }
+        }
+        return commands[command]();
+    }// <----- end of changeMessage()
+}// <-------- end of animateSnekWin()
+
+const hideModal = () => {
+    modal.classList.contains('hidden') ? 'initializing game --- modal is hidden' : toggleClass(modal, 'hidden');
+}
+
+// Remove snek from gameboard, place new snek, update scoreboard, and start game
+function initializeGame(){
+    hideModal();
+    // Create snek, set position, & moves & remove 'old-snek'
+    const oldSnek = snek;
+    let snekArray = newSnek();
+    snek = snekArray[1]; // assign snek to new 'instance' of Snek object
+    setSnekMoves(); // add moves object to prototype
+    resetRemoveSnek(oldSnek, snek);
+    window.removeEventListener('click', initializeGame);
+    scoreBoard.displayScoreboard(); // update scoreboard
+    snek.speed -= snek.speed * (.10 * (scoreBoard.level - 1)); // speed-up snek
+    moveTimer = setInterval(move, snek.speed);//set movement based on snek.speed
+    return snek;
+}
+
+
 // ============================     Feed Ssssnek     ===========================
 // Place apples on board to enable Snek's insatiable hunger:
 function Feed(currApples, maxApples, dimensions, currentRound,) {
@@ -328,8 +471,9 @@ function Feed(currApples, maxApples, dimensions, currentRound,) {
             this.grid.id === 'snek'
         ];
         return !results.includes(true); // return true if valid placement
-    }//<----- end of validPlacement()
+    } //<----- end of validPlacement()
 
+// TODO --- REMOVE - temporary settings for getCoords() & uncomment here:
     // Generate random coords, validate that coords of apples don't conflict
     // w/ Snek location and store on Feed object
     // this.getCoords = () => {
@@ -348,6 +492,7 @@ function Feed(currApples, maxApples, dimensions, currentRound,) {
             x: this.randomRange(9),
             y: this.randomRange(14)
         }
+
         if (this.newCoords.y === 0) {
             this.newCoords.y = 1;
         } else if (this.newCoords.y === 14) {
@@ -398,23 +543,6 @@ feed.placeApples();
 
 
 // ----------------------------     Move Snek     ----------------------------
-// * TODO---Implement in prototype & use in outOfBound() //
-// Calc next grid position based on move direction and current position
-snek.moves = {
-    left: function () {
-        return snek.position.grid.x - 1;
-    },
-    right: function () {
-        return snek.position.grid.x + 1;
-    },
-    up: function () {
-        return snek.position.row.y - 1;
-    },
-    down: function () {
-        return snek.position.row.y + 1;
-    }
-}
-
 // Validate move is within gameboard boundaries
 const isValidMove = function (dir) {
     const newPos = snek.moves[dir]();
@@ -428,24 +556,24 @@ const dedSnek = () => {
     snek.find(snekLand, 'snek', 'id');
     snek.find(snekLand, 'tail', 'class');
     snek.ded = true;
-    clearInterval(timer); // stop move()-interval
+    clearInterval(moveTimer); // stop move()-interval
     // Flash Snek's dead body yellow
+    //TODO --- REFACTOR - create generic animate snek method on snek object for dedSnek and levelUp()
     const bloopDoop = snek.snekBody.forEach((part) => {
         const animateDedSnek = () => {
             toggleClass(part, 'ded-1');
         }
-        const wamblam = setInterval(animateDedSnek, 500);
+        snek.dedTimers.wamblam = setInterval(animateDedSnek, 500);
     })
 // Flash Snek's dead body green
     let bloopy = snek.snekBody.forEach((part) => {
         const animateDedSnek = () => {
             toggleClass(part, 'ded-2')
         }
-        const samblam = setInterval(animateDedSnek, 250);
+        snek.dedTimers.samblam = setInterval(animateDedSnek, 250);
     })
 
     console.log('Snek Ded :(');
-    return bloopDoop, bloopy;
 }
 
 const clearFeedArray = () => {
@@ -468,31 +596,38 @@ const snekEat = (pos) => {
         feed.placeApples();
         snek.size += 1; // grow Snek!!!
         scoreBoard.scoreCalc();
-        scoreBoard.displayScore();
+        scoreBoard.scoreAndLevelUpdate();
     } else if (pos.classList.contains('tail')) {
         dedSnek();
+        // return newSnek();
     }
 }
 
+// Create new Snek, place snek-head on gameboard
+function newSnek() {
+    snek = new Snek (3,3000,500,'left'); //new Snek
+    snekLand[4][4].id = 'snek'; // place on gameboard
+    // update snek.position w/ new location
+    snek.find(snekLand, 'snek', 'id');
+    let newSnekArray = [];
+    newSnekArray.push(setSnekMoves());
+    newSnekArray.push(snek);
+    return newSnekArray;
+}
+
 function move() {
-    const x = snek.position.grid.x;
-    const y = snek.position.row.y;
     isValidMove(snek.direction); //validate move
     if (snek.restrict.movement === false) { //set snek.position to grid location containing id #snek
         let pos = snek.position.grid.dom;
         let nextPos = snek.newPos(snek.direction);
-        snekEat(nextPos); // if apples coincide update score, snekSize, & display
         //set nextPos w/ id #snek, remove #snek from pos & swap w/ class .tail
         toggleSnek(pos, nextPos);
+        snekEat(nextPos); // if apples coincide update score, snekSize, & display
         snek.findSnekHead(snekLand); //reset snek.position
-    }else {
+    } else {
     //    GAME OVER
-        dedSnek();
+       dedSnek();
     }
-}
-
-function clearTimer(timer) {
-    return clearInterval(timer);
 }
 
 function goTimer(ref, timerType, comm, speed = snek.speed) {
@@ -516,6 +651,7 @@ function goTimer(ref, timerType, comm, speed = snek.speed) {
 const snekControl = function(event) {
     snek.direction = event.slice(5, input.length - 1); //remove 'Arrow' from user input string
 }
+
 // Check if user input is opposite to current snek-direction & return !bool
 const checkOpposite = (input) => {
     const opposites = {
@@ -524,15 +660,14 @@ const checkOpposite = (input) => {
         'up' : 'down',
         'down' : 'up'
     }
-    const invalid = opposites[input] === snek.direction;
 
+    const invalid = opposites[input] === snek.direction;
     return !invalid;
 }
 
 // Check formatted input for valid values => 'right, left, up, down'
 function validateInput(input) {
     const valid = ['right', 'left', 'up', 'down'];
-
     return valid.includes(input);
 }
 
@@ -550,8 +685,15 @@ window.addEventListener('keydown', function(event) {
     }
 });
 
+function startGame() {
+    let timer = setInterval(move, snek.speed); //set movement based on snek.speed
+    return timer;
+}
+
+
 // ----------------------------     Start Game     ----------------------------
-let timer = setInterval(move, snek.speed); //set movement based on snek.speed
+moveTimer = startGame();
+let blammo = moveTimer;
 
 //--------------------------------------------------
 // TESTS:

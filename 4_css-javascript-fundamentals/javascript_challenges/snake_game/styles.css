@@ -16,7 +16,7 @@ h2 {
 
 .heading {
     display: inline-block;
-    background-color: lightblue;
+    background-color: #50a7c5;
     text-align: center;
 }
 
@@ -40,8 +40,31 @@ h2 {
     background-color: black;
     width: 30px;
     height: 30px;
-
 }
+
+.modal {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 18%;
+    width: 63%;
+    padding: 15px;
+    min-height: 165px;
+    background-color: #50a7c5;
+}
+
+.win-message-1, .win-message-2 {
+    font-size: 40px;
+    width: 100%;
+    text-align: center;
+}
+
+/*.win-message-1 {*/
+/*}*/
+
+/*.win-message-2 {*/
+/*    text-align: left;*/
+/*}*/
 
 #snek {
     background-color: #634cbf;
@@ -61,4 +84,8 @@ h2 {
 
 .ded-2 {
     background-color: limegreen;
+}
+
+.hidden {
+    display: none;
 }
