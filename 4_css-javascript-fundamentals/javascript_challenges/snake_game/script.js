@@ -147,10 +147,6 @@ function Snek(size, position, speed, direction, restrict, boundCheck, ded, snekB
         this.find(board, 'snek', 'id')
         }
 
-//TODO --- REMOVE? - May not need findSnekAll
-    // this.findSnekAll = function () {
-    //     board.forEach
-    // }
     //    TODO --- Bug - snek not responsive to input at top and bottom rows newPos not running?
     // Returns DOM element corresponding to left/right/up/down
     this.newPos = function (dir) {
@@ -412,6 +408,8 @@ function animateSnekWin() {
     // Create and display 'initial'/'final' messages and run initializeGame() on-click
     function changeMessage(command) {
         const commands = {
+            //TODO --- #29 - Enhance - Add sound effects: trigger victory sound
+            //TODO --- #36 - Enhance - Create alert upon Game Over events: Display 'Game Over' etc,.
             'initial': () => {
                 changeText(levelInfo, scoreBoard.level);
                 changeText(message1, 'Success!!!');
@@ -677,7 +675,7 @@ window.addEventListener('keydown', function(event) {
     const formatStr = eventStr.slice(5, eventStr.length).toLowerCase();
     // log error if input is not an arrow key otherwise update snek.direction
     checkOpposite(formatStr);
-    //TODO --- Enhance - trigger buzzer on invalid input
+    //TODO --- #29 - Enhance - Add sound effects: trigger buzzer on invalid input
     if(validateInput(formatStr) && checkOpposite(formatStr)) {
         snek.direction = formatStr;
     } else {
