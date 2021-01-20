@@ -1,0 +1,462 @@
+/* =================
+General
+================= */
+
+body {
+    font-family: Ubuntu;
+    font-weight: 300;
+    line-height: 1.2;
+    color: #707070;
+    margin: 0;
+}
+
+hr {
+    display: block;
+    color: #EBEBEB;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 2rem;
+}
+
+h1,
+h2,
+p {
+    margin-top: 0;
+}
+
+.description h2,
+img,
+.article-info {
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 900px) {
+    .aside-row hr {
+        border: 1px solid #EBEBEB;
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 675px) {
+    .title,
+    .sub-title,
+    .nav-link {
+        margin: 0 auto;
+    }
+}
+
+
+/* =================
+Typography
+================= */
+
+html {
+    font-size: 85%;
+}
+
+@media (min-width: 800px) {
+    html {
+        font-size: 100%;
+    }
+}
+
+strong {
+    font-weight: 700;
+}
+
+.title {
+    font-family: Lora;
+    font-weight: 400;
+    font-size: 3.375rem;
+    color: #143774;
+    margin-bottom: .10em;
+}
+
+.sub-title {
+    font-size: 1rem;
+    color: #1792d2;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+/* */
+.description {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.description p {
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 675px) {
+    .title {
+        font-size: 2.5rem;
+        text-align: center;
+    }
+
+    .sub-title {
+        font-size: .75rem;
+        text-align: center;
+    }
+}
+
+@media (min-width: 800px) {
+    html {
+        font-size: 95%;
+    }
+}
+
+.nav-link {
+    min-width: 8rem;
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    min-width: 490px;
+    color: #707070;
+}
+
+
+
+.nav-link {
+    list-style-type: none;
+    text-transform: uppercase;
+}
+
+.nav-link a {
+    font-weight: 700;
+    color: #707070;
+}
+
+#recent-posts-nav {
+    min-width: 3rem;
+}
+
+@media (min-width: 900px) {
+    /* Prevent 'stacking' of text */
+    #recent-posts-nav {
+        min-width: 9rem;
+    }
+}
+
+.current-page {
+    border-bottom: 2px solid #707070;
+}
+
+.article-info {
+    font-size: .85rem;
+}
+
+h2,
+.recent-posts  a {
+    font-family: Lora;
+    color: #143774;
+}
+
+.aside-row h2 {
+    font-family: Ubuntu;
+}
+
+.about-me p{
+    font-size: .85rem;
+}
+
+.description a,
+aside,
+.recent-posts  a,
+.nav-link a,
+.about-me a,
+.continue {
+    text-decoration: none;
+}
+
+.continue,
+.sub-title,
+.aside-row h2 {
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.light {
+    color: #1792D2;
+}
+
+
+/* =================
+Layout
+================= */
+
+header {
+    background-color: #f8f8f8;
+    width: 100%;
+    padding-top: 4em;
+    padding-bottom: 4em;
+    margin-bottom: 4rem;
+}
+
+nav:last-child {
+    margin-right: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.container {
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.col-main {
+    display: flex;
+    flex-direction: column;
+}
+
+.article {
+    margin-bottom: 2rem;
+}
+
+@media  (min-width: 900px) {
+    .container {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 2rem;
+    }
+
+    .article {
+        margin-bottom: 3rem;
+    }
+
+    .recent-posts .article {
+        margin-bottom: 1rem;
+    }
+
+    #simple-decorations {
+        margin-bottom: 0;
+    }
+
+    .aside-row p {
+        margin-bottom: 0;
+    }
+}
+
+
+ul {
+    padding: 0;
+}
+
+/* TODO --- REFACTOR - Crop pic and get rid of this shit */
+/* ---------  about-me  ---------*/
+@media (max-width: 950px) {
+    .about-me {
+        height: 265px;
+    }
+
+    .about-me img {
+        bottom: 300px;
+    }
+}
+
+@media (max-width: 899px) {
+    .about-me {
+        height: 530px;
+        overflow: hidden;
+    }
+
+    .about-me img {
+        bottom: 375px;
+        position: relative;
+        display: grid;
+        object-fit: cover;
+    }
+}
+
+@media (max-width: 761px) {
+    .about-me {
+        height: 450px;
+    }
+
+    .about-me img {
+        bottom: 300px;
+    }
+}
+
+@media (max-width: 660px) {
+    .about-me {
+        height: 400px;
+    }
+
+    .about-me img {
+        bottom: 300px;
+    }
+}
+
+@media (max-width: 600px) {
+    .about-me {
+        height: 350px;
+    }
+
+    .about-me img {
+        bottom: 275px;
+    }
+}
+
+@media (max-width: 526px) {
+    .about-me {
+        height: 305px;
+    }
+
+    .about-me img {
+        bottom: 225px;
+    }
+}
+
+@media (max-width: 450px) {
+    .about-me {
+        height: 265px;
+    }
+}
+
+/* ---------  navigation  ---------*/
+.container-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 675px) {
+    .site-title,
+    .title,
+    .sub-title,
+    ul,
+    li,
+    .nav-link
+    {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .nav-link {
+        margin-bottom: 2rem;
+    }
+
+    .container-nav {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+
+    nav ul {
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    li {
+        text-align: center;
+    }
+}
+
+@media  (min-width: 685px) {
+    .nav-link {
+        padding-bottom: .25em;
+        margin-left: 2em;
+    }
+
+    nav {
+        justify-content: space-evenly;
+    }
+}
+
+
+@media  (min-width: 900px) {
+    .col-main {
+        width: 32rem;
+        max-width: 42rem;
+        margin-right: 4rem;
+        flex-grow: 2;
+    }
+
+    .aside-row {
+        max-width: 10rem;
+    }
+
+    .article-main {
+        margin-bottom: 1rem;
+    }
+
+    .article-sub {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .thumbnail {
+        width: 9.5rem;
+        overflow: hidden;
+        margin-right: 2rem;
+    }
+
+    .description {
+        width: 75%;
+    }
+}
+
+/*  hover & focus states  */
+nav a:hover,
+nav a:focus {
+    color: #1792d2;
+}
+
+.current-page:hover {
+    color: #707070;
+}
+
+/* ---------  aside  ---------*/
+@media  (min-width: 900px) {
+    aside {
+        box-sizing: border-box;
+
+        height: 64rem;
+        margin-right: 0;
+    }
+
+    .aside-row {
+        border: 2rem solid #EBEBEB;
+        padding: 2rem;
+        margin-bottom: 4rem;
+    }
+
+    .about-me {
+        min-height: 22rem;
+    }
+}
+
+/* ---------  images  ---------*/
+img {
+    width: 100%;
+}
+
+@media  (min-width: 900px) {
+    .thumbnail img {
+        position: relative;
+        right: 80px;
+        display: grid;
+        width: 300px;
+        object-fit: cover;
+    }
+
+    .potted img{
+        position: relative;
+        left: 0px;
+        display: grid;
+        width: 300px;
+        object-fit: cover;
+    }
+}
