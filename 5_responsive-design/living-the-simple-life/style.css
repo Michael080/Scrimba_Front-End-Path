@@ -15,7 +15,7 @@ hr {
   color: #ebebeb;
   width: 100%;
   margin-top: 0;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 h1,
@@ -27,17 +27,8 @@ p {
 .description h2,
 img,
 .image,
-.article-info,
-.about-main,
-.thumbnail-aside {
+.article-info {
   margin-bottom: 1rem;
-}
-
-@media (min-width: 900px) {
-  .aside-row hr {
-    border: 1px solid #ebebeb;
-    margin-bottom: 1rem;
-  }
 }
 
 @media (max-width: 675px) {
@@ -182,6 +173,7 @@ aside,
   color: #1792d2;
 }
 
+
 /* =================
 Layout
 ================= */
@@ -200,23 +192,10 @@ nav:last-child {
 
 .container {
   max-width: 1200px;
-  margin: 0 auto;
-}
-
-.container {
   margin-left: 2rem;
   margin-right: 2rem;
 }
 
-.col-main {
-  display: flex;
-  flex-direction: column;
-}
-
-.article {
-  margin-bottom: 1rem;
-}
-/* TODO --- Break-up - Place rules separate and below corresponding selectors */
 @media (min-width: 900px) {
   .container {
     display: flex;
@@ -224,29 +203,50 @@ nav:last-child {
     margin: 0 2rem;
   }
 
+  .description {
+    width: 75%;
+  }
+}
+
+.col-main {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 900px) {
+  .col-main {
+    width: 32rem;
+    max-width: 42rem;
+    margin-right: 4rem;
+    flex-grow: 2;
+  }
+}
+
+.article {
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 900px) {
+  .article-main {
+    margin-bottom: 1rem;
+  }
+
   .article {
     margin-bottom: 3rem;
+  }
+
+  .article-sub {
+    display: flex;
+    justify-content: space-between;
   }
 
   .recent-posts .article {
     margin-bottom: 1rem;
   }
-
-  #simple-decorations {
-    margin-bottom: 0;
-  }
-
-  .aside-row p {
-    margin-bottom: 0;
-  }
 }
 
 ul {
   padding: 0;
-}
-
-.about-aside {
-  margin-bottom: 1rem;
 }
 
 /* ---------  navigation  ---------*/
@@ -256,9 +256,24 @@ ul {
   align-items: baseline;
 }
 
+@media (max-width: 675px) {
+  .container-nav {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
 nav ul {
   display: flex;
   justify-content: space-between;
+}
+
+@media (max-width: 675px) {
+  nav ul {
+    flex-direction: column;
+    justify-content: space-around;
+  }
 }
 
 @media (max-width: 675px) {
@@ -280,17 +295,6 @@ nav ul {
     margin-bottom: 2rem;
   }
 
-  .container-nav {
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-  }
-
-  nav ul {
-    flex-direction: column;
-    justify-content: space-around;
-  }
-
   li {
     text-align: center;
   }
@@ -304,38 +308,6 @@ nav ul {
 
   nav {
     justify-content: space-evenly;
-  }
-}
-
-@media (min-width: 900px) {
-  .col-main {
-    width: 32rem;
-    max-width: 42rem;
-    margin-right: 4rem;
-    flex-grow: 2;
-  }
-
-  .aside-row {
-    max-width: 10rem;
-  }
-
-  .article-main {
-    margin-bottom: 1rem;
-  }
-
-  .article-sub {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .thumbnail {
-    width: 9.5rem;
-    overflow: hidden;
-    margin-right: 2rem;
-  }
-
-  .description {
-    width: 75%;
   }
 }
 
@@ -356,6 +328,10 @@ nav a:focus {
 }
 
 /* ---------  aside  ---------*/
+.about-aside {
+  margin-bottom: 1rem;
+}
+
 @media (min-width: 900px) {
   aside {
     box-sizing: border-box;
@@ -363,98 +339,123 @@ nav a:focus {
     height: 64rem;
     margin-right: 0;
   }
+
+  .aside-row {
+    max-width: 10rem;
+  }
+
+  .aside-row p {
+    margin-bottom: 0;
+  }
 }
 
 /* ---------  images  ---------*/
-/* TODO --- MOVE RULE - This rule will need to go in .image at some point */
 img {
   width: 100%;
 }
 
-/* universal class intended for ALL images */
-
-.image {
-    background-repeat: no-repeat;
-    background-size: 100%;
-}
-
-/* TODO --- Appl to div!!! */
-.thumbnail {
-  width: 100%;
-  min-height: 242px;
-}
-
-.thumbnail-aside {
-  min-height: 87px;
-}
-
-.temp-dimsum-thumbnail1,
-.temp-work-thumbnail1 {
-  background-position: 20% 85%;
-  background-size: 105%;
-}
-
-.temp-work-thumbnail1 {
-  width: 100%;
-  height: 242px;
-}
-
-.dimsum {
-  background-image: url(images/charles-deluvio-D-vDQMTfAAU-unsplash.jpg);
-}
-
-.temp-dimsum-thumbnail1 {
-  background-size: 115%;
-  background-position: 65% 50%;
-}
-
-.temp-dimsum-thumbnail1 {
-  height: 242px;
-}
-
-
-.temp-decorations-thumbnail1 {
-  background-position: 0 30%;
-  background-size: 100%;
-  height: 242px;
-  width: 100%;
-}
-
-.dimsum-aside {
-  background-position: 85% 50%;
+/* Use for ALL 'about's !!! */
+.about-image {
+  background-image: url(images/mike-baker-3Y366aqddJ0-unsplash.jpg);
 }
 
 .desk {
   background-image: url(images/bench-accounting-nvzvOPQW0gc-unsplash.jpg);
 }
 
-/* TODO --- CONSOLIDATE!!! - find 'matches', create universal-class */
-
-@media (min-width: 900px) {
-  .temp-decorations-thumbnail1 {
-  background-size: 225%;
-  background-position: 7% 35%;
-
-  width: 138px;
-  }
-}
-
-.desk-aside {
-  background-position: 0 90%;
+.dimsum {
+  background-image: url(images/charles-deluvio-D-vDQMTfAAU-unsplash.jpg);
 }
 
 .plant {
   background-image: url(images/sarah-dorweiler-x2Tmfd1-SgA-unsplash.jpg);
 }
 
-.plant-aside {
-  background-position: 0 50%;
+/* Applied to ALL background-images */
+.background-image
+ {
+  background-size: 100%;
+  margin-bottom: 1rem;
+  background-repeat: no-repeat;
+}
+
+.thumbnail {
+  min-height: 242px;
+}
+
+@media (min-width: 900px) {
+  .thumbnail {
+    overflow: hidden;
+    margin-right: 2rem;
+    width: 198px;  
+  }
+}
+
+.dimsum-thumbnail,
+.work-thumbnail {
+  background-position: 20% 85%;
+  background-size: 105%;
+}
+
+.dimsum-thumbnail {
+  background-size: 115%;
+  background-position: 65% 50%;
+}
+
+@media (min-width: 900px) {
+  .dimsum-thumbnail {
+    background-position: 52% 52%;
+  }
+}
+
+@media (min-width: 900px) {
+  .work-thumbnail {
+    background-position: 50% 80%;
+  }
+}
+
+.deco-thumbnail {
+  background-position: 0 30%;
+  height: 242px;
+}
+
+@media (min-width: 900px) {
+  .deco-thumbnail {
+  background-position: 7% 35%;
+  }
+}
+
+@media (min-width: 900px) {
+  .dimsum-thumbnail,
+  .work-thumbnail,
+  .deco-thumbnail {
+    background-size: 180%;
+  }
+}
+
+.about-main {
+  background-position: 0 55%;
 }
 
 .about-aside {
-  background-image: url(images/mike-baker-3Y366aqddJ0-unsplash.jpg);
   background-position: 0 50%;
   height: 133px;
+}
+
+.thumbnail-aside {
+  min-height: 87px;
+}
+
+.dimsum-aside {
+  background-position: 85% 50%;
+}
+
+.desk-aside {
+  background-position: 0 90%;
+}
+
+.plant-aside {
+  background-position: 0 50%;
 }
 
 .crop-y {
@@ -462,72 +463,8 @@ img {
   height: 308px;
 }
 
-/* Use for ALL 'about's !!! */
-.about-image {
-    background-image: url(images/mike-baker-3Y366aqddJ0-unsplash.jpg);
-}
-
-/* TODO --- Try implementing this on other 'crop-y's and see if it works */
-/* *if works on others rename 'mid-image' or something */
-.about-main {
-  background-position: 0 55%;
-  background-size: 100%;
-}
-
-   @media (min-width: 900px) {    
-    /* TODO --- Generalize - 
-    Apply to all thumbnails? */
-    .thumbnail {
-      background-size: 100%;
-      width: 138px;
-      height: 242px;
-    }
-
-    .temp-dimsum-thumbnail1 {
-      background-size: 250%;
-      background-position: 52% 52%;
-      width: 138px;
-      height: 242px;
-    }
-
-    .temp-work-thumbnail1 {
-      width: 138px;
-      height: 242px;
-      background-size: 250%;
-      background-position: 50% 80%;
-    }
-
-    .thumbnail-aside {
-      min-height: 100px;
-    }
-    
-    .crop-y {
-      width: 100%;
-      height: 308px;
-    }
-}
-
-@media (min-width: 900px) {
-  .thumbnail img {
-    position: relative;
-    right: 80px;
-    display: grid;
-    width: 300px;
-    object-fit: cover;
-  }
-
-  .potted img {
-    position: relative;
-    left: 0px;
-    display: grid;
-    width: 300px;
-    object-fit: cover;
-  }
-
-  .temp-dimsum-thumbnail2,
-  .temp-work-thumbnail2,
-  .temp-decorations-thumbnail2 {
-    width: 100%;
-    max-height: 100px;
+@media (min-width: 900px) {    
+  .crop-y {
+    height: 308px;
   }
 }
