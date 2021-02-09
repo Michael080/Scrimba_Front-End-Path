@@ -60,7 +60,7 @@ strong {
 .title {
   font-family: Lora;
   font-weight: 400;
-  font-size: 3.375rem;
+  font-size: 2.75rem;
   color: #143774;
   margin-bottom: 0.1em;
 }
@@ -96,7 +96,7 @@ strong {
 
 @media (min-width: 800px) {
   html {
-    font-size: 95%;
+    font-size: 90%;
   }
 }
 
@@ -106,7 +106,6 @@ strong {
 nav {
   display: flex;
   justify-content: space-between;
-  min-width: 490px;
   color: #707070;
 }
 
