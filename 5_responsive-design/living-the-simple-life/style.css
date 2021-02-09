@@ -143,9 +143,14 @@ nav {
 }
 
 h2,
+.recent-posts a,
+.about-me p {
+  color: #143774;
+}
+
+h2,
 .recent-posts a {
   font-family: Lora;
-  color: #143774;
 }
 
 .aside-row h2 {
