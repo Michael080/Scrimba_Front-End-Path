@@ -196,5 +196,15 @@ nav a:focus {
     /* I used an <hr> for this line-separator vs. this mo' betterer border solution */
     border-bottom: #707070 1px solid;
     padding-bottom: 2rem;
+}
+
+.article-featured,
+.article-recent {
+    display: flex;
+    flex-direction: column;
     margin-bottom: 2rem;
+}
+
+.article-recent-main {
+    order: 2;
 }
