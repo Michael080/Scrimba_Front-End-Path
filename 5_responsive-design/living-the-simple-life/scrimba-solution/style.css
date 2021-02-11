@@ -297,6 +297,10 @@ nav a:focus {
   #article-recent-decorations-image {
       object-position: -30px;
   }
+
+  .article-image-life {
+    object-position: -170px;
+  }
 }
 
 /* widgets */
