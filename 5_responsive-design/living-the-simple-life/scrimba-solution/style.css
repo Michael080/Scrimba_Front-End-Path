@@ -85,6 +85,20 @@ tut */
     margin: 2rem 0;
 }
 
+.widget-title,
+.widget-recent-post-title {
+  font-size: 1rem;
+}
+
+.widget-title {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 700;
+}   
+
+.widget-body {
+  /* font-size: .975rem; */
+}
+
 /* =================
 Layout
 ================= */
@@ -121,6 +135,20 @@ header {
   margin-bottom: 3rem;
 }
 
+footer {
+  color: white;
+  text-align: center;
+  display: grid;
+  place-items: center;
+  background-color: #143774;
+  height: 8rem;
+}
+
+.footer p {
+  margin: 0;
+  line-height: 2rem;
+}
+
 main,
 aside {
     width: 100%;
@@ -135,21 +163,13 @@ aside {
     margin-top: 2rem;
 }
 
-.sidebar-widget {
-    /* margin-bottom: 4rem;
-    padding: 2rem;
-    border: 2rem solid #f8f8f8; */
-}
-
-
-
 @media (min-width: 675px) {
     main {
-        width: 75%;
+        width: 64%;
     }
 
     aside {
-        width: 25%;
+        width: 31%;
     }
     
     .container-flex {
@@ -221,48 +241,80 @@ nav a:focus {
 }
 
 @media (min-width: 675px) {
-    .article-recent {
-        flex-direction: row;
-        justify-content: space-between;
-    }
+  .article-recent {
+      flex-direction: row;
+      justify-content: space-between;
+  }
 
-    .article-recent-main {
-        width: 65%;
-    }
+  .article-recent-main {
+      width: 72%;
+  }
 
-    .article-recent-secondary {
-        width: 30%;
-    }
+  .article-recent-secondary {
+      width: 25%;
+      min-width: 220px;
+      margin-right: 2rem;
+  }
 
-    .article-featured .article-info {
-        margin-top: 0;
-    }
+  .article-featured .article-info {
+      margin-top: 0;
+  }
 
-    .article-info {
-        order: -1;
-    }
+  .article-info {
+      order: -1;
+  }
 
-    /* imgs */
+  /* imgs */
 /* *** Check design */
 /* This is a better way to crop imgs */
-    .article-image {
-        order: -2;
-        min-height: 250px;
-        object-fit: cover;
-    }
+  .article-image {
+      order: -2;
+      min-height: 250px;
+      object-fit: cover;
+  }
 
-    .article-image,
-    .widget-image {
-        margin-bottom: 1rem;
-    }
+  .article-image,
+  .widget-image {
+      margin-bottom: 1rem;
+  }
 
-    .article-featured .article-image,
-    .sidebar-about-me .widget-image {
-        margin-bottom: 2rem;
-    }
+  .article-featured .article-image,
+  .sidebar-about-me .widget-image {
+      margin-bottom: 2rem;
+  }
 /* *** Check design */
 /* This is a different way to position imgs */
-    #article-recent-decorations-image {
-        object-position: -30px;
+  #article-recent-decorations-image {
+      object-position: -30px;
+  }
+}
+
+/* widgets */
+
+.sidebar-widget {
+  /* font-size: 1rem; */
+  margin-bottom: 4rem;
+  padding: 2em;
+  border: 1.5em solid #f8f8f8;
+}
+
+.widget-recent-post {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #707070;
+}
+
+.widget-recent-post-title {
+  order: 1;
+}
+
+.widget-recent-post:last-child {
+  border: none;
+}
+
+@media (min-width: 675px) {
+    aside {
+        margin-left: 1em;
     }
 }
