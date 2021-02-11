@@ -89,6 +89,14 @@ tut */
 Layout
 ================= */
 
+p {
+    margin-top: 0;
+}
+
+img {
+    /* margin-bottom: 2rem; */
+}
+
 .container {
   width: 90%;
   max-width: 900px;
@@ -110,6 +118,7 @@ header {
   background: #f8f8f8;
   padding: 2em 0;
   text-align: center;
+  margin-bottom: 3rem;
 }
 
 main,
@@ -131,6 +140,8 @@ aside {
     padding: 2rem;
     border: 2rem solid #f8f8f8; */
 }
+
+
 
 @media (min-width: 675px) {
     main {
@@ -207,4 +218,51 @@ nav a:focus {
 
 .article-recent-main {
     order: 2;
+}
+
+@media (min-width: 675px) {
+    .article-recent {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .article-recent-main {
+        width: 65%;
+    }
+
+    .article-recent-secondary {
+        width: 30%;
+    }
+
+    .article-featured .article-info {
+        margin-top: 0;
+    }
+
+    .article-info {
+        order: -1;
+    }
+
+    /* imgs */
+/* *** Check design */
+/* This is a better way to crop imgs */
+    .article-image {
+        order: -2;
+        min-height: 250px;
+        object-fit: cover;
+    }
+
+    .article-image,
+    .widget-image {
+        margin-bottom: 1rem;
+    }
+
+    .article-featured .article-image,
+    .sidebar-about-me .widget-image {
+        margin-bottom: 2rem;
+    }
+/* *** Check design */
+/* This is a different way to position imgs */
+    #article-recent-decorations-image {
+        object-position: -30px;
+    }
 }
