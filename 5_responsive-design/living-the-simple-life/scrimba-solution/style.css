@@ -283,6 +283,12 @@ nav a:focus {
       object-fit: cover;
   }
 
+  .article-image-featured {
+    height: 300px;
+    width: 100%;
+    object-position: bottom;
+  }
+
   .article-image,
   .widget-image {
       margin-bottom: 1rem;
