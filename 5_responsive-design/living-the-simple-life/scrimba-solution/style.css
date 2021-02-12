@@ -6,13 +6,12 @@ font-family: 'Ubuntu', sans-serif;
 
 body {
   margin: 0;
-  /* font-family: "Ubuntu", sans-serif; */
+  font-family: "Ubuntu", sans-serif;
   font-size: 1.125rem;
   font-weight: 300;
   color: #707070;
 }
-/* *** Check my design */
-/* Display block to remove additional margin on imgs??? */
+
 img {
     max-width: 100%;
     display: block;
@@ -25,7 +24,7 @@ Typography
 h1,
 h2,
 h3 {
-  /* font-family: "Lora", serif; */
+  font-family: "Lora", serif;
   font-weight: 400;
   color: #143774;
   margin-top: 0;
@@ -77,8 +76,7 @@ tut */
 .article-read-more {
   text-decoration: none;
 }
-/* *** Check my design */
-/* Change colors on :hover/:focus??? */
+
 .article-read-more:hover,
 .article-read-more:focus {
   color: #143774;
@@ -112,7 +110,7 @@ p {
 }
 
 img {
-    /* margin-bottom: 2rem; */
+    margin-bottom: 2rem;
 }
 
 .container {
@@ -120,12 +118,7 @@ img {
   max-width: 900px;
   margin: 0 auto;
 }
-/* *** Check my design */
-/* Use class for flex on both nav and main? */
-/* *** Check design ---  */
-/* The following three rules used to display the header as
-    a flex-column. I think my solution is way more complex than this,
-    probably because it transitions through an intermediary state or something */
+
 .container-flex {
   display: flex;
   flex-direction: column;
@@ -230,8 +223,6 @@ nav a:focus {
 /* articles */
 
 .article-featured {
-    /* *** Check design --- */
-    /* I used an <hr> for this line-separator vs. this mo' betterer border solution */
     border-bottom: #707070 1px solid;
     padding-bottom: 2rem;
 }
@@ -276,8 +267,7 @@ nav a:focus {
   }
 
   /* imgs */
-/* *** Check design */
-/* This is a better way to crop imgs */
+
   .article-image {
       order: -2;
       min-height: 250px;
@@ -299,8 +289,7 @@ nav a:focus {
   .sidebar-about-me .widget-image {
       margin-bottom: 2rem;
   }
-/* *** Check design */
-/* This is a different way to position imgs */
+
   #article-recent-decorations-image {
       object-position: -30px;
   }
@@ -313,7 +302,6 @@ nav a:focus {
 /* widgets */
 
 .sidebar-widget {
-  /* font-size: 1rem; */
   margin-bottom: 4rem;
   padding: 2em;
   border: 1.5em solid #f8f8f8;
