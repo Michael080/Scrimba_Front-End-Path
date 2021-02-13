@@ -1,0 +1,51 @@
+body {
+   margin: 0;
+}
+
+.images-container {
+   display: flex;
+   flex-direction: column;
+}
+
+.item {
+   width: 100%;
+   margin-bottom: 0;
+}
+
+img {
+   display: block;
+   width: 100%;
+   object-fit: cover;
+}
+
+@media (min-width: 1000px) {
+   body {
+      display: flex;
+      justify-content: space-around;
+   }
+
+   img {
+      height: 100%;
+   }
+
+   .images-container {
+      flex-direction: row;
+      flex-wrap: wrap;
+   }
+
+   .item {
+      width: 50%;
+      height: 50%;
+   }
+}
+
+/* Largish Screens */
+@media (min-width: 1900px) {
+   body {
+      padding-top: 100px;
+   }
+
+   .image-container {
+      max-width: 1900px;
+         }
+}
