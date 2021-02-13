@@ -1,0 +1,28 @@
+/* DON'T TOUCH THIS! */
+
+body {
+	background: #5e5e5e;
+}
+
+.box-red {
+	width: 100%;
+	background: #e07979;
+	height: 400px;
+}
+
+.box-green {
+	width: 50%;
+	background: #77e083;
+	height: 300px;
+}
+
+.box-blue {
+	width: 50%;
+	background: #77b4e0;
+	height: 200px;
+}
+/* DON'T TOUCH THIS! */
+
+/* ==========================
+	Write your solution here!
+   ========================== */
