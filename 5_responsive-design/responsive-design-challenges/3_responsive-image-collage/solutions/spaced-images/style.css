@@ -1,3 +1,23 @@
-/* ==========================
-	Write your solution here!
-   ========================== */
+img {
+	width: 100%;
+	margin-bottom: 50px;
+}
+
+@media (min-width: 1000px) {
+	body {
+		padding-top: 7%;
+	}
+
+	img {
+		flex-basis: 48%;
+	}
+
+	.container {
+		display: flex;
+		flex-wrap: wrap;
+		width: 85%;
+		margin: 0 auto;
+		justify-content: space-between;
+		align-content: space-around;
+	}
+}
