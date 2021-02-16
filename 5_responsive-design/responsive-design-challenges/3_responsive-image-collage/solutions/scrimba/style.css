@@ -1,0 +1,24 @@
+body {
+  display: flex;
+  flex-flow: column wrap;
+  /* Align Items! ...on columns... it's mo' betterer */
+  align-content: center;
+}
+
+img {
+  width: 90%;
+  margin: 1em;
+  object-fit: cover;
+}
+
+@media (min-width: 600px) {
+  body {
+    flex-flow: row wrap;
+    justify-content: space-between;
+  }
+
+  img {
+    width: 44%;
+    margin: 1em;
+  }
+}
