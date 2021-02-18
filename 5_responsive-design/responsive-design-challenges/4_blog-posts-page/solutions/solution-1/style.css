@@ -89,3 +89,17 @@ body {
   text-align: center;
   line-height: 1.75rem;
 }
+
+@media (min-width: 900px) {
+	.posts {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: space-between;
+		width: 90%;
+		max-width: 900px;
+	}
+
+	.post {
+		width: 42%;
+	}
+}
