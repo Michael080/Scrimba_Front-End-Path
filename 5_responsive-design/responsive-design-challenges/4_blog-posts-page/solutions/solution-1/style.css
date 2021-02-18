@@ -63,10 +63,6 @@ body {
   margin-bottom: 2.75rem;
 }
 
-/* .container-post {
-	width: 75%;
-} */
-
 .container-post {
   display: flex;
   flex-flow: column wrap;
@@ -80,7 +76,8 @@ body {
 
 .post-image {
   order: 3;
-  display: block;
+	display: block;
+	border-radius: 1.375rem;
   object-fit: cover;
   width: 100%;
 }
