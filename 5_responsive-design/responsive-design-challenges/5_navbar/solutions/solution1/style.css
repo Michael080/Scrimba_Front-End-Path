@@ -1,9 +1,6 @@
 /* ==========================
 	Write your solution here!
    ========================== */
-
-   /* - Header: Lora
-   - Link: Ubuntu */
 body {
    font-size: 1.25em;
 }
@@ -66,10 +63,8 @@ a {
 
    .links {
       flex-flow: column wrap;
-      /* flex-shrink: 3; */
       width: 350px;
    }
-
 }
 
 @media (min-width: 700px) {
@@ -77,5 +72,4 @@ a {
       flex-flow: row wrap;
       width: 350px;
    }
-
 }
