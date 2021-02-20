@@ -1,0 +1,81 @@
+/* ==========================
+	Write your solution here!
+   ========================== */
+
+   /* - Header: Lora
+   - Link: Ubuntu */
+body {
+   font-size: 1.25em;
+}
+
+a,
+h1 {
+   margin-top: 0;
+}
+
+a {
+   text-decoration: none;
+}
+
+.nav {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   font-family: 'Lora', serif;
+   color: #143774;
+   background-color: #F8F8F8;
+   padding: 2rem;
+}
+
+.links {
+   display: flex;
+   flex-direction: column;
+   font-family: 'Ubuntu', sans-serif;
+   line-height: 2rem;
+   align-items: center;
+}
+
+.link {
+   font-size: 1rem;
+   font-weight: 700;
+   color: #717171;
+}
+
+.current-page {
+   border-bottom: 2px solid #717171;
+}
+
+.link:focus,
+.link:hover {
+   color: #143774;
+}
+
+@media (min-width: 600px) {
+   .nav,
+   .links {
+      justify-content: space-between;
+   }
+
+   .nav {
+      flex-direction: row;
+   }
+
+   .title {
+      min-width: 250px;
+   }
+
+   .links {
+      flex-flow: column wrap;
+      /* flex-shrink: 3; */
+      width: 350px;
+   }
+
+}
+
+@media (min-width: 700px) {
+   .links {
+      flex-flow: row wrap;
+      width: 350px;
+   }
+
+}
