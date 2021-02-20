@@ -1,0 +1,103 @@
+/* DON'T TOUCH THIS! */
+body {
+	background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(images/The-Club.jpeg);
+	background-size: cover;
+	background-attachment: fixed;
+	color: white;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+.btn {
+	color: white;
+	text-decoration: none;
+	background: #22499c;
+	font-weight: 800;
+	font-family: 'Ubuntu', sans-serif;
+	padding: 10px;
+}
+/* DON'T TOUCH THIS! */
+
+/* ==========================
+	Write your solution here!
+	 ========================== */
+html,
+body {
+	height: 100%;
+}
+
+html {
+	font-size: 65%;
+}
+
+body {
+	margin: 0;
+	/* min-height: 100%; */
+	/* background-image: center; */
+	/* background-attachment: local; */
+	/* background-attachment: scroll; */
+	/* background-repeat: no-repeat; */
+
+}
+
+.title,
+.text,
+.btn {
+	margin: .75em;
+}
+
+@media (min-width: 550px) {
+	html {
+		font-size: 80%;
+	}
+}
+
+@media (min-width: 650px) {
+	html {
+		font-size: 90%;
+	}
+}
+
+@media (min-width: 800px) {
+	html {
+		font-size: 100%;
+	}
+}
+
+/* === Typography === */
+
+.title,
+.btn {
+	font-weight: 700;
+}
+
+.text {
+	font-weight: 500;
+}
+
+/* === Layout === */
+
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+}
+
+.call-to-action {
+	display: flex;
+	flex-flow: column wrap;
+	align-items: center;
+	text-align: center;
+	width: 90%;
+	max-width: 686px;
+}
+
+.btn {
+	width: 6em;
+}
+
+.btn:hover,
+.btn:focus {
+	background-color: #586e9e;
+}
