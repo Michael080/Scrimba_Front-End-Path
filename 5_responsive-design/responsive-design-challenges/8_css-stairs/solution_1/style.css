@@ -1,0 +1,32 @@
+/* DON'T TOUCH THIS! */
+body {
+	margin: 0;
+	width: 100vw;
+	height: 100vh;
+}
+.stairs {
+	width: 100%;
+	height: 100%;
+}
+
+.stair {
+	background: black;
+	height: calc(100vh / 3);
+	width: calc(100vw / 3);
+	margin: 0;
+}
+/* DON'T TOUCH THIS! */
+
+/* ==========================
+	Write your solution here!
+	 ========================== */
+	 
+.stair2 {
+	background-color: magenta;
+	margin-left: calc(100vw / 3)
+}
+
+.stair3 {
+	background-color: green;
+	margin-left: calc((100vw / 3) * 2)
+}
