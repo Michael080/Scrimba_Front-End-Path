@@ -70,7 +70,6 @@ body {
 	}
 
 	.links {
-		/* flex-flow: row wrap; */
 		flex-direction: row;
 		margin-right: 3em;
 		max-width: 50%;
