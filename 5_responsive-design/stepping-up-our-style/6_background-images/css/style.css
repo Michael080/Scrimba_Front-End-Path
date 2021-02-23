@@ -1,0 +1,27 @@
+h1 {
+    font-size: 3rem;
+    text-align: center;
+}
+
+.cat {
+    /* background-color: lightblue; */
+/* width: 250px; */
+    background-image: url(/images/cat.jpg);
+    /* background-image: url(/images/email-pattern.png); */
+    /* ---   background-repeat   ---  */
+    background-repeat: no-repeat;
+    background-repeat: repeat-y;
+    background-repeat: repeat-x;
+    background-repeat: round;
+    background-repeat: space;
+
+    padding: 100px;
+    /* ---   background-position   ---  */
+    background-position: 100px 100px;
+    background-position: top;
+    background-position: bottom;
+    background-position: top right;
+    background-position: center;
+
+    background-size: 200px;
+}
