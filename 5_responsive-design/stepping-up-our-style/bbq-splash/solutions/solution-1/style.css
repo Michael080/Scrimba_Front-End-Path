@@ -1,0 +1,170 @@
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 900;
+}
+
+h1, 
+h2, 
+h3, 
+p {
+  margin-top: 0;
+}
+
+/* ===============   Typography   =============== */
+
+input,
+.description,
+.fine-print {
+  font-weight: 300;
+}
+
+input {
+  text-align: center;
+}
+
+strong {
+  font-weight: 900;
+}
+
+.text-upper {
+  text-transform: uppercase;
+}
+
+.heading-mini {
+  font-size: .625rem;
+  letter-spacing: 3px;
+  justify-self: flex-start;
+  width: 21.8em;
+  padding-top: 1em;
+  border-top: 1em inset #F18119;
+}
+
+.heading-main {
+  font-size: 2.25rem;
+  font-weight: 400;
+  color: white;
+}
+
+.sub-heading {
+  font-size: 1.3125rem;
+  font-weight: 900;
+  margin-bottom: 0;
+}
+
+.sub-sub-heading {
+  font-size: 1rem;
+  margin-bottom: 2em;
+}
+
+.heading-accent {
+  font-family: 'Source Sans Pro';
+  color: #F18119;
+}
+
+.fine-print {
+  font-size: .625rem;
+}
+
+::placeholder {
+  opacity: 50%;
+}
+
+/* ==================   Layout   ================== */
+
+header,
+.modal,
+form,
+.container-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+}
+
+header > .sub-heading {
+  margin-bottom: 2em;
+}
+
+header {
+  margin-bottom: 3em;
+  padding: 0 3em;
+  background-image: url(/images/dark-ribs.jpg);
+  background-size: cover;
+  background-position: left 65%;
+  height: 400px;
+  width: 90%;
+}
+
+form {
+  width: 86%;
+  height: 125px;
+}
+
+.modal {
+  margin: 0 auto;
+  max-width: 528px;
+}
+
+/* ----- form -----*/
+input,
+.container-form {
+  width: 100%;
+}
+
+input,
+.btn-register,
+#register {
+  border-radius: .25rem;
+  height: 2.125em;
+}
+
+input {
+  border: 1px solid #818181;
+  margin-bottom: 1.25em;
+}
+
+.btn-register {
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: .7812rem;
+  letter-spacing: 1.5px;
+  line-height: 1.15;
+  text-transform: uppercase;
+  color: white;
+  width: 101%;
+  height: 2.65em;
+  background-color: #F18119;
+  margin: 0;
+  margin-bottom: 1.25em;
+  border: none;
+}
+
+/* ----- 850px -----*/
+@media (min-width: 850px) {
+  html {
+    font-size: 1.3em;
+  }
+
+  header {
+    align-self: stretch;
+    height: 100%;
+  }
+  
+  .modal {
+    flex-direction: row;
+    margin: 0 auto;
+    max-width: 1200px;
+    height: 725px;
+  }
+
+  .container-form {
+    padding: 1em;
+    max-width: 350px;
+  }
+
+  .btn-register {
+    font-size: .625rem;
+  }
+}
