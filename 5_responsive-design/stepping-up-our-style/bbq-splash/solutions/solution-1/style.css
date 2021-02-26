@@ -113,8 +113,7 @@ input,
 }
 
 input,
-.btn-register,
-#register {
+.btn-register {
   border-radius: .25rem;
   height: 2.125em;
 }
