@@ -1,0 +1,31 @@
+form {
+  background: #efefef;
+  padding: 2em;
+  width: 30%;
+}
+
+input {
+  margin-bottom: 2em;
+  padding: .25em; /* use padding to separate inputs?! */
+  border: none;
+}
+
+/* select input based on type */
+input[type="text"] {
+  background-color: lightblue;
+}
+/* OR */
+[type="text"] {
+  /* background-color: lightblue; */
+}
+
+button {
+  background: #333;
+  color: white;
+  border: 0;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #404040;
+}
