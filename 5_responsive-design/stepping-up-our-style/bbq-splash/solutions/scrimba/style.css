@@ -1,0 +1,249 @@
+/*  
+      fonts: 'Source Sans Pro', sans-serif
+    weights: 400 700 900 
+*/
+/* '*' => selects all */
+* {
+  /* gets rid of scrollbar!!! */
+  /* supposedly gets rid of scrollbar!!! */
+  box-sizing: border-box;
+}
+
+body {
+  /* font-family: 'Source Sans Pro', sans-serif; */
+  font-family: sans-serif;
+  font-size: 1rem; /* I used a percentage here, find Kevin's tut on this */
+  color: #404040;
+  text-align: center;
+  margin: 0;
+}
+
+/* =================
+   Typography 
+   ================= */
+
+h1 {
+  font-size: 2.25rem;
+  font-weight: 400;
+  color: white;
+  /* I used align-self...this may be better for maintaining equal spacing??? */
+  margin: 0;
+}
+
+/* adjacent sibling selector */
+h1 + p {
+  color: #f18119;
+  font-weight: 900;
+  font-size: 1.3125rem;
+  margin: 0;
+}
+
+h2 {
+  font-size: 1.3125rem;
+  margin: 0;
+}
+
+p {
+  margin-top: 0;
+}
+
+strong {
+  font-weight: 900;
+}
+
+.top-text {
+  font-size: 0.625rem;
+  font-weight: 900;
+  color: #f18119;
+  order: -1; /* change order to place @ top of page */
+  /* padding: 2em 1em; see if Kevin uses this solution??? */
+}
+
+/* .top-text, */
+.fine-print {
+  font-size: 0.625rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #f18119;
+}
+
+h1 ~ p,
+h2 + p,
+.fine-print {
+  text-transform: uppercase;
+  margin-top: 0;
+}
+
+/* =================
+   Intro section 
+   ================= */
+
+.intro {
+  background-image: url(/images/dark-ribs.jpg);
+  background-color: #404040; /* fallback background-color */
+  background-size: cover;
+  background-position: center; /* check my solution */
+  padding: 0 0.5em 2em;
+}
+
+/* =================
+   Main-content section 
+   ================= */
+.intro > *,
+.main-content > * {
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.description {
+  font-weight: 300;
+}
+
+.main-content {
+  padding: 2em 1em;
+}
+
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.container-intro {
+  /* FUN FACT: margins don't collapse in flex-containers!~!! */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* percentage does NOT work here but does in media query */
+  min-height: 50vh;
+}
+
+/* ALTERNATE solution to using .container */
+/* THIS compound selector selects ALL children of .intro */
+/* I think at least one reason Kevin may have done this is
+   that it helps avoid overflow problems??? IDK yet */
+/* .intro * {
+  max-width: 400px; */
+/* could ALSO use: margin: 0 auto???
+     .top-text has margin-bottom but this may work?? */
+/* margin-left: auto;
+  margin-right: auto;
+} */
+
+/* =================
+   registration
+   ================= */
+
+.registration {
+  /* border: 3px solid orange; */
+  width: 80%;
+  max-width: 300px;
+}
+
+/* button doesn't appear to have the same non-matching-width issues as
+   input[type="submit"] CHECK */
+/* it's easier to put a width on the inputs because changing width on
+      the form breaks centering...TRY IT */
+/* see main content section for how this was centered */
+input,
+.btn {
+  /* text-align: center; --- how I centered it
+     OR */
+  font-family: inherit;
+  text-align: inherit;
+  /* font-size: 1rem; */
+  width: 100%;
+  max-width: 300px;
+  height: 2.75em;
+  border-radius: 5px;
+}
+
+.fine-print,
+input {
+  margin-bottom: 1.25em;
+}
+
+input {
+  border: 1px solid #818181;
+  font-weight: 300;
+  /* width: 72% --- for using input width alternative to TRY */
+}
+
+.btn {
+  cursor: pointer;
+  font-size: 0.625rem; /* => 13px --- the design specs 16 CHECK */
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: none;
+  /* padding: .5em 1.5em; --- kevin's solution - I used width/height */
+  padding: .5em 1.5em;
+
+}
+
+.btn-primary {
+  color: white;
+  background: 
+  transparent linear-gradient(270deg, #ff713b 0%, #ffa51d 100%) 0%
+    0% no-repeat padding-box;
+  /* opacity: 1; */
+  /* spec'ing which rule to transition helps w/ performance */
+  /* transition in this rule & in :hover isn't necessary to transition 
+     between states, if this rule were applied only in :hover the 
+     animation would only be played on hover NOT when leaving hover */
+
+  /* transition: color 500ms;  */
+  transform: scale(1);
+  transition: transform 250ms;
+}
+
+/* My hover: */
+/* .btn:hover {
+  background: transparent linear-gradient(270deg, #994321 0%, #ffa51d 100%) 0%
+    0% no-repeat padding-box;
+} */
+
+/* Kevin's hover: */
+.btn-primary:hover {
+  transform:(1.1);
+  color: black;
+}
+
+/* =================
+   media queries 
+   ================= */
+
+@media (min-width: 500px) {
+  body {
+    display: flex;
+    font-size: 1.125rem;
+  }
+
+  h2,
+  h1 + p {
+    font-size: 1.75rem;
+  }
+
+  .intro,
+  .main-content {
+    width: 50%;
+    /* when using vh-units spec 'min-height' as a fail-safe */
+    min-height: 100vh;
+  }
+
+  h1 {
+    font-size: 3.5rem;
+  }
+
+  .main-content {
+    /* Check sol. --- I think I applied flex/flex-dir. outside
+                      of a media query. */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .container-intro {
+    /* height: 100%; */
+  }
+}
