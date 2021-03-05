@@ -50,6 +50,10 @@ h2 + p {
     font-weight: 900;
     text-transform: uppercase;
     order: -1;
+    margin-top: 0;
+    padding-top: 2px;
+    border-top: 5px solid #F18119;
+    border-image: linear-gradient(to left, #ff713b, #ffa51d) 1;
 }
 
 .fine-print {
@@ -57,6 +61,7 @@ h2 + p {
     letter-spacing: 1px;
 }
 
+/* single-line rule formatting is nice */
 strong { font-weight: 900; }
 
 
@@ -65,8 +70,11 @@ strong { font-weight: 900; }
    ================= */
    
 .intro {
-    background-image: url(images/dark-ribs.jpg);
+    /* background-image: url(../images/dark-ribs.jpg); */
+    background-image: url(../images/ribs.jpg);
     background-size: cover;
+    /* the outcome of using a blend-mode looks better than 'dark-ribs.jpg' */
+    background-blend-mode: overlay;
     background-color: #404040;
     background-position: center;
     padding: 0 .5em 2em;
@@ -109,13 +117,17 @@ input,
     width: 100%;
     border-radius: 5px;
 }
-
+/* TODO --- Spacing - for some reason the spacing doesn't match Kevin's while following along */
 input {
     font-family: inherit;
     text-align: inherit;
     margin-bottom: .75em;
     padding: .25em;
     border: 1px solid #404040;
+    /* for some reason kevin says that a transform for the 'initial' state
+    of the element is required but it seems to work fine w/out??? */
+    /* transform: scale(1); */
+    transition: transform 250ms;
 }
 
 .btn {
@@ -132,11 +144,17 @@ input {
 .btn-primary {
     background-image: linear-gradient(to left, #FF713B, #FFA51D);
     color: white;
-    transform: scale(1);
+    /* for some reason kevin says that a transform for the 'initial' state
+       of the element is required but it seems to work fine w/out??? */
+    /* transform: scale(1); */
     transition: transform 250ms;
 }
 
-.btn-primary:hover {
+/* apply animation to focus on inputs */
+input:focus,
+.btn-primary:hover,
+.btn-primary:focus {
+    /* scale doesn't affect page layout thus preventing repaint */
     transform: scale(1.1);
 }
 
