@@ -31,10 +31,6 @@ export class Player {
   printNameAndCountry() {
     console.log(`${this.getName} was born in ${this.getCountry}`);
   }
-
-  alternatPrintNameAndCountry() {
-    console.log(`${this.name} was born in ${this.country}`)
-  }
 }
 
 export class TennisPlayer extends Player {

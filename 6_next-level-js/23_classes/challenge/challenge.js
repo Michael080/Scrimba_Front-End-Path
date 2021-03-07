@@ -19,8 +19,7 @@ const bob = new Player('Bob Dobson', 'USA');
 // console.log(bob.name, bob.country);
 // console.log(bob.getName) // no parenthesis!!!
 // console.log(bob.getCountry); // no parenthesis!!!
-bob.printNameAndCountry(); // no parenthesis!!!
-bob.alternatPrintNameAndCountry();
+bob.printNameAndCountry();
 
 const pope = new TennisPlayer('Pope', 'Brazil', 85);
 console.log(pope);
