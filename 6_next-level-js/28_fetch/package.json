@@ -1,0 +1,22 @@
+{
+  "name": "28_fetch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tut.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Michael080/Scrimba_Front-End-Path.git"
+  },
+  "author": "Michael Rollin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Michael080/Scrimba_Front-End-Path/issues"
+  },
+  "homepage": "https://github.com/Michael080/Scrimba_Front-End-Path#readme",
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  }
+}
